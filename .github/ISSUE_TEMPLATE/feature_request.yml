@@ -1,0 +1,107 @@
+name: ✨ Feature Request
+description: Yeni bir özellik önerin
+title: "[FEATURE] "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Yeni özellik önerisi için teşekkürler! Lütfen aşağıdaki bilgileri doldurun.
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: ✨ Özellik Açıklaması
+      description: Önerdiğiniz özelliği net bir şekilde açıklayın
+      placeholder: Bu özellik ne yapacak?
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem-statement
+    attributes:
+      label: 🎯 Problem/İhtiyaç
+      description: Bu özellik hangi problemi çözüyor?
+      placeholder: Mevcut durumda karşılaştığınız zorluk nedir?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: 💡 Önerilen Çözüm
+      description: Bu özelliğin nasıl çalışmasını istiyorsunuz?
+      placeholder: Detaylı çözüm önerinizi yazın...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 🔄 Alternatif Çözümler
+      description: Düşündüğünüz başka çözümler var mı?
+      placeholder: Başka hangi yollarla bu problem çözülebilir?
+
+  - type: textarea
+    id: use-cases
+    attributes:
+      label: 📋 Kullanım Senaryoları
+      description: Bu özellik hangi durumlarda kullanılacak?
+      placeholder: |
+        1. Kullanıcı ... yapmak istediğinde
+        2. ... durumunda
+        3. ... ihtiyacı olduğunda
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 🎯 Öncelik
+      description: Bu özellik sizin için ne kadar önemli?
+      options:
+        - 🔥 Çok yüksek (hayati)
+        - ⭐ Yüksek (çok istenen)
+        - 📈 Orta (yararlı olur)
+        - 🤔 Düşük (nice to have)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: user-type
+    attributes:
+      label: 👥 Kullanıcı Tipi
+      description: Bu özellik kimler için faydalı?
+      options:
+        - 🙋‍♀️ Tüm kullanıcılar
+        - 👨‍💼 İş kullanıcıları
+        - 🏠 Kişisel kullanıcılar
+        - 🔧 İleri seviye kullanıcılar
+        - 👨‍💻 Geliştiriciler
+    validations:
+      required: true
+
+  - type: textarea
+    id: mockups
+    attributes:
+      label: 🎨 Mockup/Wireframe
+      description: Varsa tasarım önerilerinizi ekleyin
+      placeholder: UI mockup'ları, wireframe'ler veya referans görseller
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 📝 Ek Bilgi
+      description: Başka eklemek istediğiniz bilgi var mı?
+      placeholder: Referanslar, benzer uygulamalardaki örnekler, vs...
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ✅ Kontrol Listesi
+      description: Lütfen aşağıdakileri kontrol edin
+      options:
+        - label: Mevcut özellik isteklerini kontrol ettim
+          required: true
+        - label: Bu özellik mevcut uygulamada yok
+          required: true
+        - label: Use case'leri net bir şekilde tanımladım
+          required: true

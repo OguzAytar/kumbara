@@ -1,0 +1,105 @@
+name: 🐛 Bug Report
+description: Uygulama ile ilgili bir hata bildirin
+title: "[BUG] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Hata bildirimi için teşekkürler! Lütfen aşağıdaki bilgileri mümkün olduğunca detaylı doldurun.
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: 🐛 Hata Açıklaması
+      description: Hatayı net ve özlü bir şekilde açıklayın.
+      placeholder: Ne oldu? Beklenen davranış neydi?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: 🔄 Reproduksiyon Adımları
+      description: Hatayı yeniden oluşturmak için gereken adımlar
+      placeholder: |
+        1. '...' sayfasına git
+        2. '...' butonuna tıkla
+        3. '...' alanına yaz
+        4. Hata oluşuyor
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: ✅ Beklenen Davranış
+      description: Ne olmasını bekliyordunuz?
+      placeholder: Açık ve özlü açıklama...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: ❌ Gerçek Davranış
+      description: Gerçekte ne oluyor?
+      placeholder: Gerçek davranışı açıklayın...
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: 📸 Ekran Görüntüleri
+      description: Varsa ekran görüntüleri veya video ekleyin
+      placeholder: Drag & drop your screenshots here
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: 📱 Platform
+      description: Hangi platformda hata oluşuyor?
+      options:
+        - Android
+        - iOS
+        - Web
+        - macOS
+        - Windows
+        - Linux
+        - Tüm platformlar
+    validations:
+      required: true
+
+  - type: textarea
+    id: device-info
+    attributes:
+      label: 📋 Cihaz Bilgileri
+      description: Cihaz ve işletim sistemi bilgileri
+      placeholder: |
+        - Cihaz: [örn. iPhone 13, Samsung Galaxy S21]
+        - OS: [örn. iOS 15.0, Android 11]
+        - Uygulama Sürümü: [örn. 1.0.0]
+        - Flutter Sürümü: [örn. 3.8.1]
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 📝 Ek Bilgi
+      description: Hata hakkında başka bilgi varsa yazın
+      placeholder: Loglar, hata mesajları, vs...
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ✅ Kontrol Listesi
+      description: Lütfen aşağıdakileri kontrol edin
+      options:
+        - label: Mevcut issue'ları kontrol ettim
+          required: true
+        - label: Reproduksiyon adımları net
+          required: true
+        - label: Ekran görüntüleri/video ekledim (varsa)
+          required: false
