@@ -22,11 +22,7 @@ class CustomSnackBar {
             Expanded(
               child: Text(
                 message,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500),
               ),
             ),
           ],
@@ -38,12 +34,7 @@ class CustomSnackBar {
         margin: const EdgeInsets.all(16),
         elevation: 8,
         action: actionLabel != null && onActionPressed != null
-            ? SnackBarAction(
-                label: actionLabel,
-                textColor: Colors.white,
-                backgroundColor: colors.actionColor,
-                onPressed: onActionPressed,
-              )
+            ? SnackBarAction(label: actionLabel, textColor: Colors.white, backgroundColor: colors.actionColor, onPressed: onActionPressed)
             : null,
       ),
     );
@@ -56,14 +47,7 @@ class CustomSnackBar {
     String? actionLabel,
     VoidCallback? onActionPressed,
   }) {
-    show(
-      context,
-      message: message,
-      type: SnackBarType.success,
-      duration: duration,
-      actionLabel: actionLabel,
-      onActionPressed: onActionPressed,
-    );
+    show(context, message: message, type: SnackBarType.success, duration: duration, actionLabel: actionLabel, onActionPressed: onActionPressed);
   }
 
   static void showError(
@@ -73,14 +57,7 @@ class CustomSnackBar {
     String? actionLabel,
     VoidCallback? onActionPressed,
   }) {
-    show(
-      context,
-      message: message,
-      type: SnackBarType.error,
-      duration: duration,
-      actionLabel: actionLabel,
-      onActionPressed: onActionPressed,
-    );
+    show(context, message: message, type: SnackBarType.error, duration: duration, actionLabel: actionLabel, onActionPressed: onActionPressed);
   }
 
   static void showWarning(
@@ -90,14 +67,7 @@ class CustomSnackBar {
     String? actionLabel,
     VoidCallback? onActionPressed,
   }) {
-    show(
-      context,
-      message: message,
-      type: SnackBarType.warning,
-      duration: duration,
-      actionLabel: actionLabel,
-      onActionPressed: onActionPressed,
-    );
+    show(context, message: message, type: SnackBarType.warning, duration: duration, actionLabel: actionLabel, onActionPressed: onActionPressed);
   }
 
   static void showInfo(
@@ -107,38 +77,19 @@ class CustomSnackBar {
     String? actionLabel,
     VoidCallback? onActionPressed,
   }) {
-    show(
-      context,
-      message: message,
-      type: SnackBarType.info,
-      duration: duration,
-      actionLabel: actionLabel,
-      onActionPressed: onActionPressed,
-    );
+    show(context, message: message, type: SnackBarType.info, duration: duration, actionLabel: actionLabel, onActionPressed: onActionPressed);
   }
 
   static _SnackBarColors _getColorsForType(SnackBarType type) {
     switch (type) {
       case SnackBarType.success:
-        return _SnackBarColors(
-          backgroundColor: const Color(0xFF4CAF50),
-          actionColor: const Color(0xFF2E7D32),
-        );
+        return _SnackBarColors(backgroundColor: const Color(0xFF4CAF50), actionColor: const Color(0xFF2E7D32));
       case SnackBarType.error:
-        return _SnackBarColors(
-          backgroundColor: const Color(0xFFE53935),
-          actionColor: const Color(0xFFC62828),
-        );
+        return _SnackBarColors(backgroundColor: const Color(0xFFE53935), actionColor: const Color(0xFFC62828));
       case SnackBarType.warning:
-        return _SnackBarColors(
-          backgroundColor: const Color(0xFFFF9800),
-          actionColor: const Color(0xFFE65100),
-        );
+        return _SnackBarColors(backgroundColor: const Color(0xFFFF9800), actionColor: const Color(0xFFE65100));
       case SnackBarType.info:
-        return _SnackBarColors(
-          backgroundColor: const Color(0xFF2196F3),
-          actionColor: const Color(0xFF1565C0),
-        );
+        return _SnackBarColors(backgroundColor: const Color(0xFF2196F3), actionColor: const Color(0xFF1565C0));
     }
   }
 

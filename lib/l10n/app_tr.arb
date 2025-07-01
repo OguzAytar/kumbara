@@ -1,0 +1,272 @@
+{
+  "@@locale": "tr",
+  "appTitle": "Kumbara - Birikim Takip",
+  "@appTitle": {
+    "description": "Uygulamanın başlığı"
+  },
+  
+  "welcome": "Hoş Geldiniz",
+  "@welcome": {
+    "description": "Hoş geldiniz mesajı"
+  },
+  
+  "getStarted": "Başlayalım",
+  "@getStarted": {
+    "description": "Başlama butonu"
+  },
+  
+  "onboardingTitle1": "Hedeflerinizi Belirleyin",
+  "@onboardingTitle1": {
+    "description": "İlk onboarding başlığı"
+  },
+  
+  "onboardingDesc1": "Birikim hedeflerinizi kolayca oluşturun ve takip edin",
+  "@onboardingDesc1": {
+    "description": "İlk onboarding açıklaması"
+  },
+  
+  "onboardingTitle2": "Para Biriktirin",
+  "@onboardingTitle2": {
+    "description": "İkinci onboarding başlığı"
+  },
+  
+  "onboardingDesc2": "Düzenli olarak para yatırın ve hedeflerinize ulaşın",
+  "@onboardingDesc2": {
+    "description": "İkinci onboarding açıklaması"
+  },
+  
+  "onboardingTitle3": "İlerlemenizi İzleyin",
+  "@onboardingTitle3": {
+    "description": "Üçüncü onboarding başlığı"
+  },
+  
+  "onboardingDesc3": "Grafikler ve raporlarla ilerlemenizi görselleştirin",
+  "@onboardingDesc3": {
+    "description": "Üçüncü onboarding açıklaması"
+  },
+  
+  "next": "İleri",
+  "@next": {
+    "description": "İleri butonu"
+  },
+  
+  "skip": "Geç",
+  "@skip": {
+    "description": "Geç butonu"
+  },
+  
+  "home": "Ana Sayfa",
+  "@home": {
+    "description": "Ana sayfa"
+  },
+  
+  "totalSavings": "Toplam Birikimler",
+  "@totalSavings": {
+    "description": "Toplam birikimler"
+  },
+  
+  "activeGoals": "Aktif Hedefler",
+  "@activeGoals": {
+    "description": "Aktif hedefler"
+  },
+  
+  "completedGoals": "Tamamlanan Hedefler",
+  "@completedGoals": {
+    "description": "Tamamlanan hedefler"
+  },
+  
+  "recentSavings": "Son Birikimler",
+  "@recentSavings": {
+    "description": "Son birikimler"
+  },
+  
+  "addSaving": "Birikim Ekle",
+  "@addSaving": {
+    "description": "Birikim ekleme butonu"
+  },
+  
+  "settings": "Ayarlar",
+  "@settings": {
+    "description": "Ayarlar"
+  },
+  
+  "general": "Genel",
+  "@general": {
+    "description": "Genel ayarlar"
+  },
+  
+  "notifications": "Bildirimler",
+  "@notifications": {
+    "description": "Bildirimler"
+  },
+  
+  "notificationSubtitle": "Hatırlatma bildirimleri",
+  "@notificationSubtitle": {
+    "description": "Bildirim alt başlığı"
+  },
+  
+  "theme": "Tema",
+  "@theme": {
+    "description": "Tema"
+  },
+  
+  "lightTheme": "Açık tema",
+  "@lightTheme": {
+    "description": "Açık tema"
+  },
+  
+  "darkTheme": "Karanlık tema",
+  "@darkTheme": {
+    "description": "Karanlık tema"
+  },
+  
+  "language": "Dil",
+  "@language": {
+    "description": "Dil"
+  },
+  
+  "turkish": "Türkçe",
+  "@turkish": {
+    "description": "Türkçe dili"
+  },
+  
+  "english": "English",
+  "@english": {
+    "description": "İngilizce dili"
+  },
+  
+  "data": "Veriler",
+  "@data": {
+    "description": "Veri ayarları"
+  },
+  
+  "backupData": "Verileri Yedekle",
+  "@backupData": {
+    "description": "Veri yedekleme"
+  },
+  
+  "backupSubtitle": "Birikimlerinizi yedekleyin",
+  "@backupSubtitle": {
+    "description": "Yedekleme alt başlığı"
+  },
+  
+  "restoreData": "Verileri Geri Yükle",
+  "@restoreData": {
+    "description": "Veri geri yükleme"
+  },
+  
+  "restoreSubtitle": "Yedekten geri yükleyin",
+  "@restoreSubtitle": {
+    "description": "Geri yükleme alt başlığı"
+  },
+  
+  "deleteAllData": "Tüm Verileri Sil",
+  "@deleteAllData": {
+    "description": "Tüm veri silme"
+  },
+  
+  "deleteDataSubtitle": "Dikkat: Bu işlem geri alınamaz",
+  "@deleteDataSubtitle": {
+    "description": "Veri silme uyarısı"
+  },
+  
+  "about": "Hakkında",
+  "@about": {
+    "description": "Hakkında bölümü"
+  },
+  
+  "version": "Sürüm",
+  "@version": {
+    "description": "Sürüm"
+  },
+  
+  "helpSupport": "Yardım & Destek",
+  "@helpSupport": {
+    "description": "Yardım ve destek"
+  },
+  
+  "helpSubtitle": "SSS ve iletişim",
+  "@helpSubtitle": {
+    "description": "Yardım alt başlığı"
+  },
+  
+  "selectTheme": "Tema Seçin",
+  "@selectTheme": {
+    "description": "Tema seçimi başlığı"
+  },
+  
+  "selectLanguage": "Dil Seçin",
+  "@selectLanguage": {
+    "description": "Dil seçimi başlığı"
+  },
+  
+  "cancel": "İptal",
+  "@cancel": {
+    "description": "İptal butonu"
+  },
+  
+  "delete": "Sil",
+  "@delete": {
+    "description": "Sil butonu"
+  },
+  
+  "deleteAllDataTitle": "Tüm Verileri Sil",
+  "@deleteAllDataTitle": {
+    "description": "Veri silme dialog başlığı"
+  },
+  
+  "deleteAllDataMessage": "Bu işlem tüm birikimlerinizi ve ayarlarınızı silecektir. Bu işlem geri alınamaz. Devam etmek istediğinizden emin misiniz?",
+  "@deleteAllDataMessage": {
+    "description": "Veri silme dialog mesajı"
+  },
+  
+  "dataBackedUpSuccessfully": "Veriler başarıyla yedeklendi!",
+  "@dataBackedUpSuccessfully": {
+    "description": "Başarılı yedekleme mesajı"
+  },
+  
+  "dataRestoredSuccessfully": "Veriler başarıyla geri yüklendi!",
+  "@dataRestoredSuccessfully": {
+    "description": "Başarılı geri yükleme mesajı"
+  },
+  
+  "dataDeletedSuccessfully": "Tüm veriler başarıyla silindi!",
+  "@dataDeletedSuccessfully": {
+    "description": "Başarılı veri silme mesajı"
+  },
+  
+  "backupError": "Yedekleme sırasında hata oluştu: {error}",
+  "@backupError": {
+    "description": "Yedekleme hata mesajı",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "restoreError": "Geri yükleme sırasında hata oluştu: {error}",
+  "@restoreError": {
+    "description": "Geri yükleme hata mesajı",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "deleteError": "Veri silme sırasında hata oluştu: {error}",
+  "@deleteError": {
+    "description": "Veri silme hata mesajı",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "helpComingSoon": "Yardım sayfası yakında eklenecek!",
+  "@helpComingSoon": {
+    "description": "Yardım sayfası geliyor mesajı"
+  }
+}

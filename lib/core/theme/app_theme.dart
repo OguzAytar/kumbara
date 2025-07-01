@@ -8,10 +8,7 @@ class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: _primaryColor,
-        brightness: Brightness.light,
-      ),
+      colorScheme: ColorScheme.fromSeed(seedColor: _primaryColor, brightness: Brightness.light),
       primaryColor: _primaryColor,
       primaryColorLight: _primaryColorLight,
       primaryColorDark: _primaryColorDark,
@@ -22,11 +19,7 @@ class AppTheme {
         foregroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        titleTextStyle: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-        ),
+        titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
       ),
 
       // Card Theme
@@ -42,9 +35,7 @@ class AppTheme {
           backgroundColor: _primaryColor,
           foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
       ),
@@ -78,10 +69,7 @@ class AppTheme {
         ),
         filled: true,
         fillColor: Colors.grey.shade50,
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 12,
-        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
 
       // FloatingActionButton Theme
@@ -93,56 +81,21 @@ class AppTheme {
       ),
 
       // Progress Indicator Theme
-      progressIndicatorTheme: const ProgressIndicatorThemeData(
-        color: _primaryColor,
-        linearTrackColor: Colors.grey,
-      ),
+      progressIndicatorTheme: const ProgressIndicatorThemeData(color: _primaryColor, linearTrackColor: Colors.grey),
 
       // Scaffold Background
       scaffoldBackgroundColor: Colors.grey.shade50,
 
       // Text Theme
       textTheme: const TextTheme(
-        displayLarge: TextStyle(
-          fontSize: 32,
-          fontWeight: FontWeight.bold,
-          color: Colors.black87,
-        ),
-        displayMedium: TextStyle(
-          fontSize: 28,
-          fontWeight: FontWeight.bold,
-          color: Colors.black87,
-        ),
-        displaySmall: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: Colors.black87,
-        ),
-        headlineLarge: TextStyle(
-          fontSize: 22,
-          fontWeight: FontWeight.w600,
-          color: Colors.black87,
-        ),
-        headlineMedium: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-          color: Colors.black87,
-        ),
-        headlineSmall: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-          color: Colors.black87,
-        ),
-        titleLarge: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-          color: Colors.black87,
-        ),
-        titleMedium: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          color: Colors.black87,
-        ),
+        displayLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.black87),
+        displayMedium: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black87),
+        displaySmall: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black87),
+        headlineLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: Colors.black87),
+        headlineMedium: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black87),
+        headlineSmall: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black87),
+        titleLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black87),
+        titleMedium: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black87),
         bodyLarge: TextStyle(fontSize: 16, color: Colors.black87),
         bodyMedium: TextStyle(fontSize: 14, color: Colors.black87),
         bodySmall: TextStyle(fontSize: 12, color: Colors.black54),
@@ -153,10 +106,7 @@ class AppTheme {
   static ThemeData get darkTheme {
     return ThemeData(
       useMaterial3: true,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: _primaryColor,
-        brightness: Brightness.dark,
-      ),
+      colorScheme: ColorScheme.fromSeed(seedColor: _primaryColor, brightness: Brightness.dark),
       primaryColor: _primaryColor,
 
       // AppBar Theme
@@ -165,11 +115,7 @@ class AppTheme {
         foregroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        titleTextStyle: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-        ),
+        titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
       ),
 
       // Card Theme
@@ -186,11 +132,41 @@ class AppTheme {
           backgroundColor: _primaryColor,
           foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
+      ),
+
+      // Text Button Theme
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: _primaryColorLight,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+        ),
+      ),
+
+      // Input Decoration Theme
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey.shade600),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: _primaryColorLight, width: 2),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Colors.redAccent, width: 1),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Colors.redAccent, width: 2),
+        ),
+        filled: true,
+        fillColor: Colors.grey.shade800,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
 
       // FloatingActionButton Theme
@@ -202,13 +178,68 @@ class AppTheme {
       ),
 
       // Progress Indicator Theme
-      progressIndicatorTheme: const ProgressIndicatorThemeData(
-        color: _primaryColor,
-        linearTrackColor: Colors.grey,
-      ),
+      progressIndicatorTheme: const ProgressIndicatorThemeData(color: _primaryColorLight, linearTrackColor: Colors.grey),
 
       // Scaffold Background
-      scaffoldBackgroundColor: Colors.grey.shade900,
+      scaffoldBackgroundColor: const Color(0xFF121212),
+
+      // Text Theme - Dark mode için uygun renkler
+      textTheme: const TextTheme(
+        displayLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
+        displayMedium: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
+        displaySmall: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+        headlineLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: Colors.white),
+        headlineMedium: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
+        headlineSmall: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
+        titleLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
+        titleMedium: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.white70),
+        bodyLarge: TextStyle(fontSize: 16, color: Colors.white70),
+        bodyMedium: TextStyle(fontSize: 14, color: Colors.white70),
+        bodySmall: TextStyle(fontSize: 12, color: Colors.white60),
+      ),
+
+      // Bottom Navigation Bar Theme
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: Colors.grey.shade900,
+        selectedItemColor: _primaryColorLight,
+        unselectedItemColor: Colors.grey.shade600,
+        type: BottomNavigationBarType.fixed,
+      ),
+
+      // List Tile Theme
+      listTileTheme: const ListTileThemeData(textColor: Colors.white70, iconColor: Colors.white70),
+
+      // Switch Theme
+      switchTheme: SwitchThemeData(
+        thumbColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return _primaryColorLight;
+          }
+          return Colors.grey.shade600;
+        }),
+        trackColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return _primaryColor.withValues(alpha: 0.5);
+          }
+          return Colors.grey.shade700;
+        }),
+      ),
+
+      // Radio Theme
+      radioTheme: RadioThemeData(
+        fillColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return _primaryColorLight;
+          }
+          return Colors.grey.shade600;
+        }),
+      ),
+
+      // Icon Theme
+      iconTheme: IconThemeData(color: Colors.white70, size: 24),
+
+      // Primary Icon Theme
+      primaryIconTheme: const IconThemeData(color: Colors.white, size: 24),
     );
   }
 }

@@ -1,108 +1,98 @@
 import 'package:flutter/material.dart';
+import 'package:kumbara/l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
-import '../../core/widgets/custom_snackbar.dart';
+import 'settings_viewmodel.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<SettingsViewModel>().initialize();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Ayarlar',
+        title: Text(
+          AppLocalizations.of(context)!.settings,
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         backgroundColor: Theme.of(context).primaryColor,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: ListView(
-        children: [
-          _buildSection('Genel', [
-            _buildSettingsTile(
-              icon: Icons.notifications,
-              title: 'Bildirimler',
-              subtitle: 'Hatırlatma bildirimleri',
-              trailing: Switch(
-                value: true, // TODO: Get from provider
-                onChanged: (value) {
-                  // TODO: Update notification settings
-                },
-              ),
-            ),
-            _buildSettingsTile(
-              icon: Icons.palette,
-              title: 'Tema',
-              subtitle: 'Açık tema',
-              onTap: () {
-                // TODO: Show theme selector
-              },
-            ),
-            _buildSettingsTile(
-              icon: Icons.language,
-              title: 'Dil',
-              subtitle: 'Türkçe',
-              onTap: () {
-                // TODO: Show language selector
-              },
-            ),
-          ]),
-          _buildSection('Veriler', [
-            _buildSettingsTile(
-              icon: Icons.backup,
-              title: 'Verileri Yedekle',
-              subtitle: 'Birikimlerinizi yedekleyin',
-              onTap: () {
-                // TODO: Backup data
-                CustomSnackBar.showInfo(
-                  context,
-                  message: 'Yedekleme özelliği yakında eklenecek!',
-                );
-              },
-            ),
-            _buildSettingsTile(
-              icon: Icons.restore,
-              title: 'Verileri Geri Yükle',
-              subtitle: 'Yedekten geri yükleyin',
-              onTap: () {
-                // TODO: Restore data
-                CustomSnackBar.showInfo(
-                  context,
-                  message: 'Geri yükleme özelliği yakında eklenecek!',
-                );
-              },
-            ),
-            _buildSettingsTile(
-              icon: Icons.delete_forever,
-              title: 'Tüm Verileri Sil',
-              subtitle: 'Dikkat: Bu işlem geri alınamaz',
-              textColor: Colors.red,
-              onTap: () {
-                _showDeleteConfirmationDialog(context);
-              },
-            ),
-          ]),
-          _buildSection('Hakkında', [
-            _buildSettingsTile(
-              icon: Icons.info,
-              title: 'Sürüm',
-              subtitle: '1.0.0',
-            ),
-            _buildSettingsTile(
-              icon: Icons.help,
-              title: 'Yardım & Destek',
-              subtitle: 'SSS ve iletişim',
-              onTap: () {
-                // TODO: Show help screen
-                CustomSnackBar.showInfo(
-                  context,
-                  message: 'Yardım sayfası yakında eklenecek!',
-                );
-              },
-            ),
-          ]),
-        ],
+      body: Consumer<SettingsViewModel>(
+        builder: (context, viewModel, child) {
+          if (viewModel.isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          return ListView(
+            children: [
+              _buildSection(AppLocalizations.of(context)!.general, [
+                _buildSettingsTile(
+                  icon: Icons.notifications,
+                  title: AppLocalizations.of(context)!.notifications,
+                  subtitle: AppLocalizations.of(context)!.notificationSubtitle,
+                  trailing: Switch(value: viewModel.notificationsEnabled, onChanged: viewModel.toggleNotifications),
+                ),
+                _buildSettingsTile(
+                  icon: Icons.palette,
+                  title: AppLocalizations.of(context)!.theme,
+                  subtitle: viewModel.themeText(context),
+                  onTap: () => viewModel.showThemeSelector(context),
+                ),
+                _buildSettingsTile(
+                  icon: Icons.language,
+                  title: AppLocalizations.of(context)!.language,
+                  subtitle: viewModel.selectedLanguageText,
+                  onTap: () => viewModel.showLanguageSelector(context),
+                ),
+              ]),
+              _buildSection(AppLocalizations.of(context)!.data, [
+                _buildSettingsTile(
+                  icon: Icons.backup,
+                  title: AppLocalizations.of(context)!.backupData,
+                  subtitle: AppLocalizations.of(context)!.backupSubtitle,
+                  onTap: () => viewModel.backupData(context),
+                ),
+                _buildSettingsTile(
+                  icon: Icons.restore,
+                  title: AppLocalizations.of(context)!.restoreData,
+                  subtitle: AppLocalizations.of(context)!.restoreSubtitle,
+                  onTap: () => viewModel.restoreData(context),
+                ),
+                _buildSettingsTile(
+                  icon: Icons.delete_forever,
+                  title: AppLocalizations.of(context)!.deleteAllData,
+                  subtitle: AppLocalizations.of(context)!.deleteDataSubtitle,
+                  textColor: Colors.red,
+                  onTap: () => viewModel.showDeleteConfirmationDialog(context),
+                ),
+              ]),
+              _buildSection(AppLocalizations.of(context)!.about, [
+                _buildSettingsTile(icon: Icons.info, title: AppLocalizations.of(context)!.version, subtitle: '1.0.0'),
+                _buildSettingsTile(
+                  icon: Icons.help,
+                  title: AppLocalizations.of(context)!.helpSupport,
+                  subtitle: AppLocalizations.of(context)!.helpSubtitle,
+                  onTap: () => viewModel.showHelpScreen(context),
+                ),
+              ]),
+            ],
+          );
+        },
       ),
     );
   }
@@ -115,11 +105,7 @@ class SettingsScreen extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
           child: Text(
             title,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
-            ),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.titleMedium?.color),
           ),
         ),
         ...children,
@@ -135,69 +121,26 @@ class SettingsScreen extends StatelessWidget {
     VoidCallback? onTap,
     Color? textColor,
   }) {
-    return ListTile(
-      leading: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: (textColor ?? Colors.blue).withOpacity(0.1),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Icon(icon, color: textColor ?? Colors.blue, size: 20),
-      ),
-      title: Text(
-        title,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          color: textColor ?? Colors.black87,
-        ),
-      ),
-      subtitle: subtitle != null
-          ? Text(
-              subtitle,
-              style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
-            )
-          : null,
-      trailing:
-          trailing ??
-          (onTap != null
-              ? Icon(Icons.chevron_right, color: Colors.grey.shade400)
-              : null),
-      onTap: onTap,
-    );
-  }
-
-  void _showDeleteConfirmationDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Tüm Verileri Sil'),
-          content: const Text(
-            'Bu işlem tüm birikimlerinizi ve ayarlarınızı silecektir. Bu işlem geri alınamaz. Devam etmek istediğinizden emin misiniz?',
+    return Builder(
+      builder: (context) => ListTile(
+        leading: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: (textColor ?? Theme.of(context).primaryColor).withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(8),
           ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('İptal'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                // TODO: Delete all data
-                CustomSnackBar.showWarning(
-                  context,
-                  message: 'Veri silme özelliği yakında eklenecek!',
-                );
-              },
-              style: TextButton.styleFrom(foregroundColor: Colors.red),
-              child: const Text('Sil'),
-            ),
-          ],
-        );
-      },
+          child: Icon(icon, color: textColor ?? Theme.of(context).primaryColor, size: 20),
+        ),
+        title: Text(
+          title,
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: textColor ?? Theme.of(context).textTheme.titleMedium?.color),
+        ),
+        subtitle: subtitle != null
+            ? Text(subtitle, style: TextStyle(fontSize: 14, color: Theme.of(context).textTheme.bodyMedium?.color?.withValues(alpha: 0.7)))
+            : null,
+        trailing: trailing ?? (onTap != null ? Icon(Icons.chevron_right, color: Theme.of(context).iconTheme.color?.withValues(alpha: 0.5)) : null),
+        onTap: onTap,
+      ),
     );
   }
 }

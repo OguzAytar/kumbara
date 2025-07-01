@@ -12,8 +12,7 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<double> _scaleAnimation;
@@ -29,10 +28,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void _initAnimations() {
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 2000),
-      vsync: this,
-    );
+    _animationController = AnimationController(duration: const Duration(milliseconds: 2000), vsync: this);
 
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
@@ -130,42 +126,23 @@ class _SplashScreenState extends State<SplashScreen>
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(24),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 20,
-                            offset: const Offset(0, 10),
-                          ),
-                        ],
+                        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 20, offset: const Offset(0, 10))],
                       ),
-                      child: const Icon(
-                        Icons.savings,
-                        size: 60,
-                        color: Color(0xFF2E7D32),
-                      ),
+                      child: const Icon(Icons.savings, size: 60, color: Color(0xFF2E7D32)),
                     ),
                     const SizedBox(height: 24),
 
                     // App Adı
                     const Text(
                       'Kumbara',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        letterSpacing: 1.2,
-                      ),
+                      style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white, letterSpacing: 1.2),
                     ),
                     const SizedBox(height: 8),
 
                     // Slogan
                     Text(
                       'Hayallerinizi Gerçekleştirin',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white.withOpacity(0.9),
-                        letterSpacing: 0.5,
-                      ),
+                      style: TextStyle(fontSize: 16, color: Colors.white.withValues(alpha: 0.9), letterSpacing: 0.5),
                     ),
                     const SizedBox(height: 48),
 
@@ -175,9 +152,7 @@ class _SplashScreenState extends State<SplashScreen>
                       height: 32,
                       child: CircularProgressIndicator(
                         strokeWidth: 3,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          Colors.white.withOpacity(0.8),
-                        ),
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white.withValues(alpha: 0.8)),
                       ),
                     ),
                   ],

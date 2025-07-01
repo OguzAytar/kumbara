@@ -15,32 +15,26 @@ class RecentSavingsList extends StatelessWidget {
       return Container(
         padding: const EdgeInsets.all(40),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
-            ),
-          ],
+          boxShadow: [BoxShadow(color: Theme.of(context).shadowColor.withValues(alpha: 0.1), blurRadius: 8, offset: const Offset(0, 2))],
         ),
         child: Column(
           children: [
-            Icon(Icons.savings_outlined, size: 64, color: Colors.grey.shade400),
+            Icon(Icons.savings_outlined, size: 64, color: Theme.of(context).textTheme.bodyMedium?.color?.withValues(alpha: 0.4)),
             const SizedBox(height: 16),
             Text(
               'Henüz birikim hedefi yok',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: Colors.grey.shade600,
+                color: Theme.of(context).textTheme.bodyMedium?.color?.withValues(alpha: 0.7),
               ),
             ),
             const SizedBox(height: 8),
             Text(
               'İlk birikim hedefinizi oluşturmak için + butonuna tıklayın',
-              style: TextStyle(fontSize: 14, color: Colors.grey.shade500),
+              style: TextStyle(fontSize: 14, color: Theme.of(context).textTheme.bodyMedium?.color?.withValues(alpha: 0.5)),
               textAlign: TextAlign.center,
             ),
           ],
@@ -50,22 +44,15 @@ class RecentSavingsList extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        boxShadow: [BoxShadow(color: Theme.of(context).shadowColor.withValues(alpha: 0.1), blurRadius: 8, offset: const Offset(0, 2))],
       ),
       child: ListView.separated(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: savings.length,
-        separatorBuilder: (context, index) =>
-            Divider(height: 1, color: Colors.grey.shade200),
+        separatorBuilder: (context, index) => Divider(height: 1, color: Colors.grey.shade200),
         itemBuilder: (context, index) {
           final saving = savings[index];
           return _buildSavingTile(context, saving);
@@ -83,23 +70,12 @@ class RecentSavingsList extends StatelessWidget {
       leading: Container(
         width: 48,
         height: 48,
-        decoration: BoxDecoration(
-          color: _getStatusColor(saving.status).withOpacity(0.1),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Icon(
-          _getStatusIcon(saving.status),
-          color: _getStatusColor(saving.status),
-          size: 24,
-        ),
+        decoration: BoxDecoration(color: _getStatusColor(saving.status).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(12)),
+        child: Icon(_getStatusIcon(saving.status), color: _getStatusColor(saving.status), size: 24),
       ),
       title: Text(
         saving.title,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-          color: Colors.black87,
-        ),
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Theme.of(context).textTheme.titleMedium?.color),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
@@ -109,15 +85,13 @@ class RecentSavingsList extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             '₺${saving.currentAmount.toStringAsFixed(2)} / ₺${saving.targetAmount.toStringAsFixed(2)}',
-            style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+            style: TextStyle(fontSize: 14, color: Theme.of(context).textTheme.bodyMedium?.color?.withValues(alpha: 0.7)),
           ),
           const SizedBox(height: 8),
           LinearProgressIndicator(
             value: progressPercentage / 100,
-            backgroundColor: Colors.grey.shade200,
-            valueColor: AlwaysStoppedAnimation<Color>(
-              _getStatusColor(saving.status),
-            ),
+            backgroundColor: Theme.of(context).dividerColor.withValues(alpha: 0.3),
+            valueColor: AlwaysStoppedAnimation<Color>(_getStatusColor(saving.status)),
           ),
           const SizedBox(height: 4),
           Row(
@@ -125,21 +99,13 @@ class RecentSavingsList extends StatelessWidget {
             children: [
               Text(
                 '%${progressPercentage.toInt()}',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                  color: _getStatusColor(saving.status),
-                ),
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: _getStatusColor(saving.status)),
               ),
               Text(
-                remainingDays > 0
-                    ? '$remainingDays gün kaldı'
-                    : 'Süresi dolmuş',
+                remainingDays > 0 ? '$remainingDays gün kaldı' : 'Süresi dolmuş',
                 style: TextStyle(
                   fontSize: 12,
-                  color: remainingDays > 0
-                      ? Colors.grey.shade600
-                      : Colors.red.shade600,
+                  color: remainingDays > 0 ? Theme.of(context).textTheme.bodyMedium?.color?.withValues(alpha: 0.7) : Colors.red.shade600,
                 ),
               ),
             ],
@@ -148,10 +114,7 @@ class RecentSavingsList extends StatelessWidget {
       ),
       onTap: () {
         // TODO: Navigate to saving detail
-        CustomSnackBar.showInfo(
-          context,
-          message: '${saving.title} detay sayfası yakında eklenecek!',
-        );
+        CustomSnackBar.showInfo(context, message: '${saving.title} detay sayfası yakında eklenecek!');
       },
     );
   }
