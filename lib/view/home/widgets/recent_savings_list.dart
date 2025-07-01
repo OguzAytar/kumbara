@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kumbara/core/enums/saving_enum.dart';
 
+import '../../../core/widgets/custom_snackbar.dart';
 import '../../../models/saving.dart';
 
 class RecentSavingsList extends StatelessWidget {
@@ -147,10 +148,9 @@ class RecentSavingsList extends StatelessWidget {
       ),
       onTap: () {
         // TODO: Navigate to saving detail
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('${saving.title} detay sayfası yakında eklenecek!'),
-          ),
+        CustomSnackBar.showInfo(
+          context,
+          message: '${saving.title} detay sayfası yakında eklenecek!',
         );
       },
     );

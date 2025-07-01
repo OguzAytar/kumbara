@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/widgets/custom_snackbar.dart';
+
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
@@ -53,10 +55,9 @@ class SettingsScreen extends StatelessWidget {
               subtitle: 'Birikimlerinizi yedekleyin',
               onTap: () {
                 // TODO: Backup data
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Yedekleme özelliği yakında eklenecek!'),
-                  ),
+                CustomSnackBar.showInfo(
+                  context,
+                  message: 'Yedekleme özelliği yakında eklenecek!',
                 );
               },
             ),
@@ -66,10 +67,9 @@ class SettingsScreen extends StatelessWidget {
               subtitle: 'Yedekten geri yükleyin',
               onTap: () {
                 // TODO: Restore data
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Geri yükleme özelliği yakında eklenecek!'),
-                  ),
+                CustomSnackBar.showInfo(
+                  context,
+                  message: 'Geri yükleme özelliği yakında eklenecek!',
                 );
               },
             ),
@@ -95,10 +95,9 @@ class SettingsScreen extends StatelessWidget {
               subtitle: 'SSS ve iletişim',
               onTap: () {
                 // TODO: Show help screen
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Yardım sayfası yakında eklenecek!'),
-                  ),
+                CustomSnackBar.showInfo(
+                  context,
+                  message: 'Yardım sayfası yakında eklenecek!',
                 );
               },
             ),
@@ -188,11 +187,9 @@ class SettingsScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
                 // TODO: Delete all data
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Veri silme özelliği yakında eklenecek!'),
-                    backgroundColor: Colors.red,
-                  ),
+                CustomSnackBar.showWarning(
+                  context,
+                  message: 'Veri silme özelliği yakında eklenecek!',
                 );
               },
               style: TextButton.styleFrom(foregroundColor: Colors.red),

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../core/providers/saving_provider.dart';
 import '../../core/providers/settings_provider.dart';
+import '../../core/widgets/custom_snackbar.dart';
 import '../../models/saving.dart';
 import '../settings/settings_screen.dart';
 import 'widgets/dashboard_card.dart';
@@ -124,10 +125,9 @@ class _HomeScreeState extends State<HomeScree> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // TODO: Add new saving screen
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Yeni birikim ekleme özelliği yakında eklenecek!'),
-            ),
+          CustomSnackBar.showInfo(
+            context,
+            message: 'Yeni birikim ekleme özelliği yakında eklenecek!',
           );
         },
         backgroundColor: Theme.of(context).primaryColor,
@@ -238,10 +238,9 @@ class _HomeScreeState extends State<HomeScree> {
             TextButton(
               onPressed: () {
                 // TODO: Navigate to all savings
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Tüm birikimler sayfası yakında eklenecek!'),
-                  ),
+                CustomSnackBar.showInfo(
+                  context,
+                  message: 'Tüm birikimler sayfası yakında eklenecek!',
                 );
               },
               child: const Text('Tümünü Gör'),
