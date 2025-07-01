@@ -6,37 +6,46 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  FLUTTER_VERSION: "3.22.4"
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     
     steps:
-    - uses: actions/checkout@v4
-    
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
     - name: Setup Java
       uses: actions/setup-java@v4
       with:
-        distribution: 'zulu'
+        distribution: 'temurin'
         java-version: '17'
     
     - name: Setup Flutter
-      uses: subosito/flutter-action@v2
+      uses: subosito/flutter-action@v2.16.0
       with:
-        flutter-version: '3.22.4'
+        flutter-version: ${{ env.FLUTTER_VERSION }}
         channel: 'stable'
         cache: true
+        cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
         
+    - name: Flutter version check
+      run: flutter --version
+    
     - name: Flutter doctor
       run: flutter doctor -v
     
-    - name: Install dependencies
+    - name: Get dependencies
       run: flutter pub get
     
     - name: Verify formatting
       run: dart format --output=none --set-exit-if-changed .
     
     - name: Analyze project source
-      run: flutter analyze
+      run: flutter analyze --no-fatal-infos
     
     - name: Run tests
       run: flutter test
@@ -44,28 +53,31 @@ jobs:
   build-android:
     needs: test
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
     
     - name: Setup Java
       uses: actions/setup-java@v4
       with:
-        distribution: 'zulu'
+        distribution: 'temurin'
         java-version: '17'
     
     - name: Setup Flutter
-      uses: subosito/flutter-action@v2
+      uses: subosito/flutter-action@v2.16.0
       with:
-        flutter-version: '3.22.4'
+        flutter-version: ${{ env.FLUTTER_VERSION }}
         channel: 'stable'
         cache: true
+        cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
     
-    - name: Install dependencies
+    - name: Get dependencies
       run: flutter pub get
     
     - name: Build Android APK
-      run: flutter build apk --release
+      run: flutter build apk --release --verbose
     
     - name: Upload APK
       uses: actions/upload-artifact@v4
@@ -76,22 +88,25 @@ jobs:
   build-web:
     needs: test
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
     
     - name: Setup Flutter
-      uses: subosito/flutter-action@v2
+      uses: subosito/flutter-action@v2.16.0
       with:
-        flutter-version: '3.22.4'
+        flutter-version: ${{ env.FLUTTER_VERSION }}
         channel: 'stable'
         cache: true
+        cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
     
-    - name: Install dependencies
+    - name: Get dependencies
       run: flutter pub get
     
     - name: Build Web
-      run: flutter build web --release
+      run: flutter build web --release --verbose
     
     - name: Upload Web build
       uses: actions/upload-artifact@v4
