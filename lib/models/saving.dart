@@ -46,7 +46,10 @@ class Saving {
         final remainingWeeks = (remainingDays / 7).ceil();
         return remainingWeeks > 0 ? remainingAmount / remainingWeeks : 0;
       case SavingFrequency.monthly:
-        final remainingMonths = ((targetDate.year - DateTime.now().year) * 12 + targetDate.month - DateTime.now().month);
+        final remainingMonths =
+            ((targetDate.year - DateTime.now().year) * 12 +
+            targetDate.month -
+            DateTime.now().month);
         return remainingMonths > 0 ? remainingAmount / remainingMonths : 0;
     }
   }
@@ -59,7 +62,11 @@ class Saving {
 
   // Kalan gün sayısı
   int get remainingDays {
-    return targetDate.difference(DateTime.now()).inDays.clamp(0, double.infinity).toInt();
+    return targetDate
+        .difference(DateTime.now())
+        .inDays
+        .clamp(0, double.infinity)
+        .toInt();
   }
 
   Map<String, dynamic> toMap() {
@@ -89,8 +96,14 @@ class Saving {
       currentAmount: (map['currentAmount'] ?? 0.0).toDouble(),
       startDate: DateTime.fromMillisecondsSinceEpoch(map['startDate']),
       targetDate: DateTime.fromMillisecondsSinceEpoch(map['targetDate']),
-      frequency: SavingFrequency.values.firstWhere((e) => e.name == map['frequency'], orElse: () => SavingFrequency.daily),
-      status: SavingStatus.values.firstWhere((e) => e.name == map['status'], orElse: () => SavingStatus.active),
+      frequency: SavingFrequency.values.firstWhere(
+        (e) => e.name == map['frequency'],
+        orElse: () => SavingFrequency.daily,
+      ),
+      status: SavingStatus.values.firstWhere(
+        (e) => e.name == map['status'],
+        orElse: () => SavingStatus.active,
+      ),
       iconName: map['iconName'],
       color: map['color'],
       createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt']),

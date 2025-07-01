@@ -18,7 +18,8 @@ class SavingProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get error => _error;
 
-  List<Saving> get activeSavings => _savings.where((saving) => saving.status == SavingStatus.active).toList();
+  List<Saving> get activeSavings =>
+      _savings.where((saving) => saving.status == SavingStatus.active).toList();
 
   Future<void> loadSavings() async {
     _isLoading = true;
@@ -84,7 +85,11 @@ class SavingProvider with ChangeNotifier {
     }
   }
 
-  Future<bool> addMoneyToSaving(int savingId, double amount, {String? note}) async {
+  Future<bool> addMoneyToSaving(
+    int savingId,
+    double amount, {
+    String? note,
+  }) async {
     try {
       await _savingService.addMoneyToSaving(savingId, amount, note: note);
       await loadSavings();
@@ -101,7 +106,9 @@ class SavingProvider with ChangeNotifier {
     }
   }
 
-  Future<List<SavingTransaction>> getTransactionsBySavingId(int savingId) async {
+  Future<List<SavingTransaction>> getTransactionsBySavingId(
+    int savingId,
+  ) async {
     try {
       return await _savingService.getTransactionsBySavingId(savingId);
     } catch (e) {

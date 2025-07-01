@@ -48,7 +48,10 @@ class _HomeScreeState extends State<HomeScree> {
           IconButton(
             icon: const Icon(Icons.settings, color: Colors.white),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsScreen()),
+              );
             },
           ),
         ],
@@ -64,9 +67,17 @@ class _HomeScreeState extends State<HomeScree> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.error_outline, size: 64, color: Colors.red.shade400),
+                  Icon(
+                    Icons.error_outline,
+                    size: 64,
+                    color: Colors.red.shade400,
+                  ),
                   const SizedBox(height: 16),
-                  Text(savingProvider.error!, style: const TextStyle(fontSize: 16), textAlign: TextAlign.center),
+                  Text(
+                    savingProvider.error!,
+                    style: const TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
@@ -111,7 +122,11 @@ class _HomeScreeState extends State<HomeScree> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // TODO: Add new saving screen
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Yeni birikim ekleme özelliği yakında eklenecek!')));
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Yeni birikim ekleme özelliği yakında eklenecek!'),
+            ),
+          );
         },
         backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.add, color: Colors.white),
@@ -127,22 +142,41 @@ class _HomeScreeState extends State<HomeScree> {
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Theme.of(context).primaryColor, Theme.of(context).primaryColor.withOpacity(0.8)],
+              colors: [
+                Theme.of(context).primaryColor,
+                Theme.of(context).primaryColor.withOpacity(0.8),
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(16),
-            boxShadow: [BoxShadow(color: Theme.of(context).primaryColor.withOpacity(0.3), blurRadius: 8, offset: const Offset(0, 4))],
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).primaryColor.withOpacity(0.3),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Hoş Geldiniz! 👋',
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
               const SizedBox(height: 8),
-              Text('Hayallerinize bir adım daha yaklaşın', style: TextStyle(fontSize: 16, color: Colors.white.withOpacity(0.9))),
+              Text(
+                'Hayallerinize bir adım daha yaklaşın',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white.withOpacity(0.9),
+                ),
+              ),
             ],
           ),
         );
@@ -193,19 +227,29 @@ class _HomeScreeState extends State<HomeScree> {
           children: [
             const Text(
               'Birikimlerim',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black87),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
             ),
             TextButton(
               onPressed: () {
                 // TODO: Navigate to all savings
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Tüm birikimler sayfası yakında eklenecek!')));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Tüm birikimler sayfası yakında eklenecek!'),
+                  ),
+                );
               },
               child: const Text('Tümünü Gör'),
             ),
           ],
         ),
         const SizedBox(height: 16),
-        RecentSavingsList(savings: savingProvider.activeSavings.take(3).toList()),
+        RecentSavingsList(
+          savings: savingProvider.activeSavings.take(3).toList(),
+        ),
       ],
     );
   }
@@ -234,7 +278,9 @@ class _HomeScreeState extends State<HomeScree> {
       return 'Birikim bulunamadı';
     }
 
-    final mostProgressed = activeSavings.reduce((a, b) => a.completionPercentage > b.completionPercentage ? a : b);
+    final mostProgressed = activeSavings.reduce(
+      (a, b) => a.completionPercentage > b.completionPercentage ? a : b,
+    );
 
     return '%${mostProgressed.completionPercentage.toInt()}';
   }

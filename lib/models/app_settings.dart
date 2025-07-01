@@ -33,11 +33,20 @@ class AppSettings {
       notificationsEnabled: (map['notificationsEnabled'] ?? 0) == 1,
       locale: map['locale'] ?? 'tr',
       theme: map['theme'] ?? 'light',
-      lastOpenDate: map['lastOpenDate'] != null ? DateTime.fromMillisecondsSinceEpoch(map['lastOpenDate']) : null,
+      lastOpenDate: map['lastOpenDate'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['lastOpenDate'])
+          : null,
     );
   }
 
-  AppSettings copyWith({int? id, bool? isFirstLaunch, bool? notificationsEnabled, String? locale, String? theme, DateTime? lastOpenDate}) {
+  AppSettings copyWith({
+    int? id,
+    bool? isFirstLaunch,
+    bool? notificationsEnabled,
+    String? locale,
+    String? theme,
+    DateTime? lastOpenDate,
+  }) {
     return AppSettings(
       id: id ?? this.id,
       isFirstLaunch: isFirstLaunch ?? this.isFirstLaunch,

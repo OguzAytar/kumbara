@@ -23,19 +23,22 @@ class _OnboardScreenState extends State<OnboardScreen> {
     OnboardData(
       icon: Icons.savings,
       title: 'Birikimlerinizi Takip Edin',
-      description: 'Hedeflerinize ulaşmak için biriktirmelerinizi kolayca takip edin ve yönetin.',
+      description:
+          'Hedeflerinize ulaşmak için biriktirmelerinizi kolayca takip edin ve yönetin.',
       color: Color(0xFF2E7D32),
     ),
     OnboardData(
       icon: Icons.timeline,
       title: 'İlerlemenizi Görün',
-      description: 'Grafikler ve raporlarla birikimleririnizin ilerleyişini detaylı bir şekilde analiz edin.',
+      description:
+          'Grafikler ve raporlarla birikimleririnizin ilerleyişini detaylı bir şekilde analiz edin.',
       color: Color(0xFF1976D2),
     ),
     OnboardData(
       icon: Icons.notifications_active,
       title: 'Hatırlatmalar Alın',
-      description: 'Düzenli birikim yapmayı unutmamak için bildirimlerden yararlanın.',
+      description:
+          'Düzenli birikim yapmayı unutmamak için bildirimlerden yararlanın.',
       color: Color(0xFFFF6F00),
     ),
   ];
@@ -48,7 +51,10 @@ class _OnboardScreenState extends State<OnboardScreen> {
 
   void _nextPage() {
     if (_currentPage < _totalPages - 1) {
-      _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+      _pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
     } else {
       _finishOnboarding();
     }
@@ -56,7 +62,10 @@ class _OnboardScreenState extends State<OnboardScreen> {
 
   void _previousPage() {
     if (_currentPage > 0) {
-      _pageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+      _pageController.previousPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
     }
   }
 
@@ -71,14 +80,29 @@ class _OnboardScreenState extends State<OnboardScreen> {
 
       if (granted) {
         await context.read<SettingsProvider>().setNotificationsEnabled(true);
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Bildirim izni verildi!'), backgroundColor: Colors.green));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Bildirim izni verildi!'),
+            backgroundColor: Colors.green,
+          ),
+        );
       } else {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('Bildirim izni reddedildi. Ayarlardan açabilirsiniz.'), backgroundColor: Colors.orange));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Bildirim izni reddedildi. Ayarlardan açabilirsiniz.',
+            ),
+            backgroundColor: Colors.orange,
+          ),
+        );
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Bildirim izni alınırken hata oluştu: $e'), backgroundColor: Colors.red));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Bildirim izni alınırken hata oluştu: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
 
     setState(() {
@@ -90,7 +114,9 @@ class _OnboardScreenState extends State<OnboardScreen> {
     await context.read<SettingsProvider>().markOnboardingComplete();
 
     if (mounted) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeScree()));
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const HomeScree()),
+      );
     }
   }
 
@@ -106,8 +132,17 @@ class _OnboardScreenState extends State<OnboardScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  if (_currentPage > 0) TextButton(onPressed: _previousPage, child: const Text('Geri')) else const SizedBox(),
-                  TextButton(onPressed: _finishOnboarding, child: const Text('Geç')),
+                  if (_currentPage > 0)
+                    TextButton(
+                      onPressed: _previousPage,
+                      child: const Text('Geri'),
+                    )
+                  else
+                    const SizedBox(),
+                  TextButton(
+                    onPressed: _finishOnboarding,
+                    child: const Text('Geç'),
+                  ),
                 ],
               ),
             ),
@@ -162,19 +197,38 @@ class _OnboardScreenState extends State<OnboardScreen> {
                             },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: _onboardData[_currentPage].color,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                       child: _isRequestingPermission
-                          ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
+                          ? const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Colors.white,
+                              ),
+                            )
                           : Text(
-                              _currentPage == _totalPages - 1 ? 'Bildirimlere İzin Ver' : 'Devam Et',
-                              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
+                              _currentPage == _totalPages - 1
+                                  ? 'Bildirimlere İzin Ver'
+                                  : 'Devam Et',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
                             ),
                     ),
                   ),
                   const SizedBox(height: 8),
 
-                  if (_currentPage == _totalPages - 1) TextButton(onPressed: _finishOnboarding, child: const Text('Bildirimsiz Devam Et')),
+                  if (_currentPage == _totalPages - 1)
+                    TextButton(
+                      onPressed: _finishOnboarding,
+                      child: const Text('Bildirimsiz Devam Et'),
+                    ),
                 ],
               ),
             ),
@@ -194,7 +248,10 @@ class _OnboardScreenState extends State<OnboardScreen> {
           Container(
             width: 120,
             height: 120,
-            decoration: BoxDecoration(color: data.color.withOpacity(0.1), borderRadius: BorderRadius.circular(60)),
+            decoration: BoxDecoration(
+              color: data.color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(60),
+            ),
             child: Icon(data.icon, size: 60, color: data.color),
           ),
           const SizedBox(height: 48),
@@ -202,7 +259,11 @@ class _OnboardScreenState extends State<OnboardScreen> {
           // Title
           Text(
             data.title,
-            style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black87),
+            style: const TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
@@ -210,7 +271,11 @@ class _OnboardScreenState extends State<OnboardScreen> {
           // Description
           Text(
             data.description,
-            style: TextStyle(fontSize: 16, color: Colors.grey.shade600, height: 1.5),
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.grey.shade600,
+              height: 1.5,
+            ),
             textAlign: TextAlign.center,
           ),
         ],
@@ -225,5 +290,10 @@ class OnboardData {
   final String description;
   final Color color;
 
-  OnboardData({required this.icon, required this.title, required this.description, required this.color});
+  OnboardData({
+    required this.icon,
+    required this.title,
+    required this.description,
+    required this.color,
+  });
 }

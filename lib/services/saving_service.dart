@@ -31,7 +31,9 @@ class SavingService {
   // Aktif birikimler
   Future<List<Saving>> getActiveSavings() async {
     final allSavings = await getAllSavings();
-    return allSavings.where((saving) => saving.status == SavingStatus.active).toList();
+    return allSavings
+        .where((saving) => saving.status == SavingStatus.active)
+        .toList();
   }
 
   // Transaction işlemleri
@@ -39,7 +41,9 @@ class SavingService {
     return await _databaseHelper.insertTransaction(transaction);
   }
 
-  Future<List<SavingTransaction>> getTransactionsBySavingId(int savingId) async {
+  Future<List<SavingTransaction>> getTransactionsBySavingId(
+    int savingId,
+  ) async {
     return await _databaseHelper.getTransactionsBySavingId(savingId);
   }
 
@@ -48,8 +52,17 @@ class SavingService {
   }
 
   // Para ekleme
-  Future<void> addMoneyToSaving(int savingId, double amount, {String? note}) async {
-    final transaction = SavingTransaction(savingId: savingId, amount: amount, date: DateTime.now(), note: note);
+  Future<void> addMoneyToSaving(
+    int savingId,
+    double amount, {
+    String? note,
+  }) async {
+    final transaction = SavingTransaction(
+      savingId: savingId,
+      amount: amount,
+      date: DateTime.now(),
+      note: note,
+    );
     await addTransaction(transaction);
   }
 
@@ -120,19 +133,41 @@ class SavingService {
 
       for (final saving in allSavings) {
         final transactions = await getTransactionsBySavingId(saving.id!);
-        final monthlyTransactions = transactions.where((t) => t.date.isAfter(monthStart) && t.date.isBefore(monthEnd));
+        final monthlyTransactions = transactions.where(
+          (t) => t.date.isAfter(monthStart) && t.date.isBefore(monthEnd),
+        );
 
-        monthlyTotal += monthlyTransactions.fold(0.0, (sum, t) => sum + t.amount);
+        monthlyTotal += monthlyTransactions.fold(
+          0.0,
+          (sum, t) => sum + t.amount,
+        );
       }
 
-      months.add({'month': i + 1, 'monthName': _getMonthName(i + 1), 'amount': monthlyTotal});
+      months.add({
+        'month': i + 1,
+        'monthName': _getMonthName(i + 1),
+        'amount': monthlyTotal,
+      });
     }
 
     return months;
   }
 
   String _getMonthName(int month) {
-    const monthNames = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+    const monthNames = [
+      'Ocak',
+      'Şubat',
+      'Mart',
+      'Nisan',
+      'Mayıs',
+      'Haziran',
+      'Temmuz',
+      'Ağustos',
+      'Eylül',
+      'Ekim',
+      'Kasım',
+      'Aralık',
+    ];
     return monthNames[month - 1];
   }
 }
