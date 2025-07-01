@@ -49,12 +49,7 @@ class SavingService {
 
   // Para ekleme
   Future<void> addMoneyToSaving(int savingId, double amount, {String? note}) async {
-    final transaction = SavingTransaction(
-      savingId: savingId,
-      amount: amount,
-      date: DateTime.now(),
-      note: note,
-    );
+    final transaction = SavingTransaction(savingId: savingId, amount: amount, date: DateTime.now(), note: note);
     await addTransaction(transaction);
   }
 
@@ -75,7 +70,7 @@ class SavingService {
   // Hedef tamamlanmış mı kontrol et
   Future<void> checkAndCompleteGoals() async {
     final activeSavings = await getActiveSavings();
-    
+
     for (final saving in activeSavings) {
       if (saving.currentAmount >= saving.targetAmount) {
         await updateSavingStatus(saving.id!, SavingStatus.completed);
@@ -87,17 +82,17 @@ class SavingService {
   Future<Saving?> getMostProgressedSaving() async {
     final allSavings = await getAllSavings();
     if (allSavings.isEmpty) return null;
-    
+
     Saving? mostProgressed;
     double highestProgress = 0;
-    
+
     for (final saving in allSavings) {
       if (saving.completionPercentage > highestProgress) {
         highestProgress = saving.completionPercentage;
         mostProgressed = saving;
       }
     }
-    
+
     return mostProgressed;
   }
 
@@ -105,7 +100,7 @@ class SavingService {
   Future<Saving?> getNearestTargetSaving() async {
     final activeSavings = await getActiveSavings();
     if (activeSavings.isEmpty) return null;
-    
+
     activeSavings.sort((a, b) => a.targetDate.compareTo(b.targetDate));
     return activeSavings.first;
   }
@@ -114,39 +109,30 @@ class SavingService {
   Future<List<Map<String, dynamic>>> getMonthlyProgress() async {
     final now = DateTime.now();
     final months = <Map<String, dynamic>>[];
-    
+
     for (int i = 0; i < 12; i++) {
       final monthStart = DateTime(now.year, i + 1, 1);
       final monthEnd = DateTime(now.year, i + 2, 0);
-      
+
       // Bu aydaki tüm transaction'ları getir
       final allSavings = await getAllSavings();
       double monthlyTotal = 0;
-      
+
       for (final saving in allSavings) {
         final transactions = await getTransactionsBySavingId(saving.id!);
-        final monthlyTransactions = transactions.where((t) =>
-          t.date.isAfter(monthStart) && t.date.isBefore(monthEnd)
-        );
-        
+        final monthlyTransactions = transactions.where((t) => t.date.isAfter(monthStart) && t.date.isBefore(monthEnd));
+
         monthlyTotal += monthlyTransactions.fold(0.0, (sum, t) => sum + t.amount);
       }
-      
-      months.add({
-        'month': i + 1,
-        'monthName': _getMonthName(i + 1),
-        'amount': monthlyTotal,
-      });
+
+      months.add({'month': i + 1, 'monthName': _getMonthName(i + 1), 'amount': monthlyTotal});
     }
-    
+
     return months;
   }
 
   String _getMonthName(int month) {
-    const monthNames = [
-      'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
-      'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
-    ];
+    const monthNames = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
     return monthNames[month - 1];
   }
 }

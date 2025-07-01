@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'core/theme/app_theme.dart';
-import 'core/providers/settings_provider.dart';
+
 import 'core/providers/saving_provider.dart';
+import 'core/providers/settings_provider.dart';
+import 'core/theme/app_theme.dart';
 import 'services/notification_service.dart';
 import 'view/splash/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Initialize notification service
   await NotificationService().init();
-  
+
   runApp(const MyApp());
 }
 

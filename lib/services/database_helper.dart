@@ -1,5 +1,6 @@
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+
 import '../models/app_settings.dart';
 import '../models/saving.dart';
 import '../models/saving_transaction.dart';
@@ -18,12 +19,7 @@ class DatabaseHelper {
 
   Future<Database> _initDatabase() async {
     String path = join(await getDatabasesPath(), 'kumbara.db');
-    return await openDatabase(
-      path,
-      version: 1,
-      onCreate: _onCreate,
-      onUpgrade: _onUpgrade,
-    );
+    return await openDatabase(path, version: 1, onCreate: _onCreate, onUpgrade: _onUpgrade);
   }
 
   Future<void> _onCreate(Database db, int version) async {
@@ -72,12 +68,7 @@ class DatabaseHelper {
     ''');
 
     // Varsayılan ayarları ekle
-    await db.insert('app_settings', AppSettings(
-      isFirstLaunch: true,
-      notificationsEnabled: false,
-      locale: 'tr',
-      theme: 'light',
-    ).toMap());
+    await db.insert('app_settings', AppSettings(isFirstLaunch: true, notificationsEnabled: false, locale: 'tr', theme: 'light').toMap());
   }
 
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
@@ -88,17 +79,12 @@ class DatabaseHelper {
   Future<AppSettings> getAppSettings() async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query('app_settings');
-    
+
     if (maps.isNotEmpty) {
       return AppSettings.fromMap(maps.first);
     } else {
       // Varsayılan ayarları döndür
-      final defaultSettings = AppSettings(
-        isFirstLaunch: true,
-        notificationsEnabled: false,
-        locale: 'tr',
-        theme: 'light',
-      );
+      final defaultSettings = AppSettings(isFirstLaunch: true, notificationsEnabled: false, locale: 'tr', theme: 'light');
       await updateAppSettings(defaultSettings);
       return defaultSettings;
     }
@@ -106,12 +92,7 @@ class DatabaseHelper {
 
   Future<void> updateAppSettings(AppSettings settings) async {
     final db = await database;
-    await db.update(
-      'app_settings',
-      settings.toMap(),
-      where: 'id = ?',
-      whereArgs: [settings.id],
-    );
+    await db.update('app_settings', settings.toMap(), where: 'id = ?', whereArgs: [settings.id]);
   }
 
   // Savings işlemleri
@@ -122,21 +103,14 @@ class DatabaseHelper {
 
   Future<List<Saving>> getAllSavings() async {
     final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query(
-      'savings',
-      orderBy: 'createdAt DESC',
-    );
+    final List<Map<String, dynamic>> maps = await db.query('savings', orderBy: 'createdAt DESC');
     return List.generate(maps.length, (i) => Saving.fromMap(maps[i]));
   }
 
   Future<Saving?> getSavingById(int id) async {
     final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query(
-      'savings',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-    
+    final List<Map<String, dynamic>> maps = await db.query('savings', where: 'id = ?', whereArgs: [id]);
+
     if (maps.isNotEmpty) {
       return Saving.fromMap(maps.first);
     }
@@ -145,56 +119,38 @@ class DatabaseHelper {
 
   Future<void> updateSaving(Saving saving) async {
     final db = await database;
-    await db.update(
-      'savings',
-      saving.toMap(),
-      where: 'id = ?',
-      whereArgs: [saving.id],
-    );
+    await db.update('savings', saving.toMap(), where: 'id = ?', whereArgs: [saving.id]);
   }
 
   Future<void> deleteSaving(int id) async {
     final db = await database;
-    await db.delete(
-      'savings',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
+    await db.delete('savings', where: 'id = ?', whereArgs: [id]);
   }
 
   // Saving Transactions işlemleri
   Future<int> insertTransaction(SavingTransaction transaction) async {
     final db = await database;
     final id = await db.insert('saving_transactions', transaction.toMap());
-    
+
     // Ana birikim miktarını güncelle
     await _updateSavingCurrentAmount(transaction.savingId);
-    
+
     return id;
   }
 
   Future<List<SavingTransaction>> getTransactionsBySavingId(int savingId) async {
     final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query(
-      'saving_transactions',
-      where: 'savingId = ?',
-      whereArgs: [savingId],
-      orderBy: 'date DESC',
-    );
+    final List<Map<String, dynamic>> maps = await db.query('saving_transactions', where: 'savingId = ?', whereArgs: [savingId], orderBy: 'date DESC');
     return List.generate(maps.length, (i) => SavingTransaction.fromMap(maps[i]));
   }
 
   Future<void> deleteTransaction(int id) async {
     final db = await database;
-    
+
     // Transaction'ı sil
     final transaction = await _getTransactionById(id);
-    await db.delete(
-      'saving_transactions',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-    
+    await db.delete('saving_transactions', where: 'id = ?', whereArgs: [id]);
+
     // Ana birikim miktarını güncelle
     if (transaction != null) {
       await _updateSavingCurrentAmount(transaction.savingId);
@@ -203,12 +159,8 @@ class DatabaseHelper {
 
   Future<SavingTransaction?> _getTransactionById(int id) async {
     final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query(
-      'saving_transactions',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-    
+    final List<Map<String, dynamic>> maps = await db.query('saving_transactions', where: 'id = ?', whereArgs: [id]);
+
     if (maps.isNotEmpty) {
       return SavingTransaction.fromMap(maps.first);
     }
@@ -217,59 +169,40 @@ class DatabaseHelper {
 
   Future<void> _updateSavingCurrentAmount(int savingId) async {
     final db = await database;
-    
+
     // Bu birikimdeki tüm transaction'ların toplamını hesapla
-    final result = await db.rawQuery(
-      'SELECT SUM(amount) as total FROM saving_transactions WHERE savingId = ?',
-      [savingId],
-    );
-    
+    final result = await db.rawQuery('SELECT SUM(amount) as total FROM saving_transactions WHERE savingId = ?', [savingId]);
+
     final total = result.first['total'] as double? ?? 0.0;
-    
+
     // Saving'i güncelle
-    await db.update(
-      'savings',
-      {'currentAmount': total, 'updatedAt': DateTime.now().millisecondsSinceEpoch},
-      where: 'id = ?',
-      whereArgs: [savingId],
-    );
+    await db.update('savings', {'currentAmount': total, 'updatedAt': DateTime.now().millisecondsSinceEpoch}, where: 'id = ?', whereArgs: [savingId]);
   }
 
   // Dashboard için istatistikler
   Future<Map<String, dynamic>> getDashboardStats() async {
     final db = await database;
-    
+
     // Toplam birikim sayısı
     final totalSavingsResult = await db.rawQuery('SELECT COUNT(*) as count FROM savings');
     final totalSavings = totalSavingsResult.first['count'] as int;
-    
+
     // Aktif birikim sayısı
-    final activeSavingsResult = await db.rawQuery(
-      'SELECT COUNT(*) as count FROM savings WHERE status = ?',
-      ['active'],
-    );
+    final activeSavingsResult = await db.rawQuery('SELECT COUNT(*) as count FROM savings WHERE status = ?', ['active']);
     final activeSavings = activeSavingsResult.first['count'] as int;
-    
+
     // Toplam biriktirilen miktar
     final totalAmountResult = await db.rawQuery('SELECT SUM(currentAmount) as total FROM savings');
     final totalAmount = totalAmountResult.first['total'] as double? ?? 0.0;
-    
+
     // En yakın hedef tarihi
-    final nearestTargetResult = await db.rawQuery(
-      'SELECT * FROM savings WHERE status = ? ORDER BY targetDate ASC LIMIT 1',
-      ['active'],
-    );
+    final nearestTargetResult = await db.rawQuery('SELECT * FROM savings WHERE status = ? ORDER BY targetDate ASC LIMIT 1', ['active']);
     Saving? nearestTarget;
     if (nearestTargetResult.isNotEmpty) {
       nearestTarget = Saving.fromMap(nearestTargetResult.first);
     }
-    
-    return {
-      'totalSavings': totalSavings,
-      'activeSavings': activeSavings,
-      'totalAmount': totalAmount,
-      'nearestTarget': nearestTarget,
-    };
+
+    return {'totalSavings': totalSavings, 'activeSavings': activeSavings, 'totalAmount': totalAmount, 'nearestTarget': nearestTarget};
   }
 
   Future<void> close() async {

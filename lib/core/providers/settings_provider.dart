@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+
 import '../../models/app_settings.dart';
 import '../../services/settings_service.dart';
 
 class SettingsProvider with ChangeNotifier {
   final SettingsService _settingsService = SettingsService();
-  
+
   AppSettings? _settings;
   bool _isLoading = false;
 
@@ -18,7 +19,7 @@ class SettingsProvider with ChangeNotifier {
   Future<void> loadSettings() async {
     // Build process sırasında notifyListeners çağırmamak için flag kullan
     final bool shouldNotify = !_isLoading;
-    
+
     _isLoading = true;
     if (shouldNotify && mounted) {
       // Build tamamlandıktan sonra notify et
@@ -45,7 +46,7 @@ class SettingsProvider with ChangeNotifier {
   // mounted kontrolü için getter ekleyelim
   bool _mounted = true;
   bool get mounted => _mounted;
-  
+
   @override
   void dispose() {
     _mounted = false;
