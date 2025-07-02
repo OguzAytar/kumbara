@@ -50,5 +50,111 @@
   "backupError": "Error during backup: {error}",
   "restoreError": "Error during restore: {error}",
   "deleteError": "Error during data deletion: {error}",
-  "helpComingSoon": "Help page coming soon!"
+  "helpComingSoon": "Help page coming soon!",
+  "appName": "Kumbara",
+  "retry": "Try Again",
+  "newSavingComingSoon": "Add new saving feature coming soon!",
+  "welcomeMessage": "Welcome! 👋",
+  "welcomeSubtitle": "Get one step closer to your dreams",
+  "nearestTarget": "Nearest Target",
+  "mostProgress": "Most Progress",
+  "mySavings": "My Savings",
+  "seeAll": "See All",
+  "allSavingsComingSoon": "All savings page coming soon!",
+  "targetNotFound": "Target not found",
+  "expired": "Expired",
+  "oneDayLeft": "1 day left",
+  "daysLeft": "{days} days left",
+  "@daysLeft": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "savingNotFound": "Saving not found",
+  "summaryStatistics": "Summary Statistics",
+  "totalSaving": "Total Saving",
+  "activeTarget": "Active Target",
+  "totalAmount": "Total Amount",
+  "noSavingsGoal": "No savings goal yet",
+  "createFirstGoal": "Click the + button to create your first savings goal",
+  "detailPageComingSoon": "{title} detail page coming soon!",
+  "@detailPageComingSoon": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "trackYourSavings": "Track Your Savings",
+  "@trackYourSavings": {
+    "description": "Onboard screen page 1 title"
+  },
+  
+  "trackYourSavingsDesc": "Easily track and manage your savings to reach your goals.",
+  "@trackYourSavingsDesc": {
+    "description": "Onboard screen page 1 description"
+  },
+  
+  "seeYourProgress": "See Your Progress",
+  "@seeYourProgress": {
+    "description": "Onboard screen page 2 title"
+  },
+  
+  "seeYourProgressDesc": "Analyze your savings progress in detail with charts and reports.",
+  "@seeYourProgressDesc": {
+    "description": "Onboard screen page 2 description"
+  },
+  
+  "getReminders": "Get Reminders",
+  "@getReminders": {
+    "description": "Onboard screen page 3 title"
+  },
+  
+  "getRemindersDesc": "Use notifications to remember to save regularly.",
+  "@getRemindersDesc": {
+    "description": "Onboard screen page 3 description"
+  },
+  
+  "back": "Back",
+  "@back": {
+    "description": "Back button"
+  },
+  
+  "continueButton": "Continue",
+  "@continueButton": {
+    "description": "Continue button"
+  },
+  
+  "allowNotifications": "Allow Notifications",
+  "@allowNotifications": {
+    "description": "Allow notification button"
+  },
+  
+  "continueWithoutNotifications": "Continue Without Notifications",
+  "@continueWithoutNotifications": {
+    "description": "Continue without notifications button"
+  },
+  
+  "notificationPermissionGranted": "Notification permission granted! You can now receive reminders.",
+  "@notificationPermissionGranted": {
+    "description": "Notification permission success message"
+  },
+  
+  "notificationPermissionDenied": "Notification permission denied. You can enable it in settings.",
+  "@notificationPermissionDenied": {
+    "description": "Notification permission denied message"
+  },
+  
+  "notificationPermissionError": "Error occurred while requesting notification permission: {error}",
+  "@notificationPermissionError": {
+    "description": "Notification permission error message",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -168,4 +168,121 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get helpComingSoon => 'Help page coming soon!';
+
+  @override
+  String get appName => 'Kumbara';
+
+  @override
+  String get retry => 'Try Again';
+
+  @override
+  String get newSavingComingSoon => 'Add new saving feature coming soon!';
+
+  @override
+  String get welcomeMessage => 'Welcome! 👋';
+
+  @override
+  String get welcomeSubtitle => 'Get one step closer to your dreams';
+
+  @override
+  String get nearestTarget => 'Nearest Target';
+
+  @override
+  String get mostProgress => 'Most Progress';
+
+  @override
+  String get mySavings => 'My Savings';
+
+  @override
+  String get seeAll => 'See All';
+
+  @override
+  String get allSavingsComingSoon => 'All savings page coming soon!';
+
+  @override
+  String get targetNotFound => 'Target not found';
+
+  @override
+  String get expired => 'Expired';
+
+  @override
+  String get oneDayLeft => '1 day left';
+
+  @override
+  String daysLeft(int days) {
+    return '$days days left';
+  }
+
+  @override
+  String get savingNotFound => 'Saving not found';
+
+  @override
+  String get summaryStatistics => 'Summary Statistics';
+
+  @override
+  String get totalSaving => 'Total Saving';
+
+  @override
+  String get activeTarget => 'Active Target';
+
+  @override
+  String get totalAmount => 'Total Amount';
+
+  @override
+  String get noSavingsGoal => 'No savings goal yet';
+
+  @override
+  String get createFirstGoal =>
+      'Click the + button to create your first savings goal';
+
+  @override
+  String detailPageComingSoon(String title) {
+    return '$title detail page coming soon!';
+  }
+
+  @override
+  String get trackYourSavings => 'Track Your Savings';
+
+  @override
+  String get trackYourSavingsDesc =>
+      'Easily track and manage your savings to reach your goals.';
+
+  @override
+  String get seeYourProgress => 'See Your Progress';
+
+  @override
+  String get seeYourProgressDesc =>
+      'Analyze your savings progress in detail with charts and reports.';
+
+  @override
+  String get getReminders => 'Get Reminders';
+
+  @override
+  String get getRemindersDesc =>
+      'Use notifications to remember to save regularly.';
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get continueButton => 'Continue';
+
+  @override
+  String get allowNotifications => 'Allow Notifications';
+
+  @override
+  String get continueWithoutNotifications => 'Continue Without Notifications';
+
+  @override
+  String get notificationPermissionGranted =>
+      'Notification permission granted! You can now receive reminders.';
+
+  @override
+  String get notificationPermissionDenied =>
+      'Notification permission denied. You can enable it in settings.';
+
+  @override
+  String notificationPermissionError(String error) {
+    return 'Error occurred while requesting notification permission: $error';
+  }
 }

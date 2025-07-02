@@ -403,6 +403,216 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Yardım sayfası yakında eklenecek!'**
   String get helpComingSoon;
+
+  /// Uygulama adı
+  ///
+  /// In tr, this message translates to:
+  /// **'Kumbara'**
+  String get appName;
+
+  /// Tekrar deneme butonu
+  ///
+  /// In tr, this message translates to:
+  /// **'Tekrar Dene'**
+  String get retry;
+
+  /// Yeni birikim ekleme geliyor mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'Yeni birikim ekleme özelliği yakında eklenecek!'**
+  String get newSavingComingSoon;
+
+  /// Hoş geldin başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Hoş Geldiniz! 👋'**
+  String get welcomeMessage;
+
+  /// Hoş geldin alt başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Hayallerinize bir adım daha yaklaşın'**
+  String get welcomeSubtitle;
+
+  /// En yakın hedef kartı başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'En Yakın Hedef'**
+  String get nearestTarget;
+
+  /// En çok ilerleme kartı başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'En Çok İlerleme'**
+  String get mostProgress;
+
+  /// Birikimlerim bölümü başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Birikimlerim'**
+  String get mySavings;
+
+  /// Tümünü gör butonu
+  ///
+  /// In tr, this message translates to:
+  /// **'Tümünü Gör'**
+  String get seeAll;
+
+  /// Tüm birikimler sayfası geliyor mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'Tüm birikimler sayfası yakında eklenecek!'**
+  String get allSavingsComingSoon;
+
+  /// Hedef bulunamadı mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'Hedef bulunamadı'**
+  String get targetNotFound;
+
+  /// Süresi dolmuş durumu
+  ///
+  /// In tr, this message translates to:
+  /// **'Süresi dolmuş'**
+  String get expired;
+
+  /// Bir gün kaldı mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'1 gün kaldı'**
+  String get oneDayLeft;
+
+  /// Gün sayısı kaldı mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'{days} gün kaldı'**
+  String daysLeft(int days);
+
+  /// Birikim bulunamadı mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'Birikim bulunamadı'**
+  String get savingNotFound;
+
+  /// Özet istatistikler başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Özet İstatistikler'**
+  String get summaryStatistics;
+
+  /// Toplam birikim
+  ///
+  /// In tr, this message translates to:
+  /// **'Toplam Birikim'**
+  String get totalSaving;
+
+  /// Aktif hedef
+  ///
+  /// In tr, this message translates to:
+  /// **'Aktif Hedef'**
+  String get activeTarget;
+
+  /// Toplam miktar
+  ///
+  /// In tr, this message translates to:
+  /// **'Toplam Miktar'**
+  String get totalAmount;
+
+  /// Birikim hedefi yok mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz birikim hedefi yok'**
+  String get noSavingsGoal;
+
+  /// İlk hedef oluşturma yönergesi
+  ///
+  /// In tr, this message translates to:
+  /// **'İlk birikim hedefinizi oluşturmak için + butonuna tıklayın'**
+  String get createFirstGoal;
+
+  /// Detay sayfası geliyor mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'{title} detay sayfası yakında eklenecek!'**
+  String detailPageComingSoon(String title);
+
+  /// Onboard ekranı 1. sayfa başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Birikimlerinizi Takip Edin'**
+  String get trackYourSavings;
+
+  /// Onboard ekranı 1. sayfa açıklaması
+  ///
+  /// In tr, this message translates to:
+  /// **'Hedeflerinize ulaşmak için biriktirmelerinizi kolayca takip edin ve yönetin.'**
+  String get trackYourSavingsDesc;
+
+  /// Onboard ekranı 2. sayfa başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'İlerlemenizi Görün'**
+  String get seeYourProgress;
+
+  /// Onboard ekranı 2. sayfa açıklaması
+  ///
+  /// In tr, this message translates to:
+  /// **'Grafikler ve raporlarla birikimleririnizin ilerleyişini detaylı bir şekilde analiz edin.'**
+  String get seeYourProgressDesc;
+
+  /// Onboard ekranı 3. sayfa başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Hatırlatmalar Alın'**
+  String get getReminders;
+
+  /// Onboard ekranı 3. sayfa açıklaması
+  ///
+  /// In tr, this message translates to:
+  /// **'Düzenli birikim yapmayı unutmamak için bildirimlerden yararlanın.'**
+  String get getRemindersDesc;
+
+  /// Geri butonu
+  ///
+  /// In tr, this message translates to:
+  /// **'Geri'**
+  String get back;
+
+  /// Devam et butonu
+  ///
+  /// In tr, this message translates to:
+  /// **'Devam Et'**
+  String get continueButton;
+
+  /// Bildirim izni butonu
+  ///
+  /// In tr, this message translates to:
+  /// **'Bildirimlere İzin Ver'**
+  String get allowNotifications;
+
+  /// Bildirim olmadan devam et butonu
+  ///
+  /// In tr, this message translates to:
+  /// **'Bildirimsiz Devam Et'**
+  String get continueWithoutNotifications;
+
+  /// Bildirim izni başarılı mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'Bildirim izni verildi! Artık hatırlatmalar alabilirsiniz.'**
+  String get notificationPermissionGranted;
+
+  /// Bildirim izni reddedildi mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'Bildirim izni reddedildi. Ayarlardan açabilirsiniz.'**
+  String get notificationPermissionDenied;
+
+  /// Bildirim izni hata mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'Bildirim izni alınırken hata oluştu: {error}'**
+  String notificationPermissionError(String error);
 }
 
 class _AppLocalizationsDelegate

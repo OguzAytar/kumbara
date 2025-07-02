@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kumbara/l10n/app_localizations.dart';
 import 'package:kumbara/services/notification_service.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -20,31 +21,34 @@ class _OnboardScreenState extends State<OnboardScreen> {
   final int _totalPages = 3;
   bool _isRequestingPermission = false;
 
-  final List<OnboardData> _onboardData = [
-    OnboardData(
-      icon: Icons.savings,
-      title: 'Birikimlerinizi Takip Edin',
-      description: 'Hedeflerinize ulaşmak için biriktirmelerinizi kolayca takip edin ve yönetin.',
-      color: Color(0xFF2E7D32),
-    ),
-    OnboardData(
-      icon: Icons.timeline,
-      title: 'İlerlemenizi Görün',
-      description: 'Grafikler ve raporlarla birikimleririnizin ilerleyişini detaylı bir şekilde analiz edin.',
-      color: Color(0xFF1976D2),
-    ),
-    OnboardData(
-      icon: Icons.notifications_active,
-      title: 'Hatırlatmalar Alın',
-      description: 'Düzenli birikim yapmayı unutmamak için bildirimlerden yararlanın.',
-      color: Color(0xFFFF6F00),
-    ),
-  ];
-
   @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+
+  List<OnboardData> _getOnboardData(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    return [
+      OnboardData(
+        icon: Icons.savings,
+        title: localizations.trackYourSavings,
+        description: localizations.trackYourSavingsDesc,
+        color: const Color(0xFF2E7D32),
+      ),
+      OnboardData(
+        icon: Icons.timeline,
+        title: localizations.seeYourProgress,
+        description: localizations.seeYourProgressDesc,
+        color: const Color(0xFF1976D2),
+      ),
+      OnboardData(
+        icon: Icons.notifications_active,
+        title: localizations.getReminders,
+        description: localizations.getRemindersDesc,
+        color: const Color(0xFFFF6F00),
+      ),
+    ];
   }
 
   void _nextPage() {
@@ -68,22 +72,24 @@ class _OnboardScreenState extends State<OnboardScreen> {
 
     try {
       final granted = await NotificationService().requestPermission();
+      final localizations = AppLocalizations.of(context)!;
 
       if (granted) {
         await context.read<SettingsProvider>().setNotificationsEnabled(true);
-        CustomSnackBar.showSuccess(context, message: 'Bildirim izni verildi! Artık hatırlatmalar alabilirsiniz.');
+        CustomSnackBar.showSuccess(context, message: localizations.notificationPermissionGranted);
       } else {
         CustomSnackBar.showWarning(
           context,
-          message: 'Bildirim izni reddedildi. Ayarlardan açabilirsiniz.',
-          actionLabel: 'Ayarlar',
+          message: localizations.notificationPermissionDenied,
+          actionLabel: localizations.settings,
           onActionPressed: () {
             // TODO: Ayarlar sayfasına yönlendirme
           },
         );
       }
     } catch (e) {
-      CustomSnackBar.showError(context, message: 'Bildirim izni alınırken hata oluştu: $e');
+      final localizations = AppLocalizations.of(context)!;
+      CustomSnackBar.showError(context, message: localizations.notificationPermissionError(e.toString()));
     }
 
     setState(() {
@@ -95,12 +101,15 @@ class _OnboardScreenState extends State<OnboardScreen> {
     await context.read<SettingsProvider>().markOnboardingComplete();
 
     if (mounted) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeScree()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeScreen()));
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    final onboardData = _getOnboardData(context);
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -111,8 +120,8 @@ class _OnboardScreenState extends State<OnboardScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  if (_currentPage > 0) TextButton(onPressed: _previousPage, child: const Text('Geri')) else const SizedBox(),
-                  TextButton(onPressed: _finishOnboarding, child: const Text('Geç')),
+                  if (_currentPage > 0) TextButton(onPressed: _previousPage, child: Text(localizations.back)) else const SizedBox(),
+                  TextButton(onPressed: _finishOnboarding, child: Text(localizations.skip)),
                 ],
               ),
             ),
@@ -128,7 +137,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                 },
                 itemCount: _totalPages,
                 itemBuilder: (context, index) {
-                  return _buildOnboardPage(_onboardData[index], index);
+                  return _buildOnboardPage(onboardData[index], index);
                 },
               ),
             ),
@@ -166,20 +175,21 @@ class _OnboardScreenState extends State<OnboardScreen> {
                               }
                             },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: _onboardData[_currentPage].color,
+                        backgroundColor: onboardData[_currentPage].color,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                       ),
                       child: _isRequestingPermission
                           ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
                           : Text(
-                              _currentPage == _totalPages - 1 ? 'Bildirimlere İzin Ver' : 'Devam Et',
+                              _currentPage == _totalPages - 1 ? localizations.allowNotifications : localizations.continueButton,
                               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
                             ),
                     ),
                   ),
                   const SizedBox(height: 8),
 
-                  if (_currentPage == _totalPages - 1) TextButton(onPressed: _finishOnboarding, child: const Text('Bildirimsiz Devam Et')),
+                  if (_currentPage == _totalPages - 1)
+                    TextButton(onPressed: _finishOnboarding, child: Text(localizations.continueWithoutNotifications)),
                 ],
               ),
             ),
@@ -207,17 +217,13 @@ class _OnboardScreenState extends State<OnboardScreen> {
           // Title
           Text(
             data.title,
-            style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black87),
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
 
           // Description
-          Text(
-            data.description,
-            style: TextStyle(fontSize: 16, color: Colors.grey.shade600, height: 1.5),
-            textAlign: TextAlign.center,
-          ),
+          Text(data.description, style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.5), textAlign: TextAlign.center),
         ],
       ),
     );

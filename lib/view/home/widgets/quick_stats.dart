@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kumbara/l10n/app_localizations.dart';
 
 class QuickStats extends StatelessWidget {
   final Map<String, dynamic>? stats;
@@ -26,19 +27,25 @@ class QuickStats extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Özet İstatistikler',
+            AppLocalizations.of(context)!.summaryStatistics,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.headlineSmall?.color),
           ),
           const SizedBox(height: 16),
           Row(
             children: [
-              Expanded(child: _buildStatItem('Toplam Birikim', totalSavings.toString(), Icons.savings, Colors.blue)),
+              Expanded(child: _buildStatItem(AppLocalizations.of(context)!.totalSaving, totalSavings.toString(), Icons.savings, Colors.blue)),
               const SizedBox(width: 16),
-              Expanded(child: _buildStatItem('Aktif Hedef', activeSavings.toString(), Icons.flag, Colors.green)),
+              Expanded(child: _buildStatItem(AppLocalizations.of(context)!.activeTarget, activeSavings.toString(), Icons.flag, Colors.green)),
             ],
           ),
           const SizedBox(height: 16),
-          _buildStatItem('Toplam Miktar', '₺${totalAmount.toStringAsFixed(2)}', Icons.account_balance_wallet, Colors.purple, isFullWidth: true),
+          _buildStatItem(
+            AppLocalizations.of(context)!.totalAmount,
+            '₺${totalAmount.toStringAsFixed(2)}',
+            Icons.account_balance_wallet,
+            Colors.purple,
+            isFullWidth: true,
+          ),
         ],
       ),
     );

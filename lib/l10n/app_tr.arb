@@ -268,5 +268,195 @@
   "helpComingSoon": "Yardım sayfası yakında eklenecek!",
   "@helpComingSoon": {
     "description": "Yardım sayfası geliyor mesajı"
+  },
+  
+  "appName": "Kumbara",
+  "@appName": {
+    "description": "Uygulama adı"
+  },
+  
+  "retry": "Tekrar Dene",
+  "@retry": {
+    "description": "Tekrar deneme butonu"
+  },
+  
+  "newSavingComingSoon": "Yeni birikim ekleme özelliği yakında eklenecek!",
+  "@newSavingComingSoon": {
+    "description": "Yeni birikim ekleme geliyor mesajı"
+  },
+  
+  "welcomeMessage": "Hoş Geldiniz! 👋",
+  "@welcomeMessage": {
+    "description": "Hoş geldin başlığı"
+  },
+  
+  "welcomeSubtitle": "Hayallerinize bir adım daha yaklaşın",
+  "@welcomeSubtitle": {
+    "description": "Hoş geldin alt başlığı"
+  },
+  
+  "nearestTarget": "En Yakın Hedef",
+  "@nearestTarget": {
+    "description": "En yakın hedef kartı başlığı"
+  },
+  
+  "mostProgress": "En Çok İlerleme",
+  "@mostProgress": {
+    "description": "En çok ilerleme kartı başlığı"
+  },
+  
+  "mySavings": "Birikimlerim",
+  "@mySavings": {
+    "description": "Birikimlerim bölümü başlığı"
+  },
+  
+  "seeAll": "Tümünü Gör",
+  "@seeAll": {
+    "description": "Tümünü gör butonu"
+  },
+  
+  "allSavingsComingSoon": "Tüm birikimler sayfası yakında eklenecek!",
+  "@allSavingsComingSoon": {
+    "description": "Tüm birikimler sayfası geliyor mesajı"
+  },
+  
+  "targetNotFound": "Hedef bulunamadı",
+  "@targetNotFound": {
+    "description": "Hedef bulunamadı mesajı"
+  },
+  
+  "expired": "Süresi dolmuş",
+  "@expired": {
+    "description": "Süresi dolmuş durumu"
+  },
+  
+  "oneDayLeft": "1 gün kaldı",
+  "@oneDayLeft": {
+    "description": "Bir gün kaldı mesajı"
+  },
+  
+  "daysLeft": "{days} gün kaldı",
+  "@daysLeft": {
+    "description": "Gün sayısı kaldı mesajı",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "savingNotFound": "Birikim bulunamadı",
+  "@savingNotFound": {
+    "description": "Birikim bulunamadı mesajı"
+  },
+  
+  "summaryStatistics": "Özet İstatistikler",
+  "@summaryStatistics": {
+    "description": "Özet istatistikler başlığı"
+  },
+  
+  "totalSaving": "Toplam Birikim",
+  "@totalSaving": {
+    "description": "Toplam birikim"
+  },
+  
+  "activeTarget": "Aktif Hedef",
+  "@activeTarget": {
+    "description": "Aktif hedef"
+  },
+  
+  "totalAmount": "Toplam Miktar",
+  "@totalAmount": {
+    "description": "Toplam miktar"
+  },
+  
+  "noSavingsGoal": "Henüz birikim hedefi yok",
+  "@noSavingsGoal": {
+    "description": "Birikim hedefi yok mesajı"
+  },
+  
+  "createFirstGoal": "İlk birikim hedefinizi oluşturmak için + butonuna tıklayın",
+  "@createFirstGoal": {
+    "description": "İlk hedef oluşturma yönergesi"
+  },
+  
+  "detailPageComingSoon": "{title} detay sayfası yakında eklenecek!",
+  "@detailPageComingSoon": {
+    "description": "Detay sayfası geliyor mesajı",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "trackYourSavings": "Birikimlerinizi Takip Edin",
+  "@trackYourSavings": {
+    "description": "Onboard ekranı 1. sayfa başlığı"
+  },
+  
+  "trackYourSavingsDesc": "Hedeflerinize ulaşmak için biriktirmelerinizi kolayca takip edin ve yönetin.",
+  "@trackYourSavingsDesc": {
+    "description": "Onboard ekranı 1. sayfa açıklaması"
+  },
+  
+  "seeYourProgress": "İlerlemenizi Görün",
+  "@seeYourProgress": {
+    "description": "Onboard ekranı 2. sayfa başlığı"
+  },
+  
+  "seeYourProgressDesc": "Grafikler ve raporlarla birikimleririnizin ilerleyişini detaylı bir şekilde analiz edin.",
+  "@seeYourProgressDesc": {
+    "description": "Onboard ekranı 2. sayfa açıklaması"
+  },
+  
+  "getReminders": "Hatırlatmalar Alın",
+  "@getReminders": {
+    "description": "Onboard ekranı 3. sayfa başlığı"
+  },
+  
+  "getRemindersDesc": "Düzenli birikim yapmayı unutmamak için bildirimlerden yararlanın.",
+  "@getRemindersDesc": {
+    "description": "Onboard ekranı 3. sayfa açıklaması"
+  },
+  
+  "back": "Geri",
+  "@back": {
+    "description": "Geri butonu"
+  },
+  
+  "continueButton": "Devam Et",
+  "@continueButton": {
+    "description": "Devam et butonu"
+  },
+  
+  "allowNotifications": "Bildirimlere İzin Ver",
+  "@allowNotifications": {
+    "description": "Bildirim izni butonu"
+  },
+  
+  "continueWithoutNotifications": "Bildirimsiz Devam Et",
+  "@continueWithoutNotifications": {
+    "description": "Bildirim olmadan devam et butonu"
+  },
+  
+  "notificationPermissionGranted": "Bildirim izni verildi! Artık hatırlatmalar alabilirsiniz.",
+  "@notificationPermissionGranted": {
+    "description": "Bildirim izni başarılı mesajı"
+  },
+  
+  "notificationPermissionDenied": "Bildirim izni reddedildi. Ayarlardan açabilirsiniz.",
+  "@notificationPermissionDenied": {
+    "description": "Bildirim izni reddedildi mesajı"
+  },
+  
+  "notificationPermissionError": "Bildirim izni alınırken hata oluştu: {error}",
+  "@notificationPermissionError": {
+    "description": "Bildirim izni hata mesajı",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   }
 }

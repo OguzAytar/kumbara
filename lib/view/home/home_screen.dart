@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kumbara/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/providers/saving_provider.dart';
@@ -10,14 +11,14 @@ import 'widgets/dashboard_card.dart';
 import 'widgets/quick_stats.dart';
 import 'widgets/recent_savings_list.dart';
 
-class HomeScree extends StatefulWidget {
-  const HomeScree({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<HomeScree> createState() => _HomeScreeState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreeState extends State<HomeScree> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
@@ -41,9 +42,9 @@ class _HomeScreeState extends State<HomeScree> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text(
-          'Kumbara',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        title: Text(
+          AppLocalizations.of(context)!.appName,
+          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         backgroundColor: Theme.of(context).primaryColor,
         elevation: 0,
@@ -76,7 +77,7 @@ class _HomeScreeState extends State<HomeScree> {
                       savingProvider.clearError();
                       _refreshData();
                     },
-                    child: const Text('Tekrar Dene'),
+                    child: Text(AppLocalizations.of(context)!.retry),
                   ),
                 ],
               ),
@@ -114,7 +115,7 @@ class _HomeScreeState extends State<HomeScree> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // TODO: Add new saving screen
-          CustomSnackBar.showInfo(context, message: 'Yeni birikim ekleme özelliği yakında eklenecek!');
+          CustomSnackBar.showInfo(context, message: AppLocalizations.of(context)!.newSavingComingSoon);
         },
         backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.add, color: Colors.white),
@@ -141,11 +142,11 @@ class _HomeScreeState extends State<HomeScree> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Hoş Geldiniz! 👋',
+                AppLocalizations.of(context)!.welcomeMessage,
                 style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
               ),
               const SizedBox(height: 8),
-              Text('Hayallerinize bir adım daha yaklaşın', style: TextStyle(fontSize: 16, color: Colors.white.withValues(alpha: 0.9))),
+              Text(AppLocalizations.of(context)!.welcomeSubtitle, style: TextStyle(fontSize: 16, color: Colors.white.withValues(alpha: 0.9))),
             ],
           ),
         );
@@ -160,7 +161,7 @@ class _HomeScreeState extends State<HomeScree> {
           children: [
             Expanded(
               child: DashboardCard(
-                title: 'En Yakın Hedef',
+                title: AppLocalizations.of(context)!.nearestTarget,
                 subtitle: _getNearestTargetText(savingProvider),
                 icon: Icons.access_time,
                 color: Colors.orange,
@@ -172,7 +173,7 @@ class _HomeScreeState extends State<HomeScree> {
             const SizedBox(width: 16),
             Expanded(
               child: DashboardCard(
-                title: 'En Çok İlerleme',
+                title: AppLocalizations.of(context)!.mostProgress,
                 subtitle: _getMostProgressText(savingProvider),
                 icon: Icons.trending_up,
                 color: Colors.green,
@@ -194,13 +195,13 @@ class _HomeScreeState extends State<HomeScree> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text('Birikimlerim', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text(AppLocalizations.of(context)!.mySavings, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             TextButton(
               onPressed: () {
                 // TODO: Navigate to all savings
-                CustomSnackBar.showInfo(context, message: 'Tüm birikimler sayfası yakında eklenecek!');
+                CustomSnackBar.showInfo(context, message: AppLocalizations.of(context)!.allSavingsComingSoon);
               },
-              child: const Text('Tümünü Gör'),
+              child: Text(AppLocalizations.of(context)!.seeAll),
             ),
           ],
         ),
@@ -213,25 +214,25 @@ class _HomeScreeState extends State<HomeScree> {
   String _getNearestTargetText(SavingProvider savingProvider) {
     final stats = savingProvider.dashboardStats;
     if (stats == null || stats['nearestTarget'] == null) {
-      return 'Hedef bulunamadı';
+      return AppLocalizations.of(context)!.targetNotFound;
     }
 
     final nearestTarget = stats['nearestTarget'] as Saving;
     final remainingDays = nearestTarget.remainingDays;
 
     if (remainingDays <= 0) {
-      return 'Süresi dolmuş';
+      return AppLocalizations.of(context)!.expired;
     } else if (remainingDays == 1) {
-      return '1 gün kaldı';
+      return AppLocalizations.of(context)!.oneDayLeft;
     } else {
-      return '$remainingDays gün kaldı';
+      return AppLocalizations.of(context)!.daysLeft(remainingDays);
     }
   }
 
   String _getMostProgressText(SavingProvider savingProvider) {
     final activeSavings = savingProvider.activeSavings;
     if (activeSavings.isEmpty) {
-      return 'Birikim bulunamadı';
+      return AppLocalizations.of(context)!.savingNotFound;
     }
 
     final mostProgressed = activeSavings.reduce((a, b) => a.completionPercentage > b.completionPercentage ? a : b);

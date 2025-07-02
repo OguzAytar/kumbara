@@ -84,7 +84,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     if (settingsProvider.isFirstLaunch) {
       nextScreen = const OnboardScreen();
     } else {
-      nextScreen = const HomeScree();
+      nextScreen = const HomeScreen();
     }
 
     Navigator.of(context).pushReplacement(

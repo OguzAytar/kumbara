@@ -170,4 +170,123 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get helpComingSoon => 'Yardım sayfası yakında eklenecek!';
+
+  @override
+  String get appName => 'Kumbara';
+
+  @override
+  String get retry => 'Tekrar Dene';
+
+  @override
+  String get newSavingComingSoon =>
+      'Yeni birikim ekleme özelliği yakında eklenecek!';
+
+  @override
+  String get welcomeMessage => 'Hoş Geldiniz! 👋';
+
+  @override
+  String get welcomeSubtitle => 'Hayallerinize bir adım daha yaklaşın';
+
+  @override
+  String get nearestTarget => 'En Yakın Hedef';
+
+  @override
+  String get mostProgress => 'En Çok İlerleme';
+
+  @override
+  String get mySavings => 'Birikimlerim';
+
+  @override
+  String get seeAll => 'Tümünü Gör';
+
+  @override
+  String get allSavingsComingSoon =>
+      'Tüm birikimler sayfası yakında eklenecek!';
+
+  @override
+  String get targetNotFound => 'Hedef bulunamadı';
+
+  @override
+  String get expired => 'Süresi dolmuş';
+
+  @override
+  String get oneDayLeft => '1 gün kaldı';
+
+  @override
+  String daysLeft(int days) {
+    return '$days gün kaldı';
+  }
+
+  @override
+  String get savingNotFound => 'Birikim bulunamadı';
+
+  @override
+  String get summaryStatistics => 'Özet İstatistikler';
+
+  @override
+  String get totalSaving => 'Toplam Birikim';
+
+  @override
+  String get activeTarget => 'Aktif Hedef';
+
+  @override
+  String get totalAmount => 'Toplam Miktar';
+
+  @override
+  String get noSavingsGoal => 'Henüz birikim hedefi yok';
+
+  @override
+  String get createFirstGoal =>
+      'İlk birikim hedefinizi oluşturmak için + butonuna tıklayın';
+
+  @override
+  String detailPageComingSoon(String title) {
+    return '$title detay sayfası yakında eklenecek!';
+  }
+
+  @override
+  String get trackYourSavings => 'Birikimlerinizi Takip Edin';
+
+  @override
+  String get trackYourSavingsDesc =>
+      'Hedeflerinize ulaşmak için biriktirmelerinizi kolayca takip edin ve yönetin.';
+
+  @override
+  String get seeYourProgress => 'İlerlemenizi Görün';
+
+  @override
+  String get seeYourProgressDesc =>
+      'Grafikler ve raporlarla birikimleririnizin ilerleyişini detaylı bir şekilde analiz edin.';
+
+  @override
+  String get getReminders => 'Hatırlatmalar Alın';
+
+  @override
+  String get getRemindersDesc =>
+      'Düzenli birikim yapmayı unutmamak için bildirimlerden yararlanın.';
+
+  @override
+  String get back => 'Geri';
+
+  @override
+  String get continueButton => 'Devam Et';
+
+  @override
+  String get allowNotifications => 'Bildirimlere İzin Ver';
+
+  @override
+  String get continueWithoutNotifications => 'Bildirimsiz Devam Et';
+
+  @override
+  String get notificationPermissionGranted =>
+      'Bildirim izni verildi! Artık hatırlatmalar alabilirsiniz.';
+
+  @override
+  String get notificationPermissionDenied =>
+      'Bildirim izni reddedildi. Ayarlardan açabilirsiniz.';
+
+  @override
+  String notificationPermissionError(String error) {
+    return 'Bildirim izni alınırken hata oluştu: $error';
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kumbara/core/enums/saving_enum.dart';
+import 'package:kumbara/l10n/app_localizations.dart';
 
 import '../../../core/widgets/custom_snackbar.dart';
 import '../../../models/saving.dart';
@@ -24,7 +25,7 @@ class RecentSavingsList extends StatelessWidget {
             Icon(Icons.savings_outlined, size: 64, color: Theme.of(context).textTheme.bodyMedium?.color?.withValues(alpha: 0.4)),
             const SizedBox(height: 16),
             Text(
-              'Henüz birikim hedefi yok',
+              AppLocalizations.of(context)!.noSavingsGoal,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -33,7 +34,7 @@ class RecentSavingsList extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'İlk birikim hedefinizi oluşturmak için + butonuna tıklayın',
+              AppLocalizations.of(context)!.createFirstGoal,
               style: TextStyle(fontSize: 14, color: Theme.of(context).textTheme.bodyMedium?.color?.withValues(alpha: 0.5)),
               textAlign: TextAlign.center,
             ),
@@ -52,7 +53,7 @@ class RecentSavingsList extends StatelessWidget {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: savings.length,
-        separatorBuilder: (context, index) => Divider(height: 1, color: Colors.grey.shade200),
+        separatorBuilder: (context, index) => Divider(height: 1, color: Theme.of(context).dividerColor.withValues(alpha: 0.3)),
         itemBuilder: (context, index) {
           final saving = savings[index];
           return _buildSavingTile(context, saving);
@@ -102,7 +103,9 @@ class RecentSavingsList extends StatelessWidget {
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: _getStatusColor(saving.status)),
               ),
               Text(
-                remainingDays > 0 ? '$remainingDays gün kaldı' : 'Süresi dolmuş',
+                remainingDays > 0
+                    ? (remainingDays == 1 ? AppLocalizations.of(context)!.oneDayLeft : AppLocalizations.of(context)!.daysLeft(remainingDays))
+                    : AppLocalizations.of(context)!.expired,
                 style: TextStyle(
                   fontSize: 12,
                   color: remainingDays > 0 ? Theme.of(context).textTheme.bodyMedium?.color?.withValues(alpha: 0.7) : Colors.red.shade600,
@@ -114,7 +117,7 @@ class RecentSavingsList extends StatelessWidget {
       ),
       onTap: () {
         // TODO: Navigate to saving detail
-        CustomSnackBar.showInfo(context, message: '${saving.title} detay sayfası yakında eklenecek!');
+        CustomSnackBar.showInfo(context, message: AppLocalizations.of(context)!.detailPageComingSoon(saving.title));
       },
     );
   }
