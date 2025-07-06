@@ -230,7 +230,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get activeTarget => 'Aktif Hedef';
 
   @override
-  String get totalAmount => 'Toplam Tutar';
+  String get totalAmount => 'Toplam Miktar';
 
   @override
   String get noSavingsGoal => 'Henüz birikim hedefi yok';
@@ -425,6 +425,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get totalTarget => 'Toplam Hedef';
 
   @override
+  String get totalAmountSaved => 'Toplam Biriken Tutar';
+
+  @override
   String get averageProgress => 'Ortalama İlerleme';
 
   @override
@@ -436,4 +439,51 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get completed => 'tamamlandı';
+
+  @override
+  String get editSaving => 'Birikim Düzenle';
+
+  @override
+  String get savingDetails => 'Birikim Detayları';
+
+  @override
+  String get initialAmount => 'Başlangıç Tutarı';
+
+  @override
+  String get initialAmountHint => 'Başlangıç tutarını giriniz';
+
+  @override
+  String get initialAmountDesc => 'Birikiminize başlangıç tutarı ekleyin';
+
+  @override
+  String get setInitialAmount => 'Başlangıç Tutarı Belirle';
+
+  @override
+  String get update => 'Güncelle';
+
+  @override
+  String get savingUpdatedSuccessfully => 'Birikim başarıyla güncellendi';
+
+  @override
+  String get errorUpdatingSaving => 'Birikim güncellenirken hata oluştu';
+
+  @override
+  String get currentAmount => 'Mevcut Tutar';
+
+  @override
+  String get addMoney => 'Para Ekle';
+
+  @override
+  String get addMoneyHint => 'Eklemek istediğiniz tutarı giriniz';
+
+  @override
+  String dailyTarget(String amount) {
+    return 'Günlük ₺$amount';
+  }
+
+  @override
+  String get moneyAddedSuccessfully => 'Para başarıyla eklendi';
+
+  @override
+  String get errorAddingMoney => 'Para eklenirken hata oluştu';
 }

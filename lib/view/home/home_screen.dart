@@ -8,7 +8,7 @@ import '../../core/providers/settings_provider.dart';
 import '../../models/saving.dart';
 import '../savings/savings_list_screen.dart';
 import '../settings/settings_screen.dart';
-import '../savings/widgets/add_saving_bottom_sheet.dart';
+import 'widgets/add_saving_bottom_sheet.dart';
 import 'widgets/dashboard_card.dart';
 import 'widgets/quick_stats.dart';
 import 'widgets/recent_savings_list.dart';

@@ -512,10 +512,10 @@ abstract class AppLocalizations {
   /// **'Aktif Hedef'**
   String get activeTarget;
 
-  /// Toplam tutar etiketi
+  /// Toplam miktar
   ///
   /// In tr, this message translates to:
-  /// **'Toplam Tutar'**
+  /// **'Toplam Miktar'**
   String get totalAmount;
 
   /// Birikim hedefi yok mesajı
@@ -866,6 +866,12 @@ abstract class AppLocalizations {
   /// **'Toplam Hedef'**
   String get totalTarget;
 
+  /// Toplam biriken tutar etiketi
+  ///
+  /// In tr, this message translates to:
+  /// **'Toplam Biriken Tutar'**
+  String get totalAmountSaved;
+
   /// Ortalama ilerleme etiketi
   ///
   /// In tr, this message translates to:
@@ -889,6 +895,96 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'tamamlandı'**
   String get completed;
+
+  /// Birikim düzenle başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Birikim Düzenle'**
+  String get editSaving;
+
+  /// Birikim detayları başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Birikim Detayları'**
+  String get savingDetails;
+
+  /// Başlangıç tutarı etiketi
+  ///
+  /// In tr, this message translates to:
+  /// **'Başlangıç Tutarı'**
+  String get initialAmount;
+
+  /// Başlangıç tutarı ipucu
+  ///
+  /// In tr, this message translates to:
+  /// **'Başlangıç tutarını giriniz'**
+  String get initialAmountHint;
+
+  /// Başlangıç tutarı açıklaması
+  ///
+  /// In tr, this message translates to:
+  /// **'Birikiminize başlangıç tutarı ekleyin'**
+  String get initialAmountDesc;
+
+  /// Başlangıç tutarı belirle
+  ///
+  /// In tr, this message translates to:
+  /// **'Başlangıç Tutarı Belirle'**
+  String get setInitialAmount;
+
+  /// Güncelle butonu
+  ///
+  /// In tr, this message translates to:
+  /// **'Güncelle'**
+  String get update;
+
+  /// Birikim güncelleme başarı mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'Birikim başarıyla güncellendi'**
+  String get savingUpdatedSuccessfully;
+
+  /// Birikim güncelleme hata mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'Birikim güncellenirken hata oluştu'**
+  String get errorUpdatingSaving;
+
+  /// Mevcut tutar etiketi
+  ///
+  /// In tr, this message translates to:
+  /// **'Mevcut Tutar'**
+  String get currentAmount;
+
+  /// Para ekleme başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Para Ekle'**
+  String get addMoney;
+
+  /// Para ekleme ipucu
+  ///
+  /// In tr, this message translates to:
+  /// **'Eklemek istediğiniz tutarı giriniz'**
+  String get addMoneyHint;
+
+  /// Günlük hedef tutar
+  ///
+  /// In tr, this message translates to:
+  /// **'Günlük ₺{amount}'**
+  String dailyTarget(String amount);
+
+  /// Para ekleme başarı mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'Para başarıyla eklendi'**
+  String get moneyAddedSuccessfully;
+
+  /// Para ekleme hata mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'Para eklenirken hata oluştu'**
+  String get errorAddingMoney;
 }
 
 class _AppLocalizationsDelegate

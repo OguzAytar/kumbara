@@ -676,9 +676,9 @@
     "description": "Toplam hedef etiketi"
   },
   
-  "totalAmount": "Toplam Tutar",
-  "@totalAmount": {
-    "description": "Toplam tutar etiketi"
+  "totalAmountSaved": "Toplam Biriken Tutar",
+  "@totalAmountSaved": {
+    "description": "Toplam biriken tutar etiketi"
   },
   
   "averageProgress": "Ortalama İlerleme",
@@ -699,5 +699,85 @@
   "completed": "tamamlandı",
   "@completed": {
     "description": "Tamamlandı durumu"
+  },
+  
+  "editSaving": "Birikim Düzenle",
+  "@editSaving": {
+    "description": "Birikim düzenle başlığı"
+  },
+  
+  "savingDetails": "Birikim Detayları",
+  "@savingDetails": {
+    "description": "Birikim detayları başlığı"
+  },
+  
+  "initialAmount": "Başlangıç Tutarı",
+  "@initialAmount": {
+    "description": "Başlangıç tutarı etiketi"
+  },
+  
+  "initialAmountHint": "Başlangıç tutarını giriniz",
+  "@initialAmountHint": {
+    "description": "Başlangıç tutarı ipucu"
+  },
+  
+  "initialAmountDesc": "Birikiminize başlangıç tutarı ekleyin",
+  "@initialAmountDesc": {
+    "description": "Başlangıç tutarı açıklaması"
+  },
+  
+  "setInitialAmount": "Başlangıç Tutarı Belirle",
+  "@setInitialAmount": {
+    "description": "Başlangıç tutarı belirle"
+  },
+  
+  "update": "Güncelle",
+  "@update": {
+    "description": "Güncelle butonu"
+  },
+  
+  "savingUpdatedSuccessfully": "Birikim başarıyla güncellendi",
+  "@savingUpdatedSuccessfully": {
+    "description": "Birikim güncelleme başarı mesajı"
+  },
+  
+  "errorUpdatingSaving": "Birikim güncellenirken hata oluştu",
+  "@errorUpdatingSaving": {
+    "description": "Birikim güncelleme hata mesajı"
+  },
+  
+  "currentAmount": "Mevcut Tutar",
+  "@currentAmount": {
+    "description": "Mevcut tutar etiketi"
+  },
+  
+  "addMoney": "Para Ekle",
+  "@addMoney": {
+    "description": "Para ekleme başlığı"
+  },
+  
+  "addMoneyHint": "Eklemek istediğiniz tutarı giriniz",
+  "@addMoneyHint": {
+    "description": "Para ekleme ipucu"
+  },
+  
+  "dailyTarget": "Günlük ₺{amount}",
+  "@dailyTarget": {
+    "description": "Günlük hedef tutar",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "moneyAddedSuccessfully": "Para başarıyla eklendi",
+  "@moneyAddedSuccessfully": {
+    "description": "Para ekleme başarı mesajı"
+  },
+  
+  "errorAddingMoney": "Para eklenirken hata oluştu",
+  "@errorAddingMoney": {
+    "description": "Para ekleme hata mesajı"
   }
 }

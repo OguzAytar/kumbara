@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import '../../core/enums/saving_enum.dart';
 import '../../core/functions/firebase_analytics_helper.dart';
 import '../../core/providers/saving_provider.dart';
-import '../../core/widgets/custom_snackbar.dart';
 import '../../models/saving.dart';
+import '../home/widgets/add_saving_bottom_sheet.dart';
 import 'widgets/saving_card.dart';
 
 class SavingsListScreen extends StatefulWidget {
@@ -157,8 +157,13 @@ class _SavingsListScreenState extends State<SavingsListScreen> {
                               child: SavingCard(
                                 saving: filteredSavings[index],
                                 onTap: () {
-                                  // TODO: Navigate to saving detail
-                                  CustomSnackBar.showInfo(context, message: AppLocalizations.of(context)!.savingDetailComingSoon);
+                                  // Birikim detaylarını göster
+                                  showModalBottomSheet(
+                                    context: context,
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    builder: (context) => AddSavingBottomSheet(saving: filteredSavings[index]),
+                                  );
                                 },
                               ),
                             );

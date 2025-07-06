@@ -374,9 +374,9 @@
     "description": "Total target label"
   },
   
-  "totalAmount": "Total Amount",
-  "@totalAmount": {
-    "description": "Total amount label"
+  "totalAmountSaved": "Total Amount Saved",
+  "@totalAmountSaved": {
+    "description": "Total amount saved label"
   },
   
   "averageProgress": "Average Progress",
@@ -397,5 +397,85 @@
   "completed": "completed",
   "@completed": {
     "description": "Completed status"
+  },
+  
+  "editSaving": "Edit Saving",
+  "@editSaving": {
+    "description": "Edit saving title"
+  },
+  
+  "savingDetails": "Saving Details",
+  "@savingDetails": {
+    "description": "Saving details title"
+  },
+  
+  "initialAmount": "Initial Amount",
+  "@initialAmount": {
+    "description": "Initial amount label"
+  },
+  
+  "initialAmountHint": "Enter initial amount",
+  "@initialAmountHint": {
+    "description": "Initial amount hint"
+  },
+  
+  "initialAmountDesc": "Add initial amount to your saving",
+  "@initialAmountDesc": {
+    "description": "Initial amount description"
+  },
+  
+  "setInitialAmount": "Set Initial Amount",
+  "@setInitialAmount": {
+    "description": "Set initial amount"
+  },
+  
+  "update": "Update",
+  "@update": {
+    "description": "Update button"
+  },
+  
+  "savingUpdatedSuccessfully": "Saving updated successfully",
+  "@savingUpdatedSuccessfully": {
+    "description": "Saving update success message"
+  },
+  
+  "errorUpdatingSaving": "Error updating saving",
+  "@errorUpdatingSaving": {
+    "description": "Saving update error message"
+  },
+  
+  "currentAmount": "Current Amount",
+  "@currentAmount": {
+    "description": "Current amount label"
+  },
+  
+  "addMoney": "Add Money",
+  "@addMoney": {
+    "description": "Add money title"
+  },
+  
+  "addMoneyHint": "Enter amount to add",
+  "@addMoneyHint": {
+    "description": "Add money hint"
+  },
+  
+  "dailyTarget": "Daily ₺{amount}",
+  "@dailyTarget": {
+    "description": "Daily target amount",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "moneyAddedSuccessfully": "Money added successfully",
+  "@moneyAddedSuccessfully": {
+    "description": "Money add success message"
+  },
+  
+  "errorAddingMoney": "Error adding money",
+  "@errorAddingMoney": {
+    "description": "Money add error message"
   }
 }

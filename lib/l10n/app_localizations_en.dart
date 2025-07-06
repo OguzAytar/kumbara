@@ -420,6 +420,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get totalTarget => 'Total Target';
 
   @override
+  String get totalAmountSaved => 'Total Amount Saved';
+
+  @override
   String get averageProgress => 'Average Progress';
 
   @override
@@ -431,4 +434,51 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get completed => 'completed';
+
+  @override
+  String get editSaving => 'Edit Saving';
+
+  @override
+  String get savingDetails => 'Saving Details';
+
+  @override
+  String get initialAmount => 'Initial Amount';
+
+  @override
+  String get initialAmountHint => 'Enter initial amount';
+
+  @override
+  String get initialAmountDesc => 'Add initial amount to your saving';
+
+  @override
+  String get setInitialAmount => 'Set Initial Amount';
+
+  @override
+  String get update => 'Update';
+
+  @override
+  String get savingUpdatedSuccessfully => 'Saving updated successfully';
+
+  @override
+  String get errorUpdatingSaving => 'Error updating saving';
+
+  @override
+  String get currentAmount => 'Current Amount';
+
+  @override
+  String get addMoney => 'Add Money';
+
+  @override
+  String get addMoneyHint => 'Enter amount to add';
+
+  @override
+  String dailyTarget(String amount) {
+    return 'Daily ₺$amount';
+  }
+
+  @override
+  String get moneyAddedSuccessfully => 'Money added successfully';
+
+  @override
+  String get errorAddingMoney => 'Error adding money';
 }
