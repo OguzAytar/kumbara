@@ -512,10 +512,10 @@ abstract class AppLocalizations {
   /// **'Aktif Hedef'**
   String get activeTarget;
 
-  /// Toplam miktar
+  /// Toplam tutar etiketi
   ///
   /// In tr, this message translates to:
-  /// **'Toplam Miktar'**
+  /// **'Toplam Tutar'**
   String get totalAmount;
 
   /// Birikim hedefi yok mesajı
@@ -613,6 +613,282 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Bildirim izni alınırken hata oluştu: {error}'**
   String notificationPermissionError(String error);
+
+  /// Bildirim kanalı adı
+  ///
+  /// In tr, this message translates to:
+  /// **'Kumbara Bildirimleri'**
+  String get notificationChannelName;
+
+  /// Bildirim kanalı açıklaması
+  ///
+  /// In tr, this message translates to:
+  /// **'Birikim hatırlatmaları ve hedef bildirimleri'**
+  String get notificationChannelDescription;
+
+  /// Birikim hatırlatma bildirimi başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Birikim Zamanı!'**
+  String get savingReminderTitle;
+
+  /// Birikim hatırlatma bildirimi içeriği
+  ///
+  /// In tr, this message translates to:
+  /// **'Hedeflerinize bir adım daha yaklaşmak için bugün para yatırmayı unutmayın'**
+  String get savingReminderBody;
+
+  /// Hedef başarıldığında bildirim başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Tebrikler! 🎉'**
+  String get goalAchievedTitle;
+
+  /// Hedef başarıldığında bildirim içeriği
+  ///
+  /// In tr, this message translates to:
+  /// **'Hedefinize ulaştınız! Yeni bir hedef belirleyebilirsiniz'**
+  String get goalAchievedBody;
+
+  /// Hedefe yaklaşıldığında bildirim başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Hedefinize Çok Yakınsınız!'**
+  String get goalNearlyAchievedTitle;
+
+  /// Hedefe yaklaşıldığında bildirim içeriği
+  ///
+  /// In tr, this message translates to:
+  /// **'Hedefinizin %90\'ına ulaştınız. Son spurt!'**
+  String get goalNearlyAchievedBody;
+
+  /// Yeni birikim ekleme sayfası başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Yeni Birikim Ekle'**
+  String get addNewSaving;
+
+  /// Kaydet butonu
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaydet'**
+  String get save;
+
+  /// Birikim adı etiketi
+  ///
+  /// In tr, this message translates to:
+  /// **'Birikim Adı'**
+  String get savingName;
+
+  /// Birikim adı ipucu
+  ///
+  /// In tr, this message translates to:
+  /// **'Örn: Tatil Fonu, Yeni Araba'**
+  String get savingNameHint;
+
+  /// Birikim adı zorunlu alan uyarısı
+  ///
+  /// In tr, this message translates to:
+  /// **'Lütfen birikim adını giriniz'**
+  String get pleaseEnterSavingName;
+
+  /// Açıklama etiketi
+  ///
+  /// In tr, this message translates to:
+  /// **'Açıklama'**
+  String get description;
+
+  /// Açıklama ipucu
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu birikim hakkında notlarınızı yazın...'**
+  String get descriptionHint;
+
+  /// Hedef tutar etiketi
+  ///
+  /// In tr, this message translates to:
+  /// **'Hedef Tutar'**
+  String get targetAmount;
+
+  /// Hedef tutar belirleme anahtarı
+  ///
+  /// In tr, this message translates to:
+  /// **'Hedef tutar belirle'**
+  String get setTargetAmount;
+
+  /// Hedef tutar açıklaması
+  ///
+  /// In tr, this message translates to:
+  /// **'Ulaşmak istediğiniz tutarı belirleyin'**
+  String get setTargetAmountDesc;
+
+  /// Hedef tutar ipucu
+  ///
+  /// In tr, this message translates to:
+  /// **'Örn: 5000'**
+  String get targetAmountHint;
+
+  /// Hedef tutar zorunlu alan uyarısı
+  ///
+  /// In tr, this message translates to:
+  /// **'Lütfen hedef tutarını giriniz'**
+  String get pleaseEnterTargetAmount;
+
+  /// Geçerli tutar uyarısı
+  ///
+  /// In tr, this message translates to:
+  /// **'Lütfen geçerli bir tutar giriniz'**
+  String get pleaseEnterValidAmount;
+
+  /// Hedef tarihi etiketi
+  ///
+  /// In tr, this message translates to:
+  /// **'Hedef Tarihi'**
+  String get targetDate;
+
+  /// Hedef tarih belirleme anahtarı
+  ///
+  /// In tr, this message translates to:
+  /// **'Hedef tarih belirle'**
+  String get setTargetDate;
+
+  /// Hedef tarih açıklaması
+  ///
+  /// In tr, this message translates to:
+  /// **'Hedefinize ulaşmak istediğiniz tarihi belirleyin'**
+  String get setTargetDateDesc;
+
+  /// Hedef tarih seçim metni
+  ///
+  /// In tr, this message translates to:
+  /// **'Hedef tarihi seçiniz'**
+  String get selectTargetDate;
+
+  /// Hedef tarih zorunlu alan uyarısı
+  ///
+  /// In tr, this message translates to:
+  /// **'Lütfen hedef tarihini seçiniz'**
+  String get pleaseSelectTargetDate;
+
+  /// Birikim bilgi notu
+  ///
+  /// In tr, this message translates to:
+  /// **'Hedef tutar veya tarih belirlemezseniz, birikiminiz kumbara gibi çalışır ve sadece ne kadar para biriktirdiğinizi takip eder.'**
+  String get savingInfo;
+
+  /// Birikim ekleme başarı mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'Birikim başarıyla eklendi!'**
+  String get savingAddedSuccessfully;
+
+  /// Birikim ekleme hata mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'Birikim eklenirken hata oluştu'**
+  String get errorAddingSaving;
+
+  /// En yeni sıralama seçeneği
+  ///
+  /// In tr, this message translates to:
+  /// **'En Yeniler'**
+  String get sortByNewest;
+
+  /// En eski sıralama seçeneği
+  ///
+  /// In tr, this message translates to:
+  /// **'En Eskiler'**
+  String get sortByOldest;
+
+  /// İlerleme sıralama seçeneği
+  ///
+  /// In tr, this message translates to:
+  /// **'İlerleme Durumu'**
+  String get sortByProgress;
+
+  /// Tutar sıralama seçeneği
+  ///
+  /// In tr, this message translates to:
+  /// **'Tutar'**
+  String get sortByAmount;
+
+  /// Tüm birikimler filtresi
+  ///
+  /// In tr, this message translates to:
+  /// **'Tüm Birikimler'**
+  String get allSavings;
+
+  /// Aktif birikimler filtresi
+  ///
+  /// In tr, this message translates to:
+  /// **'Aktif Birikimler'**
+  String get activeSavings;
+
+  /// Tamamlanan birikimler filtresi
+  ///
+  /// In tr, this message translates to:
+  /// **'Tamamlanan Birikimler'**
+  String get completedSavings;
+
+  /// Duraklatılan birikimler filtresi
+  ///
+  /// In tr, this message translates to:
+  /// **'Duraklatılan Birikimler'**
+  String get pausedSavings;
+
+  /// Birikim arama ipucu
+  ///
+  /// In tr, this message translates to:
+  /// **'Birikimlerinizi arayın...'**
+  String get searchSavings;
+
+  /// Birikim detay yakında mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'Birikim detayı yakında gelecek'**
+  String get savingDetailComingSoon;
+
+  /// Birikimler özet başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Birikimlerim Özeti'**
+  String get savingsOverview;
+
+  /// Toplam birikim sayısı
+  ///
+  /// In tr, this message translates to:
+  /// **'{count} adet birikim'**
+  String totalSavingsCount(int count);
+
+  /// Toplam hedef etiketi
+  ///
+  /// In tr, this message translates to:
+  /// **'Toplam Hedef'**
+  String get totalTarget;
+
+  /// Ortalama ilerleme etiketi
+  ///
+  /// In tr, this message translates to:
+  /// **'Ortalama İlerleme'**
+  String get averageProgress;
+
+  /// Birikim bulunamadı başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Birikim bulunamadı'**
+  String get noSavingsFound;
+
+  /// Birikim bulunamadı açıklaması
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz hiç birikim eklememişsiniz veya arama kriterlerinize uygun birikim yok.'**
+  String get noSavingsFoundDesc;
+
+  /// Tamamlandı durumu
+  ///
+  /// In tr, this message translates to:
+  /// **'tamamlandı'**
+  String get completed;
 }
 
 class _AppLocalizationsDelegate

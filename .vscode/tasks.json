@@ -1,0 +1,233 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "flutter: Assemble Debug",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "assemble",
+                "debug"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Assemble Flutter debug build"
+        },
+        {
+            "label": "flutter: Assemble Release",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "assemble",
+                "release"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Assemble Flutter release build"
+        },
+        {
+            "label": "flutter: Assemble Profile",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "assemble",
+                "profile"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Assemble Flutter profile build"
+        },
+        {
+            "label": "flutter: Clean",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "clean"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Clean Flutter build artifacts"
+        },
+        {
+            "label": "flutter: Pub Get",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "pub",
+                "get"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Get Flutter dependencies"
+        },
+        {
+            "label": "flutter: Pub Upgrade",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "pub",
+                "upgrade"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Upgrade Flutter dependencies"
+        },
+        {
+            "label": "flutter: Build Android APK",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "build",
+                "apk",
+                "--release"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Build Android APK (Release)"
+        },
+        {
+            "label": "flutter: Build Android AAB",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "build",
+                "appbundle",
+                "--release"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Build Android App Bundle (Release)"
+        },
+        {
+            "label": "flutter: Build iOS",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "build",
+                "ios",
+                "--release"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Build iOS App (Release)"
+        },
+        {
+            "label": "flutter: Build Web",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "build",
+                "web",
+                "--release"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Build Web App (Release)"
+        },
+        {
+            "label": "flutter: Build macOS",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "build",
+                "macos",
+                "--release"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Build macOS App (Release)"
+        },
+        {
+            "label": "flutter: Analyze",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "analyze"
+            ],
+            "group": "test",
+            "problemMatcher": [],
+            "detail": "Analyze Flutter code"
+        },
+        {
+            "label": "flutter: Test",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "test"
+            ],
+            "group": "test",
+            "problemMatcher": [],
+            "isBackground": false,
+            "detail": "Run Flutter tests"
+        },
+        {
+            "label": "flutter: Test with Coverage",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "test",
+                "--coverage"
+            ],
+            "group": "test",
+            "problemMatcher": [],
+            "detail": "Run Flutter tests with coverage"
+        },
+        {
+            "label": "flutter: Doctor",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "doctor",
+                "-v"
+            ],
+            "group": "test",
+            "problemMatcher": [],
+            "detail": "Check Flutter installation"
+        },
+        {
+            "label": "flutter: Gen L10n",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "gen-l10n"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Generate localization files"
+        },
+        {
+            "label": "dart: Format",
+            "type": "shell",
+            "command": "dart",
+            "args": [
+                "format",
+                "lib/"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Format Dart code"
+        },
+        {
+            "label": "Firebase: Configure",
+            "type": "shell",
+            "command": "flutterfire",
+            "args": [
+                "configure"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Configure Firebase for Flutter"
+        },
+        {
+            "label": "iOS: Pod Install",
+            "type": "shell",
+            "command": "cd ios && pod install",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Install iOS CocoaPods dependencies"
+        }
+    ]
+}

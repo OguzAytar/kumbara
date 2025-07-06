@@ -4,6 +4,7 @@ import 'package:kumbara/services/notification_service.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../core/functions/firebase_analytics_helper.dart';
 import '../../core/providers/settings_provider.dart';
 import '../../core/widgets/custom_snackbar.dart';
 import '../home/home_screen.dart';
@@ -54,6 +55,12 @@ class _OnboardScreenState extends State<OnboardScreen> {
   void _nextPage() {
     if (_currentPage < _totalPages - 1) {
       _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+
+      // Log onboarding step completion
+      FirebaseAnalyticsHelper.logOnboardingStepCompleted(
+        stepNumber: _currentPage + 2, // Next step
+        stepName: 'step_${_currentPage + 2}',
+      );
     } else {
       _finishOnboarding();
     }
@@ -65,7 +72,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
     }
   }
 
-  Future<void> _requestNotificationPermission() async {
+  Future<bool> _requestNotificationPermission() async {
     setState(() {
       _isRequestingPermission = true;
     });
@@ -74,9 +81,13 @@ class _OnboardScreenState extends State<OnboardScreen> {
       final granted = await NotificationService().requestPermission();
       final localizations = AppLocalizations.of(context)!;
 
+      // Log notification permission request
+      await FirebaseAnalyticsHelper.logNotificationPermissionRequested(granted: granted, source: 'onboarding');
+
       if (granted) {
         await context.read<SettingsProvider>().setNotificationsEnabled(true);
         CustomSnackBar.showSuccess(context, message: localizations.notificationPermissionGranted);
+        return true;
       } else {
         CustomSnackBar.showWarning(
           context,
@@ -86,15 +97,21 @@ class _OnboardScreenState extends State<OnboardScreen> {
             // TODO: Ayarlar sayfasına yönlendirme
           },
         );
+        return false;
       }
     } catch (e) {
       final localizations = AppLocalizations.of(context)!;
       CustomSnackBar.showError(context, message: localizations.notificationPermissionError(e.toString()));
-    }
 
-    setState(() {
-      _isRequestingPermission = false;
-    });
+      // Log error
+      await FirebaseAnalyticsHelper.logError(errorName: 'notification_permission_error', errorMessage: e.toString());
+
+      return false;
+    } finally {
+      setState(() {
+        _isRequestingPermission = false;
+      });
+    }
   }
 
   Future<void> _finishOnboarding() async {
@@ -167,9 +184,12 @@ class _OnboardScreenState extends State<OnboardScreen> {
                     child: ElevatedButton(
                       onPressed: _isRequestingPermission
                           ? null
-                          : () {
+                          : () async {
                               if (_currentPage == _totalPages - 1) {
-                                _requestNotificationPermission();
+                                final granded = await _requestNotificationPermission();
+                                if (granded) {
+                                  _nextPage();
+                                }
                               } else {
                                 _nextPage();
                               }

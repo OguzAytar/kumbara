@@ -285,4 +285,150 @@ class AppLocalizationsEn extends AppLocalizations {
   String notificationPermissionError(String error) {
     return 'Error occurred while requesting notification permission: $error';
   }
+
+  @override
+  String get notificationChannelName => 'Kumbara Notifications';
+
+  @override
+  String get notificationChannelDescription =>
+      'Savings reminders and goal notifications';
+
+  @override
+  String get savingReminderTitle => 'Time to Save!';
+
+  @override
+  String get savingReminderBody =>
+      'Don\'t forget to save money today to get one step closer to your goals';
+
+  @override
+  String get goalAchievedTitle => 'Congratulations! 🎉';
+
+  @override
+  String get goalAchievedBody =>
+      'You\'ve reached your goal! You can set a new goal';
+
+  @override
+  String get goalNearlyAchievedTitle => 'You\'re Almost There!';
+
+  @override
+  String get goalNearlyAchievedBody =>
+      'You\'ve reached 90% of your goal. Final sprint!';
+
+  @override
+  String get addNewSaving => 'Add New Saving';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get savingName => 'Saving Name';
+
+  @override
+  String get savingNameHint => 'e.g. Holiday Fund, New Car';
+
+  @override
+  String get pleaseEnterSavingName => 'Please enter saving name';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get descriptionHint => 'Write your notes about this saving...';
+
+  @override
+  String get targetAmount => 'Target Amount';
+
+  @override
+  String get setTargetAmount => 'Set target amount';
+
+  @override
+  String get setTargetAmountDesc => 'Set the amount you want to reach';
+
+  @override
+  String get targetAmountHint => 'e.g. 5000';
+
+  @override
+  String get pleaseEnterTargetAmount => 'Please enter target amount';
+
+  @override
+  String get pleaseEnterValidAmount => 'Please enter a valid amount';
+
+  @override
+  String get targetDate => 'Target Date';
+
+  @override
+  String get setTargetDate => 'Set target date';
+
+  @override
+  String get setTargetDateDesc => 'Set the date you want to reach your goal';
+
+  @override
+  String get selectTargetDate => 'Select target date';
+
+  @override
+  String get pleaseSelectTargetDate => 'Please select target date';
+
+  @override
+  String get savingInfo =>
+      'If you don\'t set a target amount or date, your saving will work like a piggy bank and only track how much money you save.';
+
+  @override
+  String get savingAddedSuccessfully => 'Saving added successfully!';
+
+  @override
+  String get errorAddingSaving => 'Error occurred while adding saving';
+
+  @override
+  String get sortByNewest => 'Newest';
+
+  @override
+  String get sortByOldest => 'Oldest';
+
+  @override
+  String get sortByProgress => 'Progress';
+
+  @override
+  String get sortByAmount => 'Amount';
+
+  @override
+  String get allSavings => 'All Savings';
+
+  @override
+  String get activeSavings => 'Active Savings';
+
+  @override
+  String get completedSavings => 'Completed Savings';
+
+  @override
+  String get pausedSavings => 'Paused Savings';
+
+  @override
+  String get searchSavings => 'Search your savings...';
+
+  @override
+  String get savingDetailComingSoon => 'Saving detail coming soon';
+
+  @override
+  String get savingsOverview => 'Savings Overview';
+
+  @override
+  String totalSavingsCount(int count) {
+    return '$count savings';
+  }
+
+  @override
+  String get totalTarget => 'Total Target';
+
+  @override
+  String get averageProgress => 'Average Progress';
+
+  @override
+  String get noSavingsFound => 'No savings found';
+
+  @override
+  String get noSavingsFoundDesc =>
+      'You haven\'t added any savings yet or there are no savings matching your search criteria.';
+
+  @override
+  String get completed => 'completed';
 }

@@ -156,5 +156,246 @@
         "type": "String"
       }
     }
+  },
+  
+  "notificationChannelName": "Kumbara Notifications",
+  "@notificationChannelName": {
+    "description": "Notification channel name"
+  },
+  
+  "notificationChannelDescription": "Savings reminders and goal notifications",
+  "@notificationChannelDescription": {
+    "description": "Notification channel description"
+  },
+  
+  "savingReminderTitle": "Time to Save!",
+  "@savingReminderTitle": {
+    "description": "Savings reminder notification title"
+  },
+  
+  "savingReminderBody": "Don't forget to save money today to get one step closer to your goals",
+  "@savingReminderBody": {
+    "description": "Savings reminder notification body"
+  },
+  
+  "goalAchievedTitle": "Congratulations! 🎉",
+  "@goalAchievedTitle": {
+    "description": "Goal achieved notification title"
+  },
+  
+  "goalAchievedBody": "You've reached your goal! You can set a new goal",
+  "@goalAchievedBody": {
+    "description": "Goal achieved notification body"
+  },
+  
+  "goalNearlyAchievedTitle": "You're Almost There!",
+  "@goalNearlyAchievedTitle": {
+    "description": "Goal nearly achieved notification title"
+  },
+  
+  "goalNearlyAchievedBody": "You've reached 90% of your goal. Final sprint!",
+  "@goalNearlyAchievedBody": {
+    "description": "Goal nearly achieved notification body"
+  },
+  
+  "addNewSaving": "Add New Saving",
+  "@addNewSaving": {
+    "description": "Add new saving page title"
+  },
+  
+  "save": "Save",
+  "@save": {
+    "description": "Save button"
+  },
+  
+  "savingName": "Saving Name",
+  "@savingName": {
+    "description": "Saving name label"
+  },
+  
+  "savingNameHint": "e.g. Holiday Fund, New Car",
+  "@savingNameHint": {
+    "description": "Saving name hint"
+  },
+  
+  "pleaseEnterSavingName": "Please enter saving name",
+  "@pleaseEnterSavingName": {
+    "description": "Saving name required field warning"
+  },
+  
+  "description": "Description",
+  "@description": {
+    "description": "Description label"
+  },
+  
+  "descriptionHint": "Write your notes about this saving...",
+  "@descriptionHint": {
+    "description": "Description hint"
+  },
+  
+  "targetAmount": "Target Amount",
+  "@targetAmount": {
+    "description": "Target amount label"
+  },
+  
+  "setTargetAmount": "Set target amount",
+  "@setTargetAmount": {
+    "description": "Set target amount switch"
+  },
+  
+  "setTargetAmountDesc": "Set the amount you want to reach",
+  "@setTargetAmountDesc": {
+    "description": "Target amount description"
+  },
+  
+  "targetAmountHint": "e.g. 5000",
+  "@targetAmountHint": {
+    "description": "Target amount hint"
+  },
+  
+  "pleaseEnterTargetAmount": "Please enter target amount",
+  "@pleaseEnterTargetAmount": {
+    "description": "Target amount required field warning"
+  },
+  
+  "pleaseEnterValidAmount": "Please enter a valid amount",
+  "@pleaseEnterValidAmount": {
+    "description": "Valid amount warning"
+  },
+  
+  "targetDate": "Target Date",
+  "@targetDate": {
+    "description": "Target date label"
+  },
+  
+  "setTargetDate": "Set target date",
+  "@setTargetDate": {
+    "description": "Set target date switch"
+  },
+  
+  "setTargetDateDesc": "Set the date you want to reach your goal",
+  "@setTargetDateDesc": {
+    "description": "Target date description"
+  },
+  
+  "selectTargetDate": "Select target date",
+  "@selectTargetDate": {
+    "description": "Target date selection text"
+  },
+  
+  "pleaseSelectTargetDate": "Please select target date",
+  "@pleaseSelectTargetDate": {
+    "description": "Target date required field warning"
+  },
+  
+  "savingInfo": "If you don't set a target amount or date, your saving will work like a piggy bank and only track how much money you save.",
+  "@savingInfo": {
+    "description": "Saving info note"
+  },
+  
+  "savingAddedSuccessfully": "Saving added successfully!",
+  "@savingAddedSuccessfully": {
+    "description": "Saving added success message"
+  },
+  
+  "errorAddingSaving": "Error occurred while adding saving",
+  "@errorAddingSaving": {
+    "description": "Saving add error message"
+  },
+  
+  "sortByNewest": "Newest",
+  "@sortByNewest": {
+    "description": "Newest sort option"
+  },
+  
+  "sortByOldest": "Oldest",
+  "@sortByOldest": {
+    "description": "Oldest sort option"
+  },
+  
+  "sortByProgress": "Progress",
+  "@sortByProgress": {
+    "description": "Progress sort option"
+  },
+  
+  "sortByAmount": "Amount",
+  "@sortByAmount": {
+    "description": "Amount sort option"
+  },
+  
+  "allSavings": "All Savings",
+  "@allSavings": {
+    "description": "All savings filter"
+  },
+  
+  "activeSavings": "Active Savings",
+  "@activeSavings": {
+    "description": "Active savings filter"
+  },
+  
+  "completedSavings": "Completed Savings",
+  "@completedSavings": {
+    "description": "Completed savings filter"
+  },
+  
+  "pausedSavings": "Paused Savings",
+  "@pausedSavings": {
+    "description": "Paused savings filter"
+  },
+  
+  "searchSavings": "Search your savings...",
+  "@searchSavings": {
+    "description": "Search savings hint"
+  },
+  
+  "savingDetailComingSoon": "Saving detail coming soon",
+  "@savingDetailComingSoon": {
+    "description": "Saving detail coming soon message"
+  },
+  
+  "savingsOverview": "Savings Overview",
+  "@savingsOverview": {
+    "description": "Savings overview title"
+  },
+  
+  "totalSavingsCount": "{count} savings",
+  "@totalSavingsCount": {
+    "description": "Total savings count",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  
+  "totalTarget": "Total Target",
+  "@totalTarget": {
+    "description": "Total target label"
+  },
+  
+  "totalAmount": "Total Amount",
+  "@totalAmount": {
+    "description": "Total amount label"
+  },
+  
+  "averageProgress": "Average Progress",
+  "@averageProgress": {
+    "description": "Average progress label"
+  },
+  
+  "noSavingsFound": "No savings found",
+  "@noSavingsFound": {
+    "description": "No savings found title"
+  },
+  
+  "noSavingsFoundDesc": "You haven't added any savings yet or there are no savings matching your search criteria.",
+  "@noSavingsFoundDesc": {
+    "description": "No savings found description"
+  },
+  
+  "completed": "completed",
+  "@completed": {
+    "description": "Completed status"
   }
 }

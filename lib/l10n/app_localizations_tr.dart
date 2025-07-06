@@ -230,7 +230,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get activeTarget => 'Aktif Hedef';
 
   @override
-  String get totalAmount => 'Toplam Miktar';
+  String get totalAmount => 'Toplam Tutar';
 
   @override
   String get noSavingsGoal => 'Henüz birikim hedefi yok';
@@ -289,4 +289,151 @@ class AppLocalizationsTr extends AppLocalizations {
   String notificationPermissionError(String error) {
     return 'Bildirim izni alınırken hata oluştu: $error';
   }
+
+  @override
+  String get notificationChannelName => 'Kumbara Bildirimleri';
+
+  @override
+  String get notificationChannelDescription =>
+      'Birikim hatırlatmaları ve hedef bildirimleri';
+
+  @override
+  String get savingReminderTitle => 'Birikim Zamanı!';
+
+  @override
+  String get savingReminderBody =>
+      'Hedeflerinize bir adım daha yaklaşmak için bugün para yatırmayı unutmayın';
+
+  @override
+  String get goalAchievedTitle => 'Tebrikler! 🎉';
+
+  @override
+  String get goalAchievedBody =>
+      'Hedefinize ulaştınız! Yeni bir hedef belirleyebilirsiniz';
+
+  @override
+  String get goalNearlyAchievedTitle => 'Hedefinize Çok Yakınsınız!';
+
+  @override
+  String get goalNearlyAchievedBody =>
+      'Hedefinizin %90\'ına ulaştınız. Son spurt!';
+
+  @override
+  String get addNewSaving => 'Yeni Birikim Ekle';
+
+  @override
+  String get save => 'Kaydet';
+
+  @override
+  String get savingName => 'Birikim Adı';
+
+  @override
+  String get savingNameHint => 'Örn: Tatil Fonu, Yeni Araba';
+
+  @override
+  String get pleaseEnterSavingName => 'Lütfen birikim adını giriniz';
+
+  @override
+  String get description => 'Açıklama';
+
+  @override
+  String get descriptionHint => 'Bu birikim hakkında notlarınızı yazın...';
+
+  @override
+  String get targetAmount => 'Hedef Tutar';
+
+  @override
+  String get setTargetAmount => 'Hedef tutar belirle';
+
+  @override
+  String get setTargetAmountDesc => 'Ulaşmak istediğiniz tutarı belirleyin';
+
+  @override
+  String get targetAmountHint => 'Örn: 5000';
+
+  @override
+  String get pleaseEnterTargetAmount => 'Lütfen hedef tutarını giriniz';
+
+  @override
+  String get pleaseEnterValidAmount => 'Lütfen geçerli bir tutar giriniz';
+
+  @override
+  String get targetDate => 'Hedef Tarihi';
+
+  @override
+  String get setTargetDate => 'Hedef tarih belirle';
+
+  @override
+  String get setTargetDateDesc =>
+      'Hedefinize ulaşmak istediğiniz tarihi belirleyin';
+
+  @override
+  String get selectTargetDate => 'Hedef tarihi seçiniz';
+
+  @override
+  String get pleaseSelectTargetDate => 'Lütfen hedef tarihini seçiniz';
+
+  @override
+  String get savingInfo =>
+      'Hedef tutar veya tarih belirlemezseniz, birikiminiz kumbara gibi çalışır ve sadece ne kadar para biriktirdiğinizi takip eder.';
+
+  @override
+  String get savingAddedSuccessfully => 'Birikim başarıyla eklendi!';
+
+  @override
+  String get errorAddingSaving => 'Birikim eklenirken hata oluştu';
+
+  @override
+  String get sortByNewest => 'En Yeniler';
+
+  @override
+  String get sortByOldest => 'En Eskiler';
+
+  @override
+  String get sortByProgress => 'İlerleme Durumu';
+
+  @override
+  String get sortByAmount => 'Tutar';
+
+  @override
+  String get allSavings => 'Tüm Birikimler';
+
+  @override
+  String get activeSavings => 'Aktif Birikimler';
+
+  @override
+  String get completedSavings => 'Tamamlanan Birikimler';
+
+  @override
+  String get pausedSavings => 'Duraklatılan Birikimler';
+
+  @override
+  String get searchSavings => 'Birikimlerinizi arayın...';
+
+  @override
+  String get savingDetailComingSoon => 'Birikim detayı yakında gelecek';
+
+  @override
+  String get savingsOverview => 'Birikimlerim Özeti';
+
+  @override
+  String totalSavingsCount(int count) {
+    return '$count adet birikim';
+  }
+
+  @override
+  String get totalTarget => 'Toplam Hedef';
+
+  @override
+  String get averageProgress => 'Ortalama İlerleme';
+
+  @override
+  String get noSavingsFound => 'Birikim bulunamadı';
+
+  @override
+  String get noSavingsFoundDesc =>
+      'Henüz hiç birikim eklememişsiniz veya arama kriterlerinize uygun birikim yok.';
+
+  @override
+  String get completed => 'tamamlandı';
 }

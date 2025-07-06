@@ -1,15 +1,30 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:kumbara/firebase_options.dart';
 import 'package:kumbara/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import 'core/functions/firebase_analytics_helper.dart';
 import 'core/providers/saving_provider.dart';
 import 'core/providers/settings_provider.dart';
 import 'core/theme/app_theme.dart';
+import 'services/notification_service.dart';
 import 'view/settings/settings_viewmodel.dart';
 import 'view/splash/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase and Analytics
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseAnalyticsHelper.initialize();
+
+  // Initialize notification service
+  try {
+    await NotificationService.initialize();
+  } catch (e) {
+    print('Notification initialization error: $e');
+  }
 
   runApp(const MyApp());
 }
@@ -41,6 +56,9 @@ class MyApp extends StatelessWidget {
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             locale: _getLocale(settingsProvider.locale),
+
+            // Firebase Analytics Observer
+            navigatorObservers: [if (FirebaseAnalyticsHelper.observer != null) FirebaseAnalyticsHelper.observer!],
 
             home: const SplashScreen(),
           );

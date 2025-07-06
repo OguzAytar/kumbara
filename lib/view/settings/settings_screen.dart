@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kumbara/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/functions/firebase_analytics_helper.dart';
 import 'settings_viewmodel.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -15,6 +16,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
+
+    // Log screen view
+    FirebaseAnalyticsHelper.logScreenView(screenName: 'Settings', screenClass: 'SettingsScreen');
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<SettingsViewModel>().initialize();
     });

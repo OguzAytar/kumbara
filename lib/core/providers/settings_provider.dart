@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../models/app_settings.dart';
 import '../../services/settings_service.dart';
+import '../functions/firebase_analytics_helper.dart';
 
 class SettingsProvider with ChangeNotifier {
   final SettingsService _settingsService = SettingsService();
@@ -56,21 +57,50 @@ class SettingsProvider with ChangeNotifier {
   Future<void> markOnboardingComplete() async {
     await _settingsService.markOnboardingComplete();
     await loadSettings();
+
+    // Log onboarding completion
+    await FirebaseAnalyticsHelper.logOnboardingCompleted(
+      totalSteps: 3,
+      completedSteps: 3,
+      durationSeconds: 0, // Bu bilgi onboarding ekranından gelecek
+      notificationPermissionGranted: notificationsEnabled,
+    );
   }
 
   Future<void> setNotificationsEnabled(bool enabled) async {
+    final oldValue = notificationsEnabled;
     await _settingsService.setNotificationsEnabled(enabled);
     await loadSettings();
+
+    // Log settings change
+    await FirebaseAnalyticsHelper.logSettingsChanged(settingName: 'notifications', oldValue: oldValue.toString(), newValue: enabled.toString());
+
+    // Update user properties
+    await FirebaseAnalyticsHelper.setUserProperties(notificationsEnabled: enabled);
   }
 
-  Future<void> setTheme(String theme) async {
-    await _settingsService.setTheme(theme);
+  Future<void> setTheme(String newTheme) async {
+    final oldTheme = theme;
+    await _settingsService.setTheme(newTheme);
     await loadSettings();
+
+    // Log theme change
+    await FirebaseAnalyticsHelper.logThemeChanged(oldTheme: oldTheme, newTheme: newTheme);
+
+    // Update user properties
+    await FirebaseAnalyticsHelper.setUserProperties(theme: newTheme);
   }
 
-  Future<void> setLocale(String locale) async {
-    await _settingsService.setLocale(locale);
+  Future<void> setLocale(String newLocale) async {
+    final oldLocale = locale;
+    await _settingsService.setLocale(newLocale);
     await loadSettings();
+
+    // Log language change
+    await FirebaseAnalyticsHelper.logLanguageChanged(oldLanguage: oldLocale, newLanguage: newLocale);
+
+    // Update user properties
+    await FirebaseAnalyticsHelper.setUserProperties(language: newLocale);
   }
 
   Future<void> updateLastOpenDate() async {

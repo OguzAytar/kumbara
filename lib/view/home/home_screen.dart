@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:kumbara/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/functions/firebase_analytics_helper.dart';
 import '../../core/providers/saving_provider.dart';
 import '../../core/providers/settings_provider.dart';
-import '../../core/widgets/custom_snackbar.dart';
 import '../../models/saving.dart';
+import '../savings/savings_list_screen.dart';
 import '../settings/settings_screen.dart';
+import '../savings/widgets/add_saving_bottom_sheet.dart';
 import 'widgets/dashboard_card.dart';
 import 'widgets/quick_stats.dart';
 import 'widgets/recent_savings_list.dart';
@@ -22,6 +24,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+
+    // Log screen view
+    FirebaseAnalyticsHelper.logScreenView(screenName: 'Home', screenClass: 'HomeScreen');
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _loadData();
     });
@@ -114,8 +120,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // TODO: Add new saving screen
-          CustomSnackBar.showInfo(context, message: AppLocalizations.of(context)!.newSavingComingSoon);
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            builder: (context) => const AddSavingBottomSheet(),
+          );
         },
         backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.add, color: Colors.white),
@@ -198,8 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Text(AppLocalizations.of(context)!.mySavings, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             TextButton(
               onPressed: () {
-                // TODO: Navigate to all savings
-                CustomSnackBar.showInfo(context, message: AppLocalizations.of(context)!.allSavingsComingSoon);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const SavingsListScreen()));
               },
               child: Text(AppLocalizations.of(context)!.seeAll),
             ),

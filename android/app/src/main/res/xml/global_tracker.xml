@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Firebase Analytics Global Config -->
+    <!-- This file declares the use of Advertising ID for analytics purposes -->
+    <string name="ga_trackingId">YOUR_TRACKING_ID</string>
+    
+    <!-- Enable automatic activity tracking -->
+    <bool name="ga_autoActivityTracking">true</bool>
+    
+    <!-- Enable automatic exception tracking -->
+    <bool name="ga_reportUncaughtExceptions">true</bool>
+    
+    <!-- Session timeout in seconds (30 minutes) -->
+    <integer name="ga_sessionTimeout">1800</integer>
+    
+    <!-- Enable advertising features -->
+    <bool name="ga_enableAdvertisingFeatures">true</bool>
+</resources>

@@ -45,5 +45,24 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	
+	<!-- Notification permissions -->
+	<key>NSUserNotificationUsageDescription</key>
+	<string>Kumbara uygulaması birikim hatırlatıcıları göndermek için bildirim izni kullanır.</string>
+	
+	<!-- Firebase Analytics and App Tracking Transparency -->
+	<!-- iOS 14.5+ App Tracking Transparency Framework -->
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Bu uygulama, uygulama deneyimini geliştirmek için anonim analitik veriler toplar. Kişisel bilgileriniz toplanmaz.</string>
+	
+	<!-- Firebase Analytics -->
+	<key>FirebaseAnalyticsCollectionEnabled</key>
+	<true/>
+	
+	<!-- Google Analytics for Firebase -->
+	<key>GoogleAnalyticsDefaultAllowAnalyticsStorage</key>
+	<true/>
+	<key>GoogleAnalyticsDefaultAllowAdStorageSignals</key>
+	<false/>
 </dict>
 </plist>

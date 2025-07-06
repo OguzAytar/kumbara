@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:kumbara/l10n/app_localizations.dart";
 
+import "../../core/functions/firebase_analytics_helper.dart";
 import "../../core/providers/settings_provider.dart";
 import "../../core/widgets/custom_snackbar.dart";
 
@@ -222,9 +223,18 @@ class SettingsViewModel extends ChangeNotifier {
       // TODO: Implement backup functionality
       await Future.delayed(const Duration(seconds: 1)); // Simulate backup
 
+      // Log successful backup
+      await FirebaseAnalyticsHelper.logDataBackup(
+        success: true,
+        itemCount: 0, // Will be actual count when implemented
+      );
+
       CustomSnackBar.showSuccess(context, message: "Veriler başarıyla yedeklendi!");
     } catch (e) {
-      CustomSnackBar.showError(context, message: "Yedekleme sırasında hata oluştu: \$e");
+      // Log failed backup
+      await FirebaseAnalyticsHelper.logDataBackup(success: false, errorMessage: e.toString());
+
+      CustomSnackBar.showError(context, message: "Yedekleme sırasında hata oluştu: $e");
     } finally {
       _setLoading(false);
     }
@@ -237,9 +247,18 @@ class SettingsViewModel extends ChangeNotifier {
       // TODO: Implement restore functionality
       await Future.delayed(const Duration(seconds: 1)); // Simulate restore
 
+      // Log successful restore
+      await FirebaseAnalyticsHelper.logDataRestore(
+        success: true,
+        itemCount: 0, // Will be actual count when implemented
+      );
+
       CustomSnackBar.showSuccess(context, message: "Veriler başarıyla geri yüklendi!");
     } catch (e) {
-      CustomSnackBar.showError(context, message: "Geri yükleme sırasında hata oluştu: \$e");
+      // Log failed restore
+      await FirebaseAnalyticsHelper.logDataRestore(success: false, errorMessage: e.toString());
+
+      CustomSnackBar.showError(context, message: "Geri yükleme sırasında hata oluştu: $e");
     } finally {
       _setLoading(false);
     }
@@ -252,9 +271,18 @@ class SettingsViewModel extends ChangeNotifier {
       // TODO: Implement delete all data functionality
       await Future.delayed(const Duration(seconds: 1)); // Simulate deletion
 
+      // Log successful deletion
+      await FirebaseAnalyticsHelper.logDataDeletion(
+        success: true,
+        itemCount: 0, // Will be actual count when implemented
+      );
+
       CustomSnackBar.showSuccess(context, message: "Tüm veriler başarıyla silindi!");
     } catch (e) {
-      CustomSnackBar.showError(context, message: "Veri silme sırasında hata oluştu: \$e");
+      // Log failed deletion
+      await FirebaseAnalyticsHelper.logDataDeletion(success: false, errorMessage: e.toString());
+
+      CustomSnackBar.showError(context, message: "Veri silme sırasında hata oluştu: $e");
     } finally {
       _setLoading(false);
     }

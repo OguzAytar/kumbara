@@ -458,5 +458,246 @@
         "type": "String"
       }
     }
+  },
+  
+  "notificationChannelName": "Kumbara Bildirimleri",
+  "@notificationChannelName": {
+    "description": "Bildirim kanalı adı"
+  },
+  
+  "notificationChannelDescription": "Birikim hatırlatmaları ve hedef bildirimleri",
+  "@notificationChannelDescription": {
+    "description": "Bildirim kanalı açıklaması"
+  },
+  
+  "savingReminderTitle": "Birikim Zamanı!",
+  "@savingReminderTitle": {
+    "description": "Birikim hatırlatma bildirimi başlığı"
+  },
+  
+  "savingReminderBody": "Hedeflerinize bir adım daha yaklaşmak için bugün para yatırmayı unutmayın",
+  "@savingReminderBody": {
+    "description": "Birikim hatırlatma bildirimi içeriği"
+  },
+  
+  "goalAchievedTitle": "Tebrikler! 🎉",
+  "@goalAchievedTitle": {
+    "description": "Hedef başarıldığında bildirim başlığı"
+  },
+  
+  "goalAchievedBody": "Hedefinize ulaştınız! Yeni bir hedef belirleyebilirsiniz",
+  "@goalAchievedBody": {
+    "description": "Hedef başarıldığında bildirim içeriği"
+  },
+  
+  "goalNearlyAchievedTitle": "Hedefinize Çok Yakınsınız!",
+  "@goalNearlyAchievedTitle": {
+    "description": "Hedefe yaklaşıldığında bildirim başlığı"
+  },
+  
+  "goalNearlyAchievedBody": "Hedefinizin %90'ına ulaştınız. Son spurt!",
+  "@goalNearlyAchievedBody": {
+    "description": "Hedefe yaklaşıldığında bildirim içeriği"
+  },
+  
+  "addNewSaving": "Yeni Birikim Ekle",
+  "@addNewSaving": {
+    "description": "Yeni birikim ekleme sayfası başlığı"
+  },
+  
+  "save": "Kaydet",
+  "@save": {
+    "description": "Kaydet butonu"
+  },
+  
+  "savingName": "Birikim Adı",
+  "@savingName": {
+    "description": "Birikim adı etiketi"
+  },
+  
+  "savingNameHint": "Örn: Tatil Fonu, Yeni Araba",
+  "@savingNameHint": {
+    "description": "Birikim adı ipucu"
+  },
+  
+  "pleaseEnterSavingName": "Lütfen birikim adını giriniz",
+  "@pleaseEnterSavingName": {
+    "description": "Birikim adı zorunlu alan uyarısı"
+  },
+  
+  "description": "Açıklama",
+  "@description": {
+    "description": "Açıklama etiketi"
+  },
+  
+  "descriptionHint": "Bu birikim hakkında notlarınızı yazın...",
+  "@descriptionHint": {
+    "description": "Açıklama ipucu"
+  },
+  
+  "targetAmount": "Hedef Tutar",
+  "@targetAmount": {
+    "description": "Hedef tutar etiketi"
+  },
+  
+  "setTargetAmount": "Hedef tutar belirle",
+  "@setTargetAmount": {
+    "description": "Hedef tutar belirleme anahtarı"
+  },
+  
+  "setTargetAmountDesc": "Ulaşmak istediğiniz tutarı belirleyin",
+  "@setTargetAmountDesc": {
+    "description": "Hedef tutar açıklaması"
+  },
+  
+  "targetAmountHint": "Örn: 5000",
+  "@targetAmountHint": {
+    "description": "Hedef tutar ipucu"
+  },
+  
+  "pleaseEnterTargetAmount": "Lütfen hedef tutarını giriniz",
+  "@pleaseEnterTargetAmount": {
+    "description": "Hedef tutar zorunlu alan uyarısı"
+  },
+  
+  "pleaseEnterValidAmount": "Lütfen geçerli bir tutar giriniz",
+  "@pleaseEnterValidAmount": {
+    "description": "Geçerli tutar uyarısı"
+  },
+  
+  "targetDate": "Hedef Tarihi",
+  "@targetDate": {
+    "description": "Hedef tarihi etiketi"
+  },
+  
+  "setTargetDate": "Hedef tarih belirle",
+  "@setTargetDate": {
+    "description": "Hedef tarih belirleme anahtarı"
+  },
+  
+  "setTargetDateDesc": "Hedefinize ulaşmak istediğiniz tarihi belirleyin",
+  "@setTargetDateDesc": {
+    "description": "Hedef tarih açıklaması"
+  },
+  
+  "selectTargetDate": "Hedef tarihi seçiniz",
+  "@selectTargetDate": {
+    "description": "Hedef tarih seçim metni"
+  },
+  
+  "pleaseSelectTargetDate": "Lütfen hedef tarihini seçiniz",
+  "@pleaseSelectTargetDate": {
+    "description": "Hedef tarih zorunlu alan uyarısı"
+  },
+  
+  "savingInfo": "Hedef tutar veya tarih belirlemezseniz, birikiminiz kumbara gibi çalışır ve sadece ne kadar para biriktirdiğinizi takip eder.",
+  "@savingInfo": {
+    "description": "Birikim bilgi notu"
+  },
+  
+  "savingAddedSuccessfully": "Birikim başarıyla eklendi!",
+  "@savingAddedSuccessfully": {
+    "description": "Birikim ekleme başarı mesajı"
+  },
+  
+  "errorAddingSaving": "Birikim eklenirken hata oluştu",
+  "@errorAddingSaving": {
+    "description": "Birikim ekleme hata mesajı"
+  },
+  
+  "sortByNewest": "En Yeniler",
+  "@sortByNewest": {
+    "description": "En yeni sıralama seçeneği"
+  },
+  
+  "sortByOldest": "En Eskiler",
+  "@sortByOldest": {
+    "description": "En eski sıralama seçeneği"
+  },
+  
+  "sortByProgress": "İlerleme Durumu",
+  "@sortByProgress": {
+    "description": "İlerleme sıralama seçeneği"
+  },
+  
+  "sortByAmount": "Tutar",
+  "@sortByAmount": {
+    "description": "Tutar sıralama seçeneği"
+  },
+  
+  "allSavings": "Tüm Birikimler",
+  "@allSavings": {
+    "description": "Tüm birikimler filtresi"
+  },
+  
+  "activeSavings": "Aktif Birikimler",
+  "@activeSavings": {
+    "description": "Aktif birikimler filtresi"
+  },
+  
+  "completedSavings": "Tamamlanan Birikimler",
+  "@completedSavings": {
+    "description": "Tamamlanan birikimler filtresi"
+  },
+  
+  "pausedSavings": "Duraklatılan Birikimler",
+  "@pausedSavings": {
+    "description": "Duraklatılan birikimler filtresi"
+  },
+  
+  "searchSavings": "Birikimlerinizi arayın...",
+  "@searchSavings": {
+    "description": "Birikim arama ipucu"
+  },
+  
+  "savingDetailComingSoon": "Birikim detayı yakında gelecek",
+  "@savingDetailComingSoon": {
+    "description": "Birikim detay yakında mesajı"
+  },
+  
+  "savingsOverview": "Birikimlerim Özeti",
+  "@savingsOverview": {
+    "description": "Birikimler özet başlığı"
+  },
+  
+  "totalSavingsCount": "{count} adet birikim",
+  "@totalSavingsCount": {
+    "description": "Toplam birikim sayısı",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  
+  "totalTarget": "Toplam Hedef",
+  "@totalTarget": {
+    "description": "Toplam hedef etiketi"
+  },
+  
+  "totalAmount": "Toplam Tutar",
+  "@totalAmount": {
+    "description": "Toplam tutar etiketi"
+  },
+  
+  "averageProgress": "Ortalama İlerleme",
+  "@averageProgress": {
+    "description": "Ortalama ilerleme etiketi"
+  },
+  
+  "noSavingsFound": "Birikim bulunamadı",
+  "@noSavingsFound": {
+    "description": "Birikim bulunamadı başlığı"
+  },
+  
+  "noSavingsFoundDesc": "Henüz hiç birikim eklememişsiniz veya arama kriterlerinize uygun birikim yok.",
+  "@noSavingsFoundDesc": {
+    "description": "Birikim bulunamadı açıklaması"
+  },
+  
+  "completed": "tamamlandı",
+  "@completed": {
+    "description": "Tamamlandı durumu"
   }
 }
