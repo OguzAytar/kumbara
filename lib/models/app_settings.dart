@@ -5,6 +5,8 @@ class AppSettings {
   final String locale;
   final String theme;
   final DateTime? lastOpenDate;
+  final bool isPremium;
+  final String currency;
 
   AppSettings({
     this.id = 1,
@@ -13,6 +15,8 @@ class AppSettings {
     required this.locale,
     required this.theme,
     this.lastOpenDate,
+    this.isPremium = false,
+    this.currency = 'TRY',
   });
 
   Map<String, dynamic> toMap() {
@@ -23,6 +27,8 @@ class AppSettings {
       'locale': locale,
       'theme': theme,
       'lastOpenDate': lastOpenDate?.millisecondsSinceEpoch,
+      'isPremium': isPremium ? 1 : 0,
+      'currency': currency,
     };
   }
 
@@ -33,9 +39,9 @@ class AppSettings {
       notificationsEnabled: (map['notificationsEnabled'] ?? 0) == 1,
       locale: map['locale'] ?? 'tr',
       theme: map['theme'] ?? 'light',
-      lastOpenDate: map['lastOpenDate'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['lastOpenDate'])
-          : null,
+      lastOpenDate: map['lastOpenDate'] != null ? DateTime.fromMillisecondsSinceEpoch(map['lastOpenDate']) : null,
+      isPremium: (map['isPremium'] ?? 0) == 1,
+      currency: map['currency'] ?? 'TRY',
     );
   }
 
@@ -46,6 +52,8 @@ class AppSettings {
     String? locale,
     String? theme,
     DateTime? lastOpenDate,
+    bool? isPremium,
+    String? currency,
   }) {
     return AppSettings(
       id: id ?? this.id,
@@ -54,6 +62,8 @@ class AppSettings {
       locale: locale ?? this.locale,
       theme: theme ?? this.theme,
       lastOpenDate: lastOpenDate ?? this.lastOpenDate,
+      isPremium: isPremium ?? this.isPremium,
+      currency: currency ?? this.currency,
     );
   }
 }

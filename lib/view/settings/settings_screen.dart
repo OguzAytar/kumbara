@@ -64,28 +64,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   subtitle: viewModel.selectedLanguageText,
                   onTap: () => viewModel.showLanguageSelector(context),
                 ),
-              ]),
-              _buildSection(AppLocalizations.of(context)!.data, [
                 _buildSettingsTile(
-                  icon: Icons.backup,
-                  title: AppLocalizations.of(context)!.backupData,
-                  subtitle: AppLocalizations.of(context)!.backupSubtitle,
-                  onTap: () => viewModel.backupData(context),
-                ),
-                _buildSettingsTile(
-                  icon: Icons.restore,
-                  title: AppLocalizations.of(context)!.restoreData,
-                  subtitle: AppLocalizations.of(context)!.restoreSubtitle,
-                  onTap: () => viewModel.restoreData(context),
-                ),
-                _buildSettingsTile(
-                  icon: Icons.delete_forever,
-                  title: AppLocalizations.of(context)!.deleteAllData,
-                  subtitle: AppLocalizations.of(context)!.deleteDataSubtitle,
-                  textColor: Colors.red,
-                  onTap: () => viewModel.showDeleteConfirmationDialog(context),
+                  icon: Icons.monetization_on,
+                  title: AppLocalizations.of(context)!.currency,
+                  subtitle: viewModel.selectedCurrencyText,
+                  onTap: () => viewModel.showCurrencySelector(context),
                 ),
               ]),
+              // _buildSection(AppLocalizations.of(context)!.data, [
+              //   _buildSettingsTile(
+              //     icon: Icons.backup,
+              //     title: AppLocalizations.of(context)!.backupData,
+              //     subtitle: AppLocalizations.of(context)!.backupSubtitle,
+              //     onTap: () => viewModel.backupData(context),
+              //   ),
+              //   _buildSettingsTile(
+              //     icon: Icons.restore,
+              //     title: AppLocalizations.of(context)!.restoreData,
+              //     subtitle: AppLocalizations.of(context)!.restoreSubtitle,
+              //     onTap: () => viewModel.restoreData(context),
+              //   ),
+              //   _buildSettingsTile(
+              //     icon: Icons.delete_forever,
+              //     title: AppLocalizations.of(context)!.deleteAllData,
+              //     subtitle: AppLocalizations.of(context)!.deleteDataSubtitle,
+              //     textColor: Colors.red,
+              //     onTap: () => viewModel.showDeleteConfirmationDialog(context),
+              //   ),
+              // ]),
               _buildSection(AppLocalizations.of(context)!.about, [
                 _buildSettingsTile(icon: Icons.info, title: AppLocalizations.of(context)!.version, subtitle: '1.0.0'),
                 _buildSettingsTile(

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kumbara/core/enums/saving_enum.dart';
 import 'package:kumbara/l10n/app_localizations.dart';
+import 'package:kumbara/view/home/widgets/add_saving_bottom_sheet.dart';
+import 'package:provider/provider.dart';
 
-import '../../../core/widgets/custom_snackbar.dart';
+import '../../../core/constants/currency_constants.dart';
+import '../../../core/providers/settings_provider.dart';
 import '../../../models/saving.dart';
 
 class RecentSavingsList extends StatelessWidget {
@@ -65,6 +68,8 @@ class RecentSavingsList extends StatelessWidget {
   Widget _buildSavingTile(BuildContext context, Saving saving) {
     final progressPercentage = saving.completionPercentage;
     final remainingDays = saving.remainingDays;
+    final settingsProvider = Provider.of<SettingsProvider>(context, listen: false);
+    final currencySymbol = CurrencyConstants.getCurrencySymbol(settingsProvider.currency);
 
     return ListTile(
       contentPadding: const EdgeInsets.all(16),
@@ -85,7 +90,7 @@ class RecentSavingsList extends StatelessWidget {
         children: [
           const SizedBox(height: 8),
           Text(
-            '₺${saving.currentAmount.toStringAsFixed(2)} / ₺${saving.targetAmount.toStringAsFixed(2)}',
+            '$currencySymbol${saving.currentAmount.toStringAsFixed(2)} / $currencySymbol${saving.targetAmount.toStringAsFixed(2)}',
             style: TextStyle(fontSize: 14, color: Theme.of(context).textTheme.bodyMedium?.color?.withValues(alpha: 0.7)),
           ),
           const SizedBox(height: 8),
@@ -116,8 +121,13 @@ class RecentSavingsList extends StatelessWidget {
         ],
       ),
       onTap: () {
-        // TODO: Navigate to saving detail
-        CustomSnackBar.showInfo(context, message: AppLocalizations.of(context)!.detailPageComingSoon(saving.title));
+        // Birikim detaylarını göster
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          builder: (context) => AddSavingBottomSheet(saving: saving),
+        );
       },
     );
   }

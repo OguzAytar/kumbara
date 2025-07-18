@@ -248,6 +248,12 @@ abstract class AppLocalizations {
   /// **'Dil'**
   String get language;
 
+  /// Para birimi ayarı
+  ///
+  /// In tr, this message translates to:
+  /// **'Para Birimi'**
+  String get currency;
+
   /// Türkçe dili
   ///
   /// In tr, this message translates to:
@@ -985,6 +991,144 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Para eklenirken hata oluştu'**
   String get errorAddingMoney;
+
+  /// Premium geçiş başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Premium\'a Geçin'**
+  String get premiumUpgrade;
+
+  /// Premium açıklama metni
+  ///
+  /// In tr, this message translates to:
+  /// **'Daha iyi bir deneyim için premium özelliklerden yararlanın'**
+  String get premiumDescription;
+
+  /// Reklam kaldırma özelliği
+  ///
+  /// In tr, this message translates to:
+  /// **'Reklamları Kaldır'**
+  String get removeAds;
+
+  /// Reklam kaldırma açıklaması
+  ///
+  /// In tr, this message translates to:
+  /// **'Tüm reklamlardan kurtulun ve kesintisiz deneyim yaşayın'**
+  String get removeAdsDesc;
+
+  /// Sınırsız kayıt özelliği
+  ///
+  /// In tr, this message translates to:
+  /// **'Sınırsız Kayıt'**
+  String get unlimitedSavings;
+
+  /// Sınırsız kayıt açıklaması
+  ///
+  /// In tr, this message translates to:
+  /// **'İstediğiniz kadar birikim hedefi oluşturun'**
+  String get unlimitedSavingsDesc;
+
+  /// Gelişmiş analitik özelliği
+  ///
+  /// In tr, this message translates to:
+  /// **'Gelişmiş Analitik'**
+  String get advancedAnalytics;
+
+  /// Gelişmiş analitik açıklaması
+  ///
+  /// In tr, this message translates to:
+  /// **'Detaylı raporlar ve istatistikler görüntüleyin'**
+  String get advancedAnalyticsDesc;
+
+  /// Otomatik yedekleme özelliği
+  ///
+  /// In tr, this message translates to:
+  /// **'Otomatik Yedekleme'**
+  String get autoBackup;
+
+  /// Otomatik yedekleme açıklaması
+  ///
+  /// In tr, this message translates to:
+  /// **'Verileriniz güvenli bir şekilde yedeklenir'**
+  String get autoBackupDesc;
+
+  /// Premium fiyatı
+  ///
+  /// In tr, this message translates to:
+  /// **'₺29,99'**
+  String get premiumPrice;
+
+  /// Aylık fiyat suffix'i
+  ///
+  /// In tr, this message translates to:
+  /// **'/ay'**
+  String get perMonth;
+
+  /// Ücretsiz deneme süresi
+  ///
+  /// In tr, this message translates to:
+  /// **'7 gün ücretsiz deneme'**
+  String get freeTrial;
+
+  /// Daha sonra butonu
+  ///
+  /// In tr, this message translates to:
+  /// **'Daha Sonra'**
+  String get later;
+
+  /// Premium'a geçiş butonu
+  ///
+  /// In tr, this message translates to:
+  /// **'Premium\'a Geç'**
+  String get upgradeToPremium;
+
+  /// Premium yakında gelecek mesajı
+  ///
+  /// In tr, this message translates to:
+  /// **'Premium özelliği yakında kullanıma sunulacak!'**
+  String get premiumComingSoon;
+
+  /// Görsel başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Görsel'**
+  String get image;
+
+  /// Görsel ekleme butonu
+  ///
+  /// In tr, this message translates to:
+  /// **'Görsel Ekle'**
+  String get addImage;
+
+  /// Görsel seçme talimatı
+  ///
+  /// In tr, this message translates to:
+  /// **'Dokunarak görsel seçin'**
+  String get tapToSelectImage;
+
+  /// Görsel seçme başlığı
+  ///
+  /// In tr, this message translates to:
+  /// **'Görsel Seç'**
+  String get selectImage;
+
+  /// Galeriden seçme seçeneği
+  ///
+  /// In tr, this message translates to:
+  /// **'Galeriden Seç'**
+  String get selectFromGallery;
+
+  /// Kameradan çekme seçeneği
+  ///
+  /// In tr, this message translates to:
+  /// **'Kameradan Çek'**
+  String get takePhoto;
+
+  /// Değiştir butonu
+  ///
+  /// In tr, this message translates to:
+  /// **'Değiştir'**
+  String get change;
 }
 
 class _AppLocalizationsDelegate

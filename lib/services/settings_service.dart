@@ -20,9 +20,7 @@ class SettingsService {
 
   Future<void> setNotificationsEnabled(bool enabled) async {
     final currentSettings = await getSettings();
-    final updatedSettings = currentSettings.copyWith(
-      notificationsEnabled: enabled,
-    );
+    final updatedSettings = currentSettings.copyWith(notificationsEnabled: enabled);
     await updateSettings(updatedSettings);
   }
 
@@ -40,9 +38,19 @@ class SettingsService {
 
   Future<void> updateLastOpenDate() async {
     final currentSettings = await getSettings();
-    final updatedSettings = currentSettings.copyWith(
-      lastOpenDate: DateTime.now(),
-    );
+    final updatedSettings = currentSettings.copyWith(lastOpenDate: DateTime.now());
+    await updateSettings(updatedSettings);
+  }
+
+  Future<void> setPremiumStatus(bool isPremium) async {
+    final currentSettings = await getSettings();
+    final updatedSettings = currentSettings.copyWith(isPremium: isPremium);
+    await updateSettings(updatedSettings);
+  }
+
+  Future<void> setCurrency(String currency) async {
+    final currentSettings = await getSettings();
+    final updatedSettings = currentSettings.copyWith(currency: currency);
     await updateSettings(updatedSettings);
   }
 }

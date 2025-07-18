@@ -16,6 +16,8 @@ class SettingsProvider with ChangeNotifier {
   bool get notificationsEnabled => _settings?.notificationsEnabled ?? false;
   String get theme => _settings?.theme ?? 'light';
   String get locale => _settings?.locale ?? 'tr';
+  bool get isPremium => _settings?.isPremium ?? false;
+  String get currency => _settings?.currency ?? 'TRY';
 
   Future<void> loadSettings() async {
     // Build process sırasında notifyListeners çağırmamak için flag kullan
@@ -106,5 +108,26 @@ class SettingsProvider with ChangeNotifier {
   Future<void> updateLastOpenDate() async {
     await _settingsService.updateLastOpenDate();
     // Not notifying listeners here as this doesn't affect UI
+  }
+
+  Future<void> setPremiumStatus(bool isPremium) async {
+    final oldValue = this.isPremium;
+    await _settingsService.setPremiumStatus(isPremium);
+    await loadSettings();
+
+    // Log premium status change
+    await FirebaseAnalyticsHelper.logSettingsChanged(settingName: 'premium_status', oldValue: oldValue.toString(), newValue: isPremium.toString());
+
+    // Update user properties
+    // await FirebaseAnalyticsHelper.setUserProperties(isPremium: isPremium);
+  }
+
+  Future<void> setCurrency(String newCurrency) async {
+    final oldCurrency = currency;
+    await _settingsService.setCurrency(newCurrency);
+    await loadSettings();
+
+    // Log currency change
+    await FirebaseAnalyticsHelper.logSettingsChanged(settingName: 'currency', oldValue: oldCurrency, newValue: newCurrency);
   }
 }

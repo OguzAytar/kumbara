@@ -125,6 +125,11 @@
     "description": "Dil"
   },
   
+  "currency": "Para Birimi",
+  "@currency": {
+    "description": "Para birimi ayarı"
+  },
+  
   "turkish": "Türkçe",
   "@turkish": {
     "description": "Türkçe dili"
@@ -779,5 +784,120 @@
   "errorAddingMoney": "Para eklenirken hata oluştu",
   "@errorAddingMoney": {
     "description": "Para ekleme hata mesajı"
+  },
+  
+  "premiumUpgrade": "Premium'a Geçin",
+  "@premiumUpgrade": {
+    "description": "Premium geçiş başlığı"
+  },
+  
+  "premiumDescription": "Daha iyi bir deneyim için premium özelliklerden yararlanın",
+  "@premiumDescription": {
+    "description": "Premium açıklama metni"
+  },
+  
+  "removeAds": "Reklamları Kaldır",
+  "@removeAds": {
+    "description": "Reklam kaldırma özelliği"
+  },
+  
+  "removeAdsDesc": "Tüm reklamlardan kurtulun ve kesintisiz deneyim yaşayın",
+  "@removeAdsDesc": {
+    "description": "Reklam kaldırma açıklaması"
+  },
+  
+  "unlimitedSavings": "Sınırsız Kayıt",
+  "@unlimitedSavings": {
+    "description": "Sınırsız kayıt özelliği"
+  },
+  
+  "unlimitedSavingsDesc": "İstediğiniz kadar birikim hedefi oluşturun",
+  "@unlimitedSavingsDesc": {
+    "description": "Sınırsız kayıt açıklaması"
+  },
+  
+  "advancedAnalytics": "Gelişmiş Analitik",
+  "@advancedAnalytics": {
+    "description": "Gelişmiş analitik özelliği"
+  },
+  
+  "advancedAnalyticsDesc": "Detaylı raporlar ve istatistikler görüntüleyin",
+  "@advancedAnalyticsDesc": {
+    "description": "Gelişmiş analitik açıklaması"
+  },
+  
+  "autoBackup": "Otomatik Yedekleme",
+  "@autoBackup": {
+    "description": "Otomatik yedekleme özelliği"
+  },
+  
+  "autoBackupDesc": "Verileriniz güvenli bir şekilde yedeklenir",
+  "@autoBackupDesc": {
+    "description": "Otomatik yedekleme açıklaması"
+  },
+  
+  "premiumPrice": "₺29,99",
+  "@premiumPrice": {
+    "description": "Premium fiyatı"
+  },
+  
+  "perMonth": "/ay",
+  "@perMonth": {
+    "description": "Aylık fiyat suffix'i"
+  },
+  
+  "freeTrial": "7 gün ücretsiz deneme",
+  "@freeTrial": {
+    "description": "Ücretsiz deneme süresi"
+  },
+  
+  "later": "Daha Sonra",
+  "@later": {
+    "description": "Daha sonra butonu"
+  },
+  
+  "upgradeToPremium": "Premium'a Geç",
+  "@upgradeToPremium": {
+    "description": "Premium'a geçiş butonu"
+  },
+  
+  "premiumComingSoon": "Premium özelliği yakında kullanıma sunulacak!",
+  "@premiumComingSoon": {
+    "description": "Premium yakında gelecek mesajı"
+  },
+  
+  "image": "Görsel",
+  "@image": {
+    "description": "Görsel başlığı"
+  },
+  
+  "addImage": "Görsel Ekle",
+  "@addImage": {
+    "description": "Görsel ekleme butonu"
+  },
+  
+  "tapToSelectImage": "Dokunarak görsel seçin",
+  "@tapToSelectImage": {
+    "description": "Görsel seçme talimatı"
+  },
+  
+  "selectImage": "Görsel Seç",
+  "@selectImage": {
+    "description": "Görsel seçme başlığı"
+  },
+  
+  "selectFromGallery": "Galeriden Seç",
+  "@selectFromGallery": {
+    "description": "Galeriden seçme seçeneği"
+  },
+  
+  "takePhoto": "Kameradan Çek",
+  "@takePhoto": {
+    "description": "Kameradan çekme seçeneği"
+  },
+  
+  "change": "Değiştir",
+  "@change": {
+    "description": "Değiştir butonu"
   }
 }

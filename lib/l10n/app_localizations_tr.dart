@@ -87,6 +87,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get language => 'Dil';
 
   @override
+  String get currency => 'Para Birimi';
+
+  @override
   String get turkish => 'Türkçe';
 
   @override
@@ -486,4 +489,78 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get errorAddingMoney => 'Para eklenirken hata oluştu';
+
+  @override
+  String get premiumUpgrade => 'Premium\'a Geçin';
+
+  @override
+  String get premiumDescription =>
+      'Daha iyi bir deneyim için premium özelliklerden yararlanın';
+
+  @override
+  String get removeAds => 'Reklamları Kaldır';
+
+  @override
+  String get removeAdsDesc =>
+      'Tüm reklamlardan kurtulun ve kesintisiz deneyim yaşayın';
+
+  @override
+  String get unlimitedSavings => 'Sınırsız Kayıt';
+
+  @override
+  String get unlimitedSavingsDesc =>
+      'İstediğiniz kadar birikim hedefi oluşturun';
+
+  @override
+  String get advancedAnalytics => 'Gelişmiş Analitik';
+
+  @override
+  String get advancedAnalyticsDesc =>
+      'Detaylı raporlar ve istatistikler görüntüleyin';
+
+  @override
+  String get autoBackup => 'Otomatik Yedekleme';
+
+  @override
+  String get autoBackupDesc => 'Verileriniz güvenli bir şekilde yedeklenir';
+
+  @override
+  String get premiumPrice => '₺29,99';
+
+  @override
+  String get perMonth => '/ay';
+
+  @override
+  String get freeTrial => '7 gün ücretsiz deneme';
+
+  @override
+  String get later => 'Daha Sonra';
+
+  @override
+  String get upgradeToPremium => 'Premium\'a Geç';
+
+  @override
+  String get premiumComingSoon =>
+      'Premium özelliği yakında kullanıma sunulacak!';
+
+  @override
+  String get image => 'Görsel';
+
+  @override
+  String get addImage => 'Görsel Ekle';
+
+  @override
+  String get tapToSelectImage => 'Dokunarak görsel seçin';
+
+  @override
+  String get selectImage => 'Görsel Seç';
+
+  @override
+  String get selectFromGallery => 'Galeriden Seç';
+
+  @override
+  String get takePhoto => 'Kameradan Çek';
+
+  @override
+  String get change => 'Değiştir';
 }

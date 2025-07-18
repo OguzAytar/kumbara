@@ -85,6 +85,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get language => 'Language';
 
   @override
+  String get currency => 'Currency';
+
+  @override
   String get turkish => 'Türkçe';
 
   @override
@@ -481,4 +484,75 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorAddingMoney => 'Error adding money';
+
+  @override
+  String get premiumUpgrade => 'Upgrade to Premium';
+
+  @override
+  String get premiumDescription =>
+      'Enjoy premium features for a better experience';
+
+  @override
+  String get removeAds => 'Remove Ads';
+
+  @override
+  String get removeAdsDesc =>
+      'Get rid of all ads and enjoy uninterrupted experience';
+
+  @override
+  String get unlimitedSavings => 'Unlimited Savings';
+
+  @override
+  String get unlimitedSavingsDesc => 'Create as many savings goals as you want';
+
+  @override
+  String get advancedAnalytics => 'Advanced Analytics';
+
+  @override
+  String get advancedAnalyticsDesc => 'View detailed reports and statistics';
+
+  @override
+  String get autoBackup => 'Auto Backup';
+
+  @override
+  String get autoBackupDesc => 'Your data is safely backed up';
+
+  @override
+  String get premiumPrice => '\$9.99';
+
+  @override
+  String get perMonth => '/month';
+
+  @override
+  String get freeTrial => '7 days free trial';
+
+  @override
+  String get later => 'Later';
+
+  @override
+  String get upgradeToPremium => 'Upgrade to Premium';
+
+  @override
+  String get premiumComingSoon => 'Premium feature coming soon!';
+
+  @override
+  String get image => 'Image';
+
+  @override
+  String get addImage => 'Add Image';
+
+  @override
+  String get tapToSelectImage => 'Tap to select image';
+
+  @override
+  String get selectImage => 'Select Image';
+
+  @override
+  String get selectFromGallery => 'Select from Gallery';
+
+  @override
+  String get takePhoto => 'Take Photo';
+
+  @override
+  String get change => 'Change';
 }

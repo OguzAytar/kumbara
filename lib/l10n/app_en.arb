@@ -25,6 +25,7 @@
   "lightTheme": "Light theme",
   "darkTheme": "Dark theme",
   "language": "Language",
+  "currency": "Currency",
   "turkish": "Türkçe",
   "english": "English",
   "data": "Data",
@@ -477,5 +478,120 @@
   "errorAddingMoney": "Error adding money",
   "@errorAddingMoney": {
     "description": "Money add error message"
+  },
+  
+  "premiumUpgrade": "Upgrade to Premium",
+  "@premiumUpgrade": {
+    "description": "Premium upgrade title"
+  },
+  
+  "premiumDescription": "Enjoy premium features for a better experience",
+  "@premiumDescription": {
+    "description": "Premium description text"
+  },
+  
+  "removeAds": "Remove Ads",
+  "@removeAds": {
+    "description": "Remove ads feature"
+  },
+  
+  "removeAdsDesc": "Get rid of all ads and enjoy uninterrupted experience",
+  "@removeAdsDesc": {
+    "description": "Remove ads description"
+  },
+  
+  "unlimitedSavings": "Unlimited Savings",
+  "@unlimitedSavings": {
+    "description": "Unlimited savings feature"
+  },
+  
+  "unlimitedSavingsDesc": "Create as many savings goals as you want",
+  "@unlimitedSavingsDesc": {
+    "description": "Unlimited savings description"
+  },
+  
+  "advancedAnalytics": "Advanced Analytics",
+  "@advancedAnalytics": {
+    "description": "Advanced analytics feature"
+  },
+  
+  "advancedAnalyticsDesc": "View detailed reports and statistics",
+  "@advancedAnalyticsDesc": {
+    "description": "Advanced analytics description"
+  },
+  
+  "autoBackup": "Auto Backup",
+  "@autoBackup": {
+    "description": "Auto backup feature"
+  },
+  
+  "autoBackupDesc": "Your data is safely backed up",
+  "@autoBackupDesc": {
+    "description": "Auto backup description"
+  },
+  
+  "premiumPrice": "$9.99",
+  "@premiumPrice": {
+    "description": "Premium price"
+  },
+  
+  "perMonth": "/month",
+  "@perMonth": {
+    "description": "Monthly price suffix"
+  },
+  
+  "freeTrial": "7 days free trial",
+  "@freeTrial": {
+    "description": "Free trial period"
+  },
+  
+  "later": "Later",
+  "@later": {
+    "description": "Later button"
+  },
+  
+  "upgradeToPremium": "Upgrade to Premium",
+  "@upgradeToPremium": {
+    "description": "Upgrade to premium button"
+  },
+  
+  "premiumComingSoon": "Premium feature coming soon!",
+  "@premiumComingSoon": {
+    "description": "Premium coming soon message"
+  },
+  
+  "image": "Image",
+  "@image": {
+    "description": "Image title"
+  },
+  
+  "addImage": "Add Image",
+  "@addImage": {
+    "description": "Add image button"
+  },
+  
+  "tapToSelectImage": "Tap to select image",
+  "@tapToSelectImage": {
+    "description": "Image selection instruction"
+  },
+  
+  "selectImage": "Select Image",
+  "@selectImage": {
+    "description": "Image selection title"
+  },
+  
+  "selectFromGallery": "Select from Gallery",
+  "@selectFromGallery": {
+    "description": "Gallery selection option"
+  },
+  
+  "takePhoto": "Take Photo",
+  "@takePhoto": {
+    "description": "Camera option"
+  },
+  
+  "change": "Change",
+  "@change": {
+    "description": "Change button"
   }
 }

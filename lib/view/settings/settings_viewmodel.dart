@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:kumbara/l10n/app_localizations.dart";
 
+import "../../core/constants/currency_constants.dart";
 import "../../core/functions/firebase_analytics_helper.dart";
 import "../../core/providers/settings_provider.dart";
 import "../../core/widgets/custom_snackbar.dart";
@@ -19,6 +20,7 @@ class SettingsViewModel extends ChangeNotifier {
   bool get notificationsEnabled => _settingsProvider.notificationsEnabled;
   bool get isDarkTheme => _settingsProvider.theme == "dark";
   String get selectedLanguage => _settingsProvider.locale;
+  String get selectedCurrency => _settingsProvider.currency;
   bool get isLoading => _isLoading || _settingsProvider.isLoading;
 
   String get selectedLanguageText {
@@ -30,6 +32,11 @@ class SettingsViewModel extends ChangeNotifier {
       default:
         return "Türkçe";
     }
+  }
+
+  String get selectedCurrencyText {
+    final currency = CurrencyConstants.getCurrencyByCode(selectedCurrency);
+    return "${currency.flag} ${currency.name} (${currency.symbol})";
   }
 
   String themeText(BuildContext context) {
@@ -92,19 +99,33 @@ class SettingsViewModel extends ChangeNotifier {
     }
   }
 
+  /// Change currency
+  Future<void> changeCurrency(String currencyCode) async {
+    if (selectedCurrency == currencyCode) return;
+
+    _setLoading(true);
+    try {
+      await _settingsProvider.setCurrency(currencyCode);
+    } catch (e) {
+      debugPrint("Error changing currency: $e");
+    } finally {
+      _setLoading(false);
+    }
+  }
+
   /// Show theme selector
   void showThemeSelector(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Tema Seçin", style: Theme.of(context).textTheme.titleLarge),
+          title: Text(AppLocalizations.of(context)!.selectTheme, style: Theme.of(context).textTheme.titleLarge),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 ListTile(
-                  title: Text("Açık Tema", style: Theme.of(context).textTheme.bodyMedium),
+                  title: Text(AppLocalizations.of(context)!.lightTheme, style: Theme.of(context).textTheme.bodyMedium),
                   leading: Radio<bool>(
                     value: false,
                     groupValue: isDarkTheme,
@@ -122,7 +143,7 @@ class SettingsViewModel extends ChangeNotifier {
                   },
                 ),
                 ListTile(
-                  title: Text("Karanlık Tema", style: Theme.of(context).textTheme.bodyMedium),
+                  title: Text(AppLocalizations.of(context)!.darkTheme, style: Theme.of(context).textTheme.bodyMedium),
                   leading: Radio<bool>(
                     value: true,
                     groupValue: isDarkTheme,
@@ -146,7 +167,7 @@ class SettingsViewModel extends ChangeNotifier {
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
               style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
-              child: Text("İptal", style: TextStyle(color: Theme.of(context).colorScheme.primary)),
+              child: Text(AppLocalizations.of(context)!.cancel, style: TextStyle(color: Theme.of(context).colorScheme.primary)),
             ),
           ],
         );
@@ -160,13 +181,13 @@ class SettingsViewModel extends ChangeNotifier {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Dil Seçin", style: Theme.of(context).textTheme.titleLarge),
+          title: Text(AppLocalizations.of(context)!.selectLanguage, style: Theme.of(context).textTheme.titleLarge),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 ListTile(
-                  title: Text("Türkçe", style: Theme.of(context).textTheme.bodyMedium),
+                  title: Text(AppLocalizations.of(context)!.turkish, style: Theme.of(context).textTheme.bodyMedium),
                   leading: Radio<String>(
                     value: "tr",
                     groupValue: selectedLanguage,
@@ -184,7 +205,7 @@ class SettingsViewModel extends ChangeNotifier {
                   },
                 ),
                 ListTile(
-                  title: Text("English", style: Theme.of(context).textTheme.bodyMedium),
+                  title: Text(AppLocalizations.of(context)!.english, style: Theme.of(context).textTheme.bodyMedium),
                   leading: Radio<String>(
                     value: "en",
                     groupValue: selectedLanguage,
@@ -208,9 +229,74 @@ class SettingsViewModel extends ChangeNotifier {
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
               style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
-              child: Text("İptal", style: TextStyle(color: Theme.of(context).colorScheme.primary)),
+              child: Text(AppLocalizations.of(context)!.cancel, style: TextStyle(color: Theme.of(context).colorScheme.primary)),
             ),
           ],
+        );
+      },
+    );
+  }
+
+  /// Show currency selector
+  void showCurrencySelector(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.7,
+          decoration: BoxDecoration(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+          ),
+          child: Column(
+            children: [
+              // Handle bar
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(color: Theme.of(context).dividerColor, borderRadius: BorderRadius.circular(2)),
+              ),
+              // Title
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text("Para Birimi Seçin", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+              ),
+              // Currency list
+              Expanded(
+                child: ListView.builder(
+                  itemCount: CurrencyConstants.currencies.length,
+                  itemBuilder: (context, index) {
+                    final currency = CurrencyConstants.currencies[index];
+                    final isSelected = selectedCurrency == currency.code;
+
+                    return ListTile(
+                      leading: Text(currency.flag, style: const TextStyle(fontSize: 24)),
+                      title: Text(
+                        currency.name,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: isSelected ? FontWeight.bold : FontWeight.normal),
+                      ),
+                      subtitle: Text(
+                        "${currency.code} - ${currency.symbol}",
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyMedium?.copyWith(color: Theme.of(context).textTheme.bodyMedium?.color?.withValues(alpha: 0.7)),
+                      ),
+                      trailing: isSelected ? Icon(Icons.check_circle, color: Theme.of(context).primaryColor) : null,
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        if (currency.code != selectedCurrency) {
+                          changeCurrency(currency.code);
+                        }
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         );
       },
     );

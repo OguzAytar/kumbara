@@ -8,8 +8,10 @@ import '../../core/providers/settings_provider.dart';
 import '../../models/saving.dart';
 import '../savings/savings_list_screen.dart';
 import '../settings/settings_screen.dart';
+import '../widgets/ad_banner_widget.dart';
 import 'widgets/add_saving_bottom_sheet.dart';
 import 'widgets/dashboard_card.dart';
+import 'widgets/premium_dialog.dart';
 import 'widgets/quick_stats.dart';
 import 'widgets/recent_savings_list.dart';
 
@@ -35,8 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _loadData() async {
     final savingProvider = context.read<SavingProvider>();
-    await savingProvider.loadSavings();
-    await savingProvider.loadDashboardStats();
+    try {
+      await savingProvider.loadSavings();
+      await savingProvider.loadDashboardStats();
+    } catch (e) {
+      debugPrint('Error loading data: $e');
+    }
   }
 
   Future<void> _refreshData() async {
@@ -55,6 +61,13 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Theme.of(context).primaryColor,
         elevation: 0,
         actions: [
+          if (!Provider.of<SettingsProvider>(context, listen: false).isPremium)
+            IconButton(
+              icon: const Icon(Icons.workspace_premium, color: Colors.amber),
+              onPressed: () {
+                showDialog(context: context, builder: (context) => const PremiumDialog());
+              },
+            ),
           IconButton(
             icon: const Icon(Icons.settings, color: Colors.white),
             onPressed: () {
@@ -94,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onRefresh: _refreshData,
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0), // Alt padding artık gerek yok
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -118,6 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         },
       ),
+      bottomNavigationBar: const AdBannerWidget(widgetId: 'home_bottom_banner'),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
@@ -226,15 +240,20 @@ class _HomeScreenState extends State<HomeScreen> {
       return AppLocalizations.of(context)!.targetNotFound;
     }
 
-    final nearestTarget = stats['nearestTarget'] as Saving;
-    final remainingDays = nearestTarget.remainingDays;
+    try {
+      final nearestTarget = stats['nearestTarget'] as Saving;
+      final remainingDays = nearestTarget.remainingDays;
 
-    if (remainingDays <= 0) {
-      return AppLocalizations.of(context)!.expired;
-    } else if (remainingDays == 1) {
-      return AppLocalizations.of(context)!.oneDayLeft;
-    } else {
-      return AppLocalizations.of(context)!.daysLeft(remainingDays);
+      if (remainingDays <= 0) {
+        return AppLocalizations.of(context)!.expired;
+      } else if (remainingDays == 1) {
+        return AppLocalizations.of(context)!.oneDayLeft;
+      } else {
+        return AppLocalizations.of(context)!.daysLeft(remainingDays);
+      }
+    } catch (e) {
+      debugPrint('Error getting nearest target text: $e');
+      return AppLocalizations.of(context)!.targetNotFound;
     }
   }
 

@@ -1,17 +1,23 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kumbara/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/constants/currency_constants.dart';
 import '../../../core/enums/saving_enum.dart';
 import '../../../core/functions/firebase_analytics_helper.dart';
+import '../../../core/functions/image_picker_helper.dart';
 import '../../../core/providers/saving_provider.dart';
+import '../../../core/providers/settings_provider.dart';
 import '../../../core/widgets/custom_snackbar.dart';
 import '../../../models/saving.dart';
+import '../../../services/ads_service.dart';
 
 class AddSavingBottomSheet extends StatefulWidget {
   final Saving? saving; // Null ise yeni birikim, değilse düzenleme modu
-  
+
   const AddSavingBottomSheet({super.key, this.saving});
 
   @override
@@ -31,7 +37,11 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
   bool _hasTargetDate = false;
   bool _hasInitialAmount = false;
   bool _isLoading = false;
-  
+
+  // Görsel ile ilgili değişkenler
+  File? _selectedImage;
+  String? _existingImagePath;
+
   bool get _isEditMode => widget.saving != null;
 
   @override
@@ -46,20 +56,25 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
     final saving = widget.saving!;
     _nameController.text = saving.title;
     _descriptionController.text = saving.description;
-    
+
     if (saving.targetAmount > 0) {
       _hasTargetAmount = true;
       _targetAmountController.text = saving.targetAmount.toString();
     }
-    
+
     if (saving.targetDate.isAfter(DateTime.now())) {
       _hasTargetDate = true;
       _targetDate = saving.targetDate;
     }
-    
+
     if (saving.currentAmount > 0) {
       _hasInitialAmount = true;
       _initialAmountController.text = saving.currentAmount.toString();
+    }
+
+    // Mevcut görsel varsa yolu kaydet
+    if (saving.hasImage) {
+      _existingImagePath = saving.primaryImagePath;
     }
   }
 
@@ -76,48 +91,33 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+    final settingsProvider = context.watch<SettingsProvider>();
+    final currencySymbol = CurrencyConstants.getCurrencySymbol(settingsProvider.currency);
+
     return Container(
       height: MediaQuery.of(context).size.height * 0.9,
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20), 
-          topRight: Radius.circular(20)
-        ),
+        borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text(
-            _isEditMode 
-              ? AppLocalizations.of(context)!.editSaving 
-              : AppLocalizations.of(context)!.addNewSaving,
+            _isEditMode ? AppLocalizations.of(context)!.editSaving : AppLocalizations.of(context)!.addNewSaving,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.close), 
-            onPressed: () => Navigator.of(context).pop()
-          ),
+          leading: IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.of(context).pop()),
           actions: [
             TextButton(
               onPressed: _isLoading ? null : _saveSaving,
               child: _isLoading
-                  ? const SizedBox(
-                      width: 20, 
-                      height: 20, 
-                      child: CircularProgressIndicator(strokeWidth: 2)
-                    )
+                  ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2))
                   : Text(
-                      _isEditMode 
-                        ? AppLocalizations.of(context)!.update 
-                        : AppLocalizations.of(context)!.save,
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor, 
-                        fontWeight: FontWeight.bold
-                      ),
+                      _isEditMode ? AppLocalizations.of(context)!.update : AppLocalizations.of(context)!.save,
+                      style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
                     ),
             ),
           ],
@@ -164,6 +164,12 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
                 ),
                 const SizedBox(height: 24),
 
+                // Görsel Seçme Bölümü
+                _buildSectionTitle(AppLocalizations.of(context)!.image),
+                const SizedBox(height: 8),
+                _buildImageSelector(),
+                const SizedBox(height: 24),
+
                 // Mevcut Tutar ve Para Ekleme (sadece düzenleme modunda)
                 if (_isEditMode) ...[
                   _buildSectionTitle(AppLocalizations.of(context)!.currentAmount),
@@ -181,45 +187,35 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
                         Icon(Icons.account_balance_wallet, color: Colors.green, size: 32),
                         const SizedBox(height: 8),
                         Text(
-                          '₺${widget.saving!.currentAmount.toStringAsFixed(2)}',
-                          style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green,
-                          ),
+                          '$currencySymbol${widget.saving!.currentAmount.toStringAsFixed(2)}',
+                          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.green),
                         ),
-                        Text(
-                          AppLocalizations.of(context)!.currentAmount,
-                          style: TextStyle(color: Colors.green.shade700),
-                        ),
+                        Text(AppLocalizations.of(context)!.currentAmount, style: TextStyle(color: Colors.green.shade700)),
                       ],
                     ),
                   ),
                   const SizedBox(height: 16),
-                  
+
                   Text(
                     AppLocalizations.of(context)!.addMoney,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).textTheme.titleLarge?.color,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.titleLarge?.color),
                   ),
                   const SizedBox(height: 8),
                   TextFormField(
                     controller: _addMoneyController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                    inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
                     decoration: InputDecoration(
                       hintText: AppLocalizations.of(context)!.addMoneyHint,
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                       prefixIcon: const Icon(Icons.add_circle, color: Colors.green),
+                      suffixText: currencySymbol,
                       filled: true,
                       fillColor: isDark ? Colors.grey[800] : Colors.grey[50],
                     ),
                   ),
                   const SizedBox(height: 12),
-                  
+
                   // Hızlı tutar chip'leri
                   _buildQuickAmountChips(),
                   const SizedBox(height: 24),
@@ -246,12 +242,12 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
                     const SizedBox(height: 8),
                     TextFormField(
                       controller: _initialAmountController,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
                       decoration: InputDecoration(
                         hintText: AppLocalizations.of(context)!.initialAmountHint,
                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                        prefixIcon: const Icon(Icons.attach_money),
+                        prefixText: '$currencySymbol ',
                         filled: true,
                         fillColor: isDark ? Colors.grey[800] : Colors.grey[50],
                       ),
@@ -292,12 +288,12 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
                   const SizedBox(height: 8),
                   TextFormField(
                     controller: _targetAmountController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                    inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
                     decoration: InputDecoration(
                       hintText: AppLocalizations.of(context)!.targetAmountHint,
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                      prefixIcon: const Icon(Icons.attach_money),
+                      prefixText: '$currencySymbol ',
                       filled: true,
                       fillColor: isDark ? Colors.grey[800] : Colors.grey[50],
                     ),
@@ -354,10 +350,10 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
                                 ? '${_targetDate!.day}/${_targetDate!.month}/${_targetDate!.year}'
                                 : AppLocalizations.of(context)!.selectTargetDate,
                             style: TextStyle(
-                              fontSize: 16, 
-                              color: _targetDate != null 
-                                ? Theme.of(context).textTheme.bodyLarge?.color
-                                : Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.6)
+                              fontSize: 16,
+                              color: _targetDate != null
+                                  ? Theme.of(context).textTheme.bodyLarge?.color
+                                  : Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.6),
                             ),
                           ),
                         ],
@@ -381,10 +377,7 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
                       Icon(Icons.info_outline, color: Theme.of(context).primaryColor),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: Text(
-                          AppLocalizations.of(context)!.savingInfo,
-                          style: TextStyle(color: Theme.of(context).primaryColor),
-                        ),
+                        child: Text(AppLocalizations.of(context)!.savingInfo, style: TextStyle(color: Theme.of(context).primaryColor)),
                       ),
                     ],
                   ),
@@ -399,27 +392,144 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
 
   Widget _buildSectionTitle(String title) {
     return Text(
-      title, 
-      style: TextStyle(
-        fontSize: 16, 
-        fontWeight: FontWeight.bold,
-        color: Theme.of(context).textTheme.titleLarge?.color,
+      title,
+      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.titleLarge?.color),
+    );
+  }
+
+  /// Görsel seçme widget'ını oluştur
+  Widget _buildImageSelector() {
+    return Container(
+      width: double.infinity,
+      height: _hasImage ? 200 : 120,
+      decoration: BoxDecoration(
+        color: Theme.of(context).brightness == Brightness.dark ? Colors.grey[800] : Colors.grey[50],
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.3), style: BorderStyle.solid),
+      ),
+      child: _hasImage ? _buildImageDisplay() : _buildImagePlaceholder(),
+    );
+  }
+
+  /// Seçilen görseli göster
+  Widget _buildImageDisplay() {
+    return Stack(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: SizedBox(width: double.infinity, height: double.infinity, child: _displayImage),
+        ),
+        // Sil butonu
+        Positioned(
+          top: 8,
+          right: 8,
+          child: GestureDetector(
+            onTap: _removeImage,
+            child: Container(
+              padding: const EdgeInsets.all(4),
+              decoration: BoxDecoration(color: Colors.red.withOpacity(0.8), shape: BoxShape.circle),
+              child: const Icon(Icons.close, color: Colors.white, size: 20),
+            ),
+          ),
+        ),
+        // Değiştir butonu
+        Positioned(
+          bottom: 8,
+          right: 8,
+          child: GestureDetector(
+            onTap: _selectImage,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(color: Theme.of(context).primaryColor.withOpacity(0.8), borderRadius: BorderRadius.circular(16)),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.edit, color: Colors.white, size: 16),
+                  const SizedBox(width: 4),
+                  Text(AppLocalizations.of(context)!.change, style: const TextStyle(color: Colors.white, fontSize: 12)),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// Görsel seçme placeholder'ı
+  Widget _buildImagePlaceholder() {
+    return InkWell(
+      onTap: () async {
+        await _selectImage();
+      },
+      borderRadius: BorderRadius.circular(12),
+      child: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.add_photo_alternate_outlined, size: 48, color: Theme.of(context).primaryColor),
+            const SizedBox(height: 8),
+            Text(
+              AppLocalizations.of(context)!.addImage,
+              style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(height: 4),
+            Text(AppLocalizations.of(context)!.tapToSelectImage, style: TextStyle(color: Theme.of(context).textTheme.bodySmall?.color, fontSize: 12)),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildQuickAmountChips() {
     final List<double> amounts = _getQuickAmounts();
-    
+    final settingsProvider = context.watch<SettingsProvider>();
+    final currencySymbol = CurrencyConstants.getCurrencySymbol(settingsProvider.currency);
+
     return Wrap(
       spacing: 8,
       runSpacing: 8,
       children: amounts.map((amount) {
-        final isDaily = _isEditMode && _hasTargetDate && _targetDate != null;
-        final displayText = isDaily 
-          ? AppLocalizations.of(context)!.dailyTarget(amount.toStringAsFixed(0))
-          : '₺${amount.toStringAsFixed(0)}';
-          
+        String displayText;
+
+        // Dinamik etiketleme (sadece manuel seçilmiş hedef tarih ve tutar varken)
+        if (_isEditMode && _hasTargetDate && _targetDate != null && widget.saving!.targetAmount > 0) {
+          final now = DateTime.now();
+          final daysUntilTarget = _targetDate!.difference(now).inDays;
+
+          // Sadece gerçek hedef tarih seçilmiş ise (otomatik atanmış 365 gün değil)
+          if (daysUntilTarget > 0 && daysUntilTarget < 350) {
+            final remainingAmount = widget.saving!.targetAmount - widget.saving!.currentAmount;
+            if (remainingAmount > 0) {
+              final dailyAmount = remainingAmount / daysUntilTarget;
+
+              // Tutara göre etiket belirle
+              if ((amount - dailyAmount).abs() < 0.01) {
+                displayText = 'Günlük $currencySymbol${amount.toStringAsFixed(0)}';
+              } else if ((amount - dailyAmount * 2).abs() < 0.01) {
+                displayText = '2 Gün $currencySymbol${amount.toStringAsFixed(0)}';
+              } else if ((amount - dailyAmount * 7).abs() < 0.01) {
+                displayText = 'Haftalık $currencySymbol${amount.toStringAsFixed(0)}';
+              } else if ((amount - dailyAmount * 30).abs() < 0.01) {
+                displayText = 'Aylık $currencySymbol${amount.toStringAsFixed(0)}';
+              } else if ((amount - dailyAmount * 60).abs() < 0.01) {
+                displayText = '2 Ay $currencySymbol${amount.toStringAsFixed(0)}';
+              } else {
+                displayText = '$currencySymbol${amount.toStringAsFixed(0)}';
+              }
+            } else {
+              displayText = '$currencySymbol${amount.toStringAsFixed(0)}';
+            }
+          } else {
+            displayText = '$currencySymbol${amount.toStringAsFixed(0)}';
+          }
+        } else {
+          // Standart tutarlar için basit gösterim
+          displayText = '$currencySymbol${amount.toStringAsFixed(0)}';
+        }
+
         return ActionChip(
           label: Text(displayText),
           onPressed: () {
@@ -434,37 +544,63 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
   }
 
   List<double> _getQuickAmounts() {
+    // Standart miktarlar (yeni birikim veya hedef olmadığında)
+    const standardAmounts = [100.0, 200.0, 500.0, 1000.0, 2000.0];
+
     if (!_isEditMode) {
-      return [100, 200, 500, 1000, 2000];
+      return standardAmounts;
     }
-    
+
     final saving = widget.saving!;
-    
-    // Hedef tarih varsa günlük hedefi hesapla
+
+    // Sadece düzenleme modunda kullanıcı tarafından manuel olarak seçilmiş hedef tarih varsa
+    // ve hedef tutar belirlenmiş ise dinamik hesaplama yap
     if (_hasTargetDate && _targetDate != null && saving.targetAmount > 0) {
       final now = DateTime.now();
       final daysUntilTarget = _targetDate!.difference(now).inDays;
-      
-      if (daysUntilTarget > 0) {
+
+      // Sadece hedef tarih gelecekte ve 1 yıldan az ise dinamik hesaplama yap
+      // (1 yıl = 365 gün otomatik atanmış değer kontrolü)
+      if (daysUntilTarget > 0 && daysUntilTarget < 350) {
         final remainingAmount = saving.targetAmount - saving.currentAmount;
         if (remainingAmount > 0) {
           final dailyAmount = remainingAmount / daysUntilTarget;
-          final weeklyAmount = dailyAmount * 7;
-          final monthlyAmount = dailyAmount * 30;
-          
-          return [
-            dailyAmount,
-            weeklyAmount,
-            monthlyAmount,
-            dailyAmount * 2, // 2 günlük
-            dailyAmount * 5, // haftalık iş günü
-          ].where((amount) => amount > 0).toList();
+
+          // Dinamik tutar listesi oluştur
+          List<double> dynamicAmounts = [];
+
+          // Her zaman günlük tutar
+          dynamicAmounts.add(dailyAmount);
+
+          // Her zaman 2 günlük tutar
+          dynamicAmounts.add(dailyAmount * 2);
+
+          // 2 haftadan uzaksa haftalık tutar ekle
+          if (daysUntilTarget >= 14) {
+            dynamicAmounts.add(dailyAmount * 7); // 1 haftalık
+          }
+
+          // 2 aydan uzaksa aylık tutar ekle
+          if (daysUntilTarget >= 60) {
+            dynamicAmounts.add(dailyAmount * 30); // 1 aylık
+          }
+
+          // 3 aydan uzaksa 2 aylık tutar ekle
+          if (daysUntilTarget >= 90) {
+            dynamicAmounts.add(dailyAmount * 60); // 2 aylık
+          }
+
+          // Pozitif tutarları filtrele ve döndür
+          final filteredAmounts = dynamicAmounts.where((amount) => amount > 0).toList();
+
+          // Eğer dinamik tutarlar varsa onları döndür, yoksa standart tutarları
+          return filteredAmounts.isNotEmpty ? filteredAmounts : standardAmounts;
         }
       }
     }
-    
-    // Hedef tarih yoksa sabit miktarlar
-    return [100, 200, 500, 1000, 2000];
+
+    // Hedef tarih yoksa veya hesaplama yapılamıyorsa standart miktarlar
+    return standardAmounts;
   }
 
   Future<void> _selectTargetDate() async {
@@ -481,16 +617,64 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
     }
   }
 
+  // Görsel seçme metodları
+
+  /// Görsel seçme dialog'unu göster
+  Future<void> _selectImage() async {
+    final File? pickedImage = await ImagePickerHelper.showImageSourceDialog(
+      context,
+      title: AppLocalizations.of(context)!.selectImage,
+      galleryText: AppLocalizations.of(context)!.selectFromGallery,
+      cameraText: AppLocalizations.of(context)!.takePhoto,
+      cancelText: AppLocalizations.of(context)!.cancel,
+      imageQuality: 80,
+      maxWidth: 1024,
+      maxHeight: 1024,
+    );
+
+    if (pickedImage != null) {
+      setState(() {
+        _selectedImage = pickedImage;
+        _existingImagePath = null; // Yeni görsel seçildi, eskiyi temizle
+      });
+    }
+  }
+
+  /// Görseli kaldır
+  void _removeImage() {
+    setState(() {
+      _selectedImage = null;
+      _existingImagePath = null;
+    });
+  }
+
+  /// Mevcut görselin olup olmadığını kontrol et
+  bool get _hasImage {
+    return _selectedImage != null || (_existingImagePath != null && _existingImagePath!.isNotEmpty);
+  }
+
+  /// Gösterilecek görsel widget'ı
+  Widget get _displayImage {
+    if (_selectedImage != null) {
+      return Image.file(_selectedImage!, fit: BoxFit.cover);
+    } else if (_existingImagePath != null && _existingImagePath!.isNotEmpty) {
+      // Yerel dosya yolu ise File olarak, URL ise NetworkImage olarak göster
+      if (_existingImagePath!.startsWith('http')) {
+        return Image.network(_existingImagePath!, fit: BoxFit.cover);
+      } else {
+        return Image.file(File(_existingImagePath!), fit: BoxFit.cover);
+      }
+    }
+    return const SizedBox.shrink();
+  }
+
   Future<void> _saveSaving() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
 
     if (_hasTargetDate && _targetDate == null) {
-      CustomSnackBar.showError(
-        context, 
-        message: AppLocalizations.of(context)!.pleaseSelectTargetDate
-      );
+      CustomSnackBar.showError(context, message: AppLocalizations.of(context)!.pleaseSelectTargetDate);
       return;
     }
 
@@ -503,7 +687,7 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
       bool success = false;
 
       if (_isEditMode) {
-        // Güncelleme modu
+        // Güncelleme modu - önce birikim bilgilerini güncelle
         final updatedSaving = Saving(
           id: widget.saving!.id,
           title: _nameController.text.trim(),
@@ -512,29 +696,40 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
           startDate: widget.saving!.startDate,
           targetDate: _targetDate ?? widget.saving!.targetDate,
           frequency: widget.saving!.frequency,
-          currentAmount: widget.saving!.currentAmount,
+          currentAmount: widget.saving!.currentAmount, // Mevcut tutarı koruyoruz
           createdAt: widget.saving!.createdAt,
           status: widget.saving!.status,
+          // Görsel bilgilerini ekle
+          imagePath: _selectedImage?.path ?? widget.saving!.imagePath,
+          imageUrl: widget.saving!.imageUrl,
+          thumbnailPath: widget.saving!.thumbnailPath,
+          thumbnailUrl: widget.saving!.thumbnailUrl,
+          imageMetadata: _selectedImage != null
+              ? {
+                  'fileSize': await _selectedImage!.length(),
+                  'fileName': _selectedImage!.path.split('/').last,
+                  'uploadDate': DateTime.now().toIso8601String(),
+                }
+              : widget.saving!.imageMetadata,
         );
 
         success = await savingProvider.updateSaving(updatedSaving);
-        
-        // Para ekleme işlemi
+
+        // Para ekleme işlemi - sadece birikim güncelleme başarılıysa
         if (success && _addMoneyController.text.isNotEmpty) {
           final addAmount = double.tryParse(_addMoneyController.text);
           if (addAmount != null && addAmount > 0) {
-            final addMoneySuccess = await savingProvider.addMoneyToSaving(
-              widget.saving!.id!,
-              addAmount,
-            );
-            
+            // addMoneyToSaving metodu mevcut tutara ekleme yapıyor, değiştirmiyor
+            final addMoneySuccess = await savingProvider.addMoneyToSaving(widget.saving!.id!, addAmount);
+
             if (!addMoneySuccess) {
               if (mounted) {
-                CustomSnackBar.showError(
-                  context,
-                  message: AppLocalizations.of(context)!.errorAddingMoney,
-                );
+                CustomSnackBar.showError(context, message: AppLocalizations.of(context)!.errorAddingMoney);
               }
+              // Para ekleme başarısız olursa işlemi iptal et
+              setState(() {
+                _isLoading = false;
+              });
               return;
             }
           }
@@ -542,7 +737,7 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
       } else {
         // Yeni birikim oluşturma modu
         final initialAmount = _hasInitialAmount ? double.parse(_initialAmountController.text) : 0.0;
-        
+
         final saving = Saving(
           id: DateTime.now().millisecondsSinceEpoch,
           title: _nameController.text.trim(),
@@ -553,6 +748,15 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
           frequency: SavingFrequency.daily,
           currentAmount: initialAmount,
           createdAt: DateTime.now(),
+          // Görsel bilgilerini ekle
+          imagePath: _selectedImage?.path,
+          imageMetadata: _selectedImage != null
+              ? {
+                  'fileSize': await _selectedImage!.length(),
+                  'fileName': _selectedImage!.path.split('/').last,
+                  'uploadDate': DateTime.now().toIso8601String(),
+                }
+              : null,
         );
 
         success = await savingProvider.createSaving(saving);
@@ -574,7 +778,7 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
 
         if (mounted) {
           Navigator.of(context).pop();
-          
+
           String message;
           if (_isEditMode && _addMoneyController.text.isNotEmpty) {
             message = AppLocalizations.of(context)!.moneyAddedSuccessfully;
@@ -583,16 +787,20 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
           } else {
             message = AppLocalizations.of(context)!.savingAddedSuccessfully;
           }
-          
+
           CustomSnackBar.showSuccess(context, message: message);
+
+          // Sadece yeni birikim oluşturulduğunda interstitial reklam göster
+          // Para ekleme veya düzenleme işlemlerinde gösterme (çok sık olmasın)
+          if (!_isEditMode) {
+            _showInterstitialAd();
+          }
         }
       } else {
         if (mounted) {
           CustomSnackBar.showError(
             context,
-            message: _isEditMode 
-              ? AppLocalizations.of(context)!.errorUpdatingSaving
-              : AppLocalizations.of(context)!.errorAddingSaving,
+            message: _isEditMode ? AppLocalizations.of(context)!.errorUpdatingSaving : AppLocalizations.of(context)!.errorAddingSaving,
           );
         }
       }
@@ -600,9 +808,7 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
       if (mounted) {
         CustomSnackBar.showError(
           context,
-          message: _isEditMode 
-            ? AppLocalizations.of(context)!.errorUpdatingSaving
-            : AppLocalizations.of(context)!.errorAddingSaving,
+          message: _isEditMode ? AppLocalizations.of(context)!.errorUpdatingSaving : AppLocalizations.of(context)!.errorAddingSaving,
         );
       }
     } finally {
@@ -612,5 +818,16 @@ class _AddSavingBottomSheetState extends State<AddSavingBottomSheet> {
         });
       }
     }
+  }
+
+  /// Kayıt işleminden sonra interstitial reklam göster
+  void _showInterstitialAd() {
+    // Kısa bir delay ekleyerek kullanıcı deneyimini iyileştir
+    Future.delayed(const Duration(milliseconds: 800), () {
+      final adsService = AdsService.instance;
+      if (adsService.isInitialized && adsService.isInterstitialAdLoaded) {
+        adsService.showActionInterstitialAd();
+      }
+    });
   }
 }

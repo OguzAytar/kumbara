@@ -3,6 +3,7 @@ import 'package:kumbara/core/enums/saving_enum.dart';
 
 import '../../models/saving.dart';
 import '../../models/saving_transaction.dart';
+import '../../services/ads_service.dart';
 import '../../services/saving_service.dart';
 
 class SavingProvider with ChangeNotifier {
@@ -18,8 +19,7 @@ class SavingProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get error => _error;
 
-  List<Saving> get activeSavings =>
-      _savings.where((saving) => saving.status == SavingStatus.active).toList();
+  List<Saving> get activeSavings => _savings.where((saving) => saving.status == SavingStatus.active).toList();
 
   Future<void> loadSavings() async {
     _isLoading = true;
@@ -40,9 +40,14 @@ class SavingProvider with ChangeNotifier {
   Future<void> loadDashboardStats() async {
     try {
       _dashboardStats = await _savingService.getDashboardStats();
+      debugPrint('Dashboard stats loaded successfully: $_dashboardStats');
       notifyListeners();
     } catch (e) {
+      _error = 'Dashboard istatistikleri yüklenirken hata oluştu: $e';
       debugPrint('Error loading dashboard stats: $e');
+      // Hata durumunda boş stats sağla
+      _dashboardStats = {'totalSavings': 0, 'activeSavings': 0, 'totalAmount': 0.0, 'nearestTarget': null};
+      notifyListeners();
     }
   }
 
@@ -85,11 +90,7 @@ class SavingProvider with ChangeNotifier {
     }
   }
 
-  Future<bool> addMoneyToSaving(
-    int savingId,
-    double amount, {
-    String? note,
-  }) async {
+  Future<bool> addMoneyToSaving(int savingId, double amount, {String? note}) async {
     try {
       await _savingService.addMoneyToSaving(savingId, amount, note: note);
       await loadSavings();
@@ -97,6 +98,9 @@ class SavingProvider with ChangeNotifier {
 
       // Hedef tamamlanmış mı kontrol et
       await _savingService.checkAndCompleteGoals();
+
+      // Para ekleme işleminden sonra interstitial reklam göster
+      AdsService.instance.showActionInterstitialAd();
 
       return true;
     } catch (e) {
@@ -106,9 +110,7 @@ class SavingProvider with ChangeNotifier {
     }
   }
 
-  Future<List<SavingTransaction>> getTransactionsBySavingId(
-    int savingId,
-  ) async {
+  Future<List<SavingTransaction>> getTransactionsBySavingId(int savingId) async {
     try {
       return await _savingService.getTransactionsBySavingId(savingId);
     } catch (e) {

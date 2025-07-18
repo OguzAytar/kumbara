@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kumbara/l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+
+import '../../../core/constants/currency_constants.dart';
+import '../../../core/providers/settings_provider.dart';
 
 class QuickStats extends StatelessWidget {
   final Map<String, dynamic>? stats;
@@ -15,6 +19,8 @@ class QuickStats extends StatelessWidget {
     final totalSavings = stats!['totalSavings'] ?? 0;
     final activeSavings = stats!['activeSavings'] ?? 0;
     final totalAmount = stats!['totalAmount'] ?? 0.0;
+    final settingsProvider = Provider.of<SettingsProvider>(context, listen: false);
+    final currencySymbol = CurrencyConstants.getCurrencySymbol(settingsProvider.currency);
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -41,7 +47,7 @@ class QuickStats extends StatelessWidget {
           const SizedBox(height: 16),
           _buildStatItem(
             AppLocalizations.of(context)!.totalAmount,
-            '₺${totalAmount.toStringAsFixed(2)}',
+            '$currencySymbol${totalAmount.toStringAsFixed(2)}',
             Icons.account_balance_wallet,
             Colors.purple,
             isFullWidth: true,

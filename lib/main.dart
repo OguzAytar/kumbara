@@ -8,6 +8,7 @@ import 'core/functions/firebase_analytics_helper.dart';
 import 'core/providers/saving_provider.dart';
 import 'core/providers/settings_provider.dart';
 import 'core/theme/app_theme.dart';
+import 'services/ads_service.dart';
 import 'services/notification_service.dart';
 import 'view/settings/settings_viewmodel.dart';
 import 'view/splash/splash_screen.dart';
@@ -26,6 +27,15 @@ void main() async {
     print('Notification initialization error: $e');
   }
 
+  // Initialize AdsService
+  try {
+    await AdsService.instance.initialize();
+    print('AdMob başarıyla başlatıldı');
+  } catch (e) {
+    print('AdMob initialization error: $e');
+    // AdMob başlatılamazsa uygulama çalışmaya devam etsin
+  }
+
   runApp(const MyApp());
 }
 
@@ -38,6 +48,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => SettingsProvider()),
         ChangeNotifierProvider(create: (_) => SavingProvider()),
+        ChangeNotifierProvider.value(value: AdsService.instance),
         ChangeNotifierProxyProvider<SettingsProvider, SettingsViewModel>(
           create: (context) => SettingsViewModel(settingsProvider: context.read<SettingsProvider>()),
           update: (context, settingsProvider, previous) => previous ?? SettingsViewModel(settingsProvider: settingsProvider),
